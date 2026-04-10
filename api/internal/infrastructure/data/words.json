@@ -9,7 +9,7 @@
     "text": "Gato",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/gato.png"
+    "image_url": "/assets/animals/gato.JPG"
   },
   {
     "text": "León",
@@ -33,31 +33,31 @@
     "text": "Mono",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/mono.png"
+    "image_url": "/assets/animals/mono.JPG"
   },
   {
     "text": "Vaca",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/vaca.png"
+    "image_url": "/assets/animals/vaca.JPG"
   },
   {
     "text": "Cerdo",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/cerdo.png"
+    "image_url": "/assets/animals/cerdo.JPG"
   },
   {
     "text": "Oveja",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/oveja.png"
+    "image_url": "/assets/animals/oveja.JPG"
   },
   {
     "text": "Pato",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/pato.png"
+    "image_url": "/assets/animals/pato.JPG"
   },
   {
     "text": "Gallo",
@@ -87,25 +87,25 @@
     "text": "Pájaro",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/pajaro.png"
+    "image_url": "/assets/animals/pajaro.JPG"
   },
   {
     "text": "Oso",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/oso.png"
+    "image_url": "/assets/animals/oso.JPG"
   },
   {
     "text": "Tigre",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/tigre.png"
+    "image_url": "/assets/animals/tigre.JPG"
   },
   {
     "text": "Cebra",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/cebra.png"
+    "image_url": "/assets/animals/cebra.JPG"
   },
   {
     "text": "Hipopótamo",
@@ -117,7 +117,7 @@
     "text": "Cocodrilo",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/cocodrilo.png"
+    "image_url": "/assets/animals/cocodrilo.JPG"
   },
   {
     "text": "Serpiente",
@@ -159,55 +159,55 @@
     "text": "Mariposa",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/mariposa.png"
+    "image_url": "/assets/animals/mariposa.JPG"
   },
   {
     "text": "Araña",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/arana.png"
+    "image_url": "/assets/animals/arana.JPG"
   },
   {
     "text": "Rana",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/rana.png"
+    "image_url": "/assets/animals/rana.JPG"
   },
   {
     "text": "Ardilla",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/ardilla.png"
+    "image_url": "/assets/animals/ardilla.JPG"
   },
   {
     "text": "Canguro",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/canguro.png"
+    "image_url": "/assets/animals/canguro.JPG"
   },
   {
     "text": "Koala",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/koala.png"
+    "image_url": "/assets/animals/koala.JPG"
   },
   {
     "text": "Panda",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/panda.png"
+    "image_url": "/assets/animals/panda.JPG"
   },
   {
     "text": "Camello",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/camello.png"
+    "image_url": "/assets/animals/camello.JPG"
   },
   {
     "text": "Lobo",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/lobo.png"
+    "image_url": "/assets/animals/lobo.JPG"
   },
   {
     "text": "Zorro",
@@ -219,85 +219,85 @@
     "text": "Búho",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/buho.png"
+    "image_url": "/assets/animals/buho.JPG"
   },
   {
     "text": "Loro",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/loro.png"
+    "image_url": "/assets/animals/loro.JPG"
   },
   {
     "text": "Águila",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/aguila.png"
+    "image_url": "/assets/animals/aguila.JPG"
   },
   {
     "text": "Tiburón",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/tiburon.png"
+    "image_url": "/assets/animals/tiburon.JPG"
   },
   {
     "text": "Pulpo",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/pulpo.png"
+    "image_url": "/assets/animals/pulpo.JPG"
   },
   {
     "text": "Medusa",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/medusa.png"
+    "image_url": "/assets/animals/medusa.JPG"
   },
   {
     "text": "Caballo",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/caballo.png"
+    "image_url": "/assets/animals/caballo.JPG"
   },
   {
     "text": "Cabra",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/cabra.png"
+    "image_url": "/assets/animals/cabra.JPG"
   },
   {
     "text": "Gallina",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/gallina.png"
+    "image_url": "/assets/animals/gallina.JPG"
   },
   {
     "text": "Ratón",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/raton.png"
+    "image_url": "/assets/animals/raton.JPG"
   },
   {
     "text": "Murciélago",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/murcielago.png"
+    "image_url": "/assets/animals/murcielago.JPG"
   },
   {
     "text": "Erizo",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/erizo.png"
+    "image_url": "/assets/animals/erizo.JPG"
   },
   {
     "text": "Nutria",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/nutria.png"
+    "image_url": "/assets/animals/nutria.JPG"
   },
   {
     "text": "Foca",
     "category_id": "animals",
     "is_junior": true,
-    "image_url": "/assets/animals/foca.png"
+    "image_url": "/assets/animals/foca.JPG"
   },
   {
     "text": "Ornitorrinco",
@@ -1203,67 +1203,67 @@
     "text": "Mesa",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/mesa.png"
+    "image_url": "/assets/objects/mesa.JPG"
   },
   {
     "text": "Silla",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/silla.png"
+    "image_url": "/assets/objects/silla.JPG"
   },
   {
     "text": "Cama",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/cama.png"
+    "image_url": "/assets/objects/cama.JPG"
   },
   {
     "text": "Sofá",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/sofa.png"
+    "image_url": "/assets/objects/sofa.JPG"
   },
   {
     "text": "Lámpara",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/lampara.png"
+    "image_url": "/assets/objects/lampara.JPG"
   },
   {
     "text": "Espejo",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/espejo.png"
+    "image_url": "/assets/objects/espejo.JPG"
   },
   {
     "text": "Reloj",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/reloj.png"
+    "image_url": "/assets/objects/reloj.JPG"
   },
   {
     "text": "Cuadro",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/cuadro.png"
+    "image_url": "/assets/objects/cuadro.JPG"
   },
   {
     "text": "Libro",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/libro.png"
+    "image_url": "/assets/objects/libro.JPG"
   },
   {
     "text": "Pelota",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/pelota.png"
+    "image_url": "/assets/objects/pelota.JPG"
   },
   {
     "text": "Muñeca",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/muneca.png"
+    "image_url": "/assets/objects/muneca.JPG"
   },
   {
     "text": "Coche",
@@ -1275,7 +1275,7 @@
     "text": "Bicicleta",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/bicicleta.png"
+    "image_url": "/assets/objects/bicicleta.JPG"
   },
   {
     "text": "Mochila",
@@ -1287,7 +1287,7 @@
     "text": "Lápiz",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/lapiz.png"
+    "image_url": "/assets/objects/lapiz.JPG"
   },
   {
     "text": "Papel",
@@ -1299,97 +1299,97 @@
     "text": "Tijeras",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/tijeras.png"
+    "image_url": "/assets/objects/tijeras.JPG"
   },
   {
     "text": "Teléfono",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/telefono.png"
+    "image_url": "/assets/objects/telefono.JPG"
   },
   {
     "text": "Televisor",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/televisor.png"
+    "image_url": "/assets/objects/televisor.JPG"
   },
   {
     "text": "Ordenador",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/ordenador.png"
+    "image_url": "/assets/objects/ordenador.JPG"
   },
   {
     "text": "Plato",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/plato.png"
+    "image_url": "/assets/objects/plato.JPG"
   },
   {
     "text": "Vaso",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/vaso.png"
+    "image_url": "/assets/objects/vaso.JPG"
   },
   {
     "text": "Taza",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/taza.png"
+    "image_url": "/assets/objects/taza.JPG"
   },
   {
     "text": "Cuchara",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/cuchara.png"
+    "image_url": "/assets/objects/cuchara.JPG"
   },
   {
     "text": "Tenedor",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/tenedor.png"
+    "image_url": "/assets/objects/tenedor.JPG"
   },
   {
     "text": "Cuchillo",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/cuchillo.png"
+    "image_url": "/assets/objects/cuchillo.JPG"
   },
   {
     "text": "Llave",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/llave.png"
+    "image_url": "/assets/objects/llave.JPG"
   },
   {
     "text": "Gafas",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/gafas.png"
+    "image_url": "/assets/objects/gafas.JPG"
   },
   {
     "text": "Sombrero",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/sombrero.png"
+    "image_url": "/assets/objects/sombrero.JPG"
   },
   {
     "text": "Zapatos",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/zapatos.png"
+    "image_url": "/assets/objects/zapatos.JPG"
   },
   {
     "text": "Camiseta",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/camiseta.png"
+    "image_url": "/assets/objects/camiseta.JPG"
   },
   {
     "text": "Pantalón",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/pantalon.png"
+    "image_url": "/assets/objects/pantalon.JPG"
   },
   {
     "text": "Cepillo de Dientes",
@@ -1401,43 +1401,43 @@
     "text": "Jabón",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/jabon.png"
+    "image_url": "/assets/objects/jabon.JPG"
   },
   {
     "text": "Toalla",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/toalla.png"
+    "image_url": "/assets/objects/toalla.JPG"
   },
   {
     "text": "Peine",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/peine.png"
+    "image_url": "/assets/objects/peine.JPG"
   },
   {
     "text": "Paraguas",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/paraguas.png"
+    "image_url": "/assets/objects/paraguas.JPG"
   },
   {
     "text": "Guitarra",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/guitarra.png"
+    "image_url": "/assets/objects/guitarra.JPG"
   },
   {
     "text": "Piano",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/piano.png"
+    "image_url": "/assets/objects/piano.JPG"
   },
   {
     "text": "Martillo",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/martillo.png"
+    "image_url": "/assets/objects/martillo.JPG"
   },
   {
     "text": "Destornillador",
@@ -1449,55 +1449,55 @@
     "text": "Escoba",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/escoba.png"
+    "image_url": "/assets/objects/escoba.JPG"
   },
   {
     "text": "Cubo",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/cubo.png"
+    "image_url": "/assets/objects/cubo.JPG"
   },
   {
     "text": "Pala",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/pala.png"
+    "image_url": "/assets/objects/pala.JPG"
   },
   {
     "text": "Botella",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/botella.png"
+    "image_url": "/assets/objects/botella.JPG"
   },
   {
     "text": "Caja",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/caja.png"
+    "image_url": "/assets/objects/caja.JPG"
   },
   {
     "text": "Bolsa",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/bolsa.png"
+    "image_url": "/assets/objects/bolsa.JPG"
   },
   {
     "text": "Reloj",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/reloj.png"
+    "image_url": "/assets/objects/reloj.JPG"
   },
   {
     "text": "Cuerda",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/cuerda.png"
+    "image_url": "/assets/objects/cuerda.JPG"
   },
   {
     "text": "Imán",
     "category_id": "objects",
     "is_junior": true,
-    "image_url": "/assets/objects/iman.png"
+    "image_url": "/assets/objects/iman.JPG"
   },
   {
     "text": "Telescopio",
@@ -1809,163 +1809,163 @@
     "text": "Plátano",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/platano.png"
+    "image_url": "/assets/food/platano.JPG"
   },
   {
     "text": "Naranja",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/naranja.png"
+    "image_url": "/assets/food/naranja.JPG"
   },
   {
     "text": "Fresa",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/fresa.png"
+    "image_url": "/assets/food/fresa.JPG"
   },
   {
     "text": "Uva",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/uva.png"
+    "image_url": "/assets/food/uva.JPG"
   },
   {
     "text": "Sandía",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/sandia.png"
+    "image_url": "/assets/food/sandia.JPG"
   },
   {
     "text": "Melón",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/melon.png"
+    "image_url": "/assets/food/melon.JPG"
   },
   {
     "text": "Piña",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/pina.png"
+    "image_url": "/assets/food/pina.JPG"
   },
   {
     "text": "Pera",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/pera.png"
+    "image_url": "/assets/food/pera.JPG"
   },
   {
     "text": "Cerezas",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/cerezas.png"
+    "image_url": "/assets/food/cerezas.JPG"
   },
   {
     "text": "Lechuga",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/lechuga.png"
+    "image_url": "/assets/food/lechuga.JPG"
   },
   {
     "text": "Tomate",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/tomate.png"
+    "image_url": "/assets/food/tomate.JPG"
   },
   {
     "text": "Zanahoria",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/zanahoria.png"
+    "image_url": "/assets/food/zanahoria.JPG"
   },
   {
     "text": "Patata",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/patata.png"
+    "image_url": "/assets/food/patata.JPG"
   },
   {
     "text": "Huevo",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/huevo.png"
+    "image_url": "/assets/food/huevo.JPG"
   },
   {
     "text": "Leche",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/leche.png"
+    "image_url": "/assets/food/leche.JPG"
   },
   {
     "text": "Queso",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/queso.png"
+    "image_url": "/assets/food/queso.JPG"
   },
   {
     "text": "Pan",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/pan.png"
+    "image_url": "/assets/food/pan.JPG"
   },
   {
     "text": "Arroz",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/arroz.png"
+    "image_url": "/assets/food/arroz.JPG"
   },
   {
     "text": "Pasta",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/pasta.png"
+    "image_url": "/assets/food/pasta.JPG"
   },
   {
     "text": "Pizza",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/pizza.png"
+    "image_url": "/assets/food/pizza.JPG"
   },
   {
     "text": "Hamburgesa",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/hamburgesa.png"
+    "image_url": "/assets/food/hamburgesa.JPG"
   },
   {
     "text": "Pollo",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/pollo.png"
+    "image_url": "/assets/food/pollo.JPG"
   },
   {
     "text": "Pescado",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/pescado.png"
+    "image_url": "/assets/food/pescado.JPG"
   },
   {
     "text": "Carne",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/carne.png"
+    "image_url": "/assets/food/carne.JPG"
   },
   {
     "text": "Sopa",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/sopa.png"
+    "image_url": "/assets/food/sopa.JPG"
   },
   {
     "text": "Ensalada",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/ensalada.png"
+    "image_url": "/assets/food/ensalada.JPG"
   },
   {
     "text": "Yogur",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/yogur.png"
+    "image_url": "/assets/food/yogur.JPG"
   },
   {
     "text": "Helado",
@@ -1977,85 +1977,85 @@
     "text": "Chocolate",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/chocolate.png"
+    "image_url": "/assets/food/chocolate.JPG"
   },
   {
     "text": "Caramelo",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/caramelo.png"
+    "image_url": "/assets/food/caramelo.JPG"
   },
   {
     "text": "Galleta",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/galleta.png"
+    "image_url": "/assets/food/galleta.JPG"
   },
   {
     "text": "Pastel",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/pastel.png"
+    "image_url": "/assets/food/pastel.JPG"
   },
   {
     "text": "Zumo",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/zumo.png"
+    "image_url": "/assets/food/zumo.JPG"
   },
   {
     "text": "Agua",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/agua.png"
+    "image_url": "/assets/food/agua.JPG"
   },
   {
     "text": "Miel",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/miel.png"
+    "image_url": "/assets/food/miel.JPG"
   },
   {
     "text": "Mermelada",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/mermelada.png"
+    "image_url": "/assets/food/mermelada.JPG"
   },
   {
     "text": "Mantequilla",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/mantequilla.png"
+    "image_url": "/assets/food/mantequilla.JPG"
   },
   {
     "text": "Macarrones",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/macarrones.png"
+    "image_url": "/assets/food/macarrones.JPG"
   },
   {
     "text": "Salchicha",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/salchicha.png"
+    "image_url": "/assets/food/salchicha.JPG"
   },
   {
     "text": "Croqueta",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/croqueta.png"
+    "image_url": "/assets/food/croqueta.JPG"
   },
   {
     "text": "Tortilla",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/tortilla.png"
+    "image_url": "/assets/food/tortilla.JPG"
   },
   {
     "text": "Bocadillo",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/bocadillo.png"
+    "image_url": "/assets/food/bocadillo.JPG"
   },
   {
     "text": "Donut",
@@ -2067,13 +2067,13 @@
     "text": "Mandarina",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/mandarina.png"
+    "image_url": "/assets/food/mandarina.JPG"
   },
   {
     "text": "Limón",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/limon.png"
+    "image_url": "/assets/food/limon.JPG"
   },
   {
     "text": "Coco",
@@ -2085,19 +2085,19 @@
     "text": "Calabaza",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/calabaza.png"
+    "image_url": "/assets/food/calabaza.JPG"
   },
   {
     "text": "Guisantes",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/guisantes.png"
+    "image_url": "/assets/food/guisantes.JPG"
   },
   {
     "text": "Maíz",
     "category_id": "food",
     "is_junior": true,
-    "image_url": "/assets/food/maiz.png"
+    "image_url": "/assets/food/maiz.jpeg"
   },
   {
     "text": "Sushi",

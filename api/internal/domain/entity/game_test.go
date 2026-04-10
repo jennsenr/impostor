@@ -246,6 +246,41 @@ func TestGame_Rematch(t *testing.T) {
 		}
 
 		assert.Equal(t, 1, impostorCount)
-		assert.False(t, p2.IsImpostor)
+	})
+
+	t.Run("Does not pin impostor to the same player across many rematches", func(t *testing.T) {
+		settings := vo.NewSettings([]vo.CategoryID{vo.CategoryAnimals}, false, false, true, 60)
+		game := NewGame("g1", "123456", "h", settings)
+		players := []*Player{
+			NewPlayer("p1", "P1", "a1"),
+			NewPlayer("p2", "P2", "a2"),
+			NewPlayer("p3", "P3", "a3"),
+			NewPlayer("p4", "P4", "a4"),
+		}
+
+		for _, p := range players {
+			_, _ = game.Join(p)
+		}
+
+		game.Status = vo.StatusFinished
+
+		selected := map[string]int{}
+		for i := 0; i < 64; i++ {
+			err := game.Rematch("NewWord", "", vo.CategoryAnimals)
+			assert.NoError(t, err)
+
+			currentImpostorCount := 0
+			for _, p := range game.Players {
+				if p.IsImpostor {
+					selected[p.ID]++
+					currentImpostorCount++
+				}
+			}
+
+			assert.Equal(t, 1, currentImpostorCount)
+			game.Status = vo.StatusFinished
+		}
+
+		assert.Greater(t, len(selected), 1)
 	})
 }

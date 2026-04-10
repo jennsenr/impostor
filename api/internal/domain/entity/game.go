@@ -540,14 +540,6 @@ func (g *Game) Rematch(word string, wordImageUrl string, categoryID vo.CategoryI
 		return errs.ErrInvalidStatus
 	}
 
-	previousImpostorIndex := -1
-	for i, p := range g.Players {
-		if p.IsImpostor {
-			previousImpostorIndex = i
-			break
-		}
-	}
-
 	// Resetear jugadores
 	for _, p := range g.Players {
 		p.IsReady = false
@@ -598,17 +590,9 @@ func (g *Game) Rematch(word string, wordImageUrl string, categoryID vo.CategoryI
 
 	// Sortear nuevo impostor
 	if len(g.Players) > 0 {
-		imposterIndex := previousImpostorIndex
-		if len(g.Players) == 1 {
-			imposterIndex = 0
-		} else {
-			for imposterIndex == previousImpostorIndex {
-				nextIndex, err := randomInt(len(g.Players))
-				if err != nil {
-					return err
-				}
-				imposterIndex = nextIndex
-			}
+		imposterIndex, err := randomInt(len(g.Players))
+		if err != nil {
+			return err
 		}
 		g.Players[imposterIndex].IsImpostor = true
 	}
