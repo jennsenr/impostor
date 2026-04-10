@@ -31,6 +31,7 @@ jobs:
     env:
       DEPLOY_HOST: ${{ secrets.IMPOSTOR_HOST }}
       DEPLOY_PATH: /opt/impostor
+      COMPOSE_FILE: docker-compose.yaml
       API_PORT: "80"
     steps:
       - name: Checkout code
@@ -72,12 +73,12 @@ jobs:
 
             export API_PORT="${API_PORT}"
 
-            docker compose -f docker-compose.yml up --build -d
+            docker compose -f "${COMPOSE_FILE}" up --build -d
 
-            api_container=\$(docker compose -f docker-compose.yml ps -q impostor-api)
+            api_container=\$(docker compose -f "${COMPOSE_FILE}" ps -q impostor-api)
             if [ -z "\$api_container" ]; then
               echo "impostor-api container was not created"
-              docker compose -f docker-compose.yml ps
+              docker compose -f "${COMPOSE_FILE}" ps
               exit 1
             fi
 
@@ -88,8 +89,8 @@ jobs:
               fi
               if [ "\$status" = "unhealthy" ]; then
                 echo "impostor-api became unhealthy during deploy"
-                docker compose -f docker-compose.yml ps
-                docker compose -f docker-compose.yml logs --tail=100
+                docker compose -f "${COMPOSE_FILE}" ps
+                docker compose -f "${COMPOSE_FILE}" logs --tail=100
                 exit 1
               fi
               sleep 2
@@ -98,11 +99,11 @@ jobs:
             final_status=\$(docker inspect --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "\$api_container")
             if [ "\$final_status" != "healthy" ]; then
               echo "impostor-api did not become healthy in time: \$final_status"
-              docker compose -f docker-compose.yml ps
-              docker compose -f docker-compose.yml logs --tail=100
+              docker compose -f "${COMPOSE_FILE}" ps
+              docker compose -f "${COMPOSE_FILE}" logs --tail=100
               exit 1
             fi
 
-            docker compose -f docker-compose.yml ps
+            docker compose -f "${COMPOSE_FILE}" ps
             docker image prune -f
           EOF

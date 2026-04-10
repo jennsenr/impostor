@@ -145,7 +145,7 @@ void main() {
 
     test('Should start next round timer automatically on ties (Result)', () {
       fakeAsync((async) {
-        when(() => mockRepo.nextRound(any())).thenAnswer((_) async {});
+        when(() => mockRepo.nextRound(any(), any())).thenAnswer((_) async {});
         
         final gameWithResult = initialGame.copyWith(
           status: GameStatus.result,
@@ -160,13 +160,13 @@ void main() {
         async.flushMicrotasks();
 
         // Verificar que no se ha llamado aún si no pasaron los 4 segundos
-        verifyNever(() => mockRepo.nextRound('g1'));
+        verifyNever(() => mockRepo.nextRound('g1', 'p1'));
 
         // Avanzar el tiempo 4 segundos
         async.elapse(const Duration(seconds: 4));
 
         // Como `p1` es host y no hay ganador, se debió llamar a nextRound automáticamente
-        verify(() => mockRepo.nextRound('g1')).called(1);
+        verify(() => mockRepo.nextRound('g1', 'p1')).called(1);
       });
     });
   });

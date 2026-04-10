@@ -80,7 +80,7 @@ void main() {
       },
       expect: () => [
         isA<SetupState>().having((s) => s.playerName, 'playerName', ''),
-        isA<SetupState>().having((s) => s.status, 'status', const SetupError('name_required')),
+        isA<SetupState>().having((s) => s.status, 'status', SetupError('name_required')),
       ],
     );
 

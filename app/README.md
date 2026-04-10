@@ -1,17 +1,36 @@
-# impostor
+# Impostor App
 
-A new Flutter project.
+## Flavors
 
-## Getting Started
+La app soporta dos entornos:
 
-This project is a starting point for a Flutter application.
+- `dev`: usa por defecto `http://192.168.68.63:8080`
+- `prod`: usa por defecto `https://impostor.manggio.com`
 
-A few resources to get you started if this is your first Flutter project:
+Ambos pueden sobreescribirse con `--dart-define=API_URL=...`.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Comandos útiles
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Desarrollo local:
+
+```bash
+flutter run -t lib/main_dev.dart --dart-define=FLAVOR=dev
+```
+
+Producción con la URL oficial:
+
+```bash
+flutter run --flavor prod -t lib/main_prod.dart --dart-define=FLAVOR=prod
+```
+
+Build Android de producción:
+
+```bash
+flutter build appbundle --flavor prod -t lib/main_prod.dart --dart-define=FLAVOR=prod
+```
+
+Si necesitas apuntar temporalmente a otra API:
+
+```bash
+flutter run --flavor prod -t lib/main_prod.dart --dart-define=FLAVOR=prod --dart-define=API_URL=https://tu-api.example.com
+```

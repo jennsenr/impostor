@@ -5,18 +5,22 @@ import 'src/shared/infrastructure/service_locator.dart';
 import 'src/shared/presentation/theme/app_theme.dart';
 import 'src/shared/presentation/router/app_router.dart';
 
-void main() async {
+Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Inicialización de inyección de dependencias
   await initServiceLocator();
-  
+
   runApp(
     BlocProvider(
       create: (context) => sl<SetupCubit>(),
       child: const ImpostorApp(),
     ),
   );
+}
+
+void main() async {
+  await bootstrap();
 }
 
 class ImpostorApp extends StatelessWidget {
