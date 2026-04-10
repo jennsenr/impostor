@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: impostor-production-deploy
+  cancel-in-progress: true
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -24,6 +28,10 @@ jobs:
   deploy:
     needs: validate
     runs-on: ubuntu-latest
+    env:
+      DEPLOY_HOST: ${{ secrets.IMPOSTOR_HOST }}
+      DEPLOY_PATH: /opt/impostor
+      API_PORT: "80"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,19 +41,68 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.HETZNER_SSH_KEY }}
 
+      - name: Configure SSH known hosts
+        env:
+          HETZNER_HOST_KEY: ${{ secrets.HETZNER_HOST_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          if [ -n "$HETZNER_HOST_KEY" ]; then
+            printf '%s\n' "$HETZNER_HOST_KEY" >> ~/.ssh/known_hosts
+          else
+            ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          fi
+          chmod 600 ~/.ssh/known_hosts
+
       - name: Sync files to VPS
         run: |
           rsync -avz --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            ./api/ root@${{ secrets.IMPOSTOR_HOST }}:/opt/impostor/
+            --exclude '.env' \
+            --exclude '.env.*' \
+            --exclude 'docker-compose.override.yml' \
+            --exclude 'docker-compose.override.yaml' \
+            --rsync-path="mkdir -p ${DEPLOY_PATH} && rsync" \
+            ./api/ "root@${DEPLOY_HOST}:${DEPLOY_PATH}/"
 
-      - name: Build and Restart Services
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.IMPOSTOR_HOST }}
-          username: root
-          key: ${{ secrets.HETZNER_SSH_KEY }}
-          script: |
-            cd /opt/impostor
-            API_PORT=80 docker compose -f docker-compose.yml up --build -d
+      - name: Build, restart and verify services
+        run: |
+          ssh "root@${DEPLOY_HOST}" <<EOF
+            set -eu
+            cd "${DEPLOY_PATH}"
+
+            export API_PORT="${API_PORT}"
+
+            docker compose -f docker-compose.yml up --build -d
+
+            api_container=\$(docker compose -f docker-compose.yml ps -q impostor-api)
+            if [ -z "\$api_container" ]; then
+              echo "impostor-api container was not created"
+              docker compose -f docker-compose.yml ps
+              exit 1
+            fi
+
+            for attempt in \$(seq 1 30); do
+              status=\$(docker inspect --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "\$api_container")
+              if [ "\$status" = "healthy" ]; then
+                break
+              fi
+              if [ "\$status" = "unhealthy" ]; then
+                echo "impostor-api became unhealthy during deploy"
+                docker compose -f docker-compose.yml ps
+                docker compose -f docker-compose.yml logs --tail=100
+                exit 1
+              fi
+              sleep 2
+            done
+
+            final_status=\$(docker inspect --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "\$api_container")
+            if [ "\$final_status" != "healthy" ]; then
+              echo "impostor-api did not become healthy in time: \$final_status"
+              docker compose -f docker-compose.yml ps
+              docker compose -f docker-compose.yml logs --tail=100
+              exit 1
+            fi
+
+            docker compose -f docker-compose.yml ps
             docker image prune -f
+          EOF

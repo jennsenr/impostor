@@ -19,7 +19,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o bin/server cmd/main.go
 # Etapa final (producción)
 FROM alpine:latest
 
-RUN apk --no-cache add ca-certificates tzdata
+RUN apk --no-cache add ca-certificates tzdata wget
 
 WORKDIR /app
 
