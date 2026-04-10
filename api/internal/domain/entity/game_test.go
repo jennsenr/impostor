@@ -223,4 +223,29 @@ func TestGame_Rematch(t *testing.T) {
 		assert.True(t, p1.IsAlive)
 		assert.Empty(t, p1.VoteTargetID)
 	})
+
+	t.Run("Chooses a different impostor when possible", func(t *testing.T) {
+		settings := vo.NewSettings([]vo.CategoryID{vo.CategoryAnimals}, false, false, true, 60)
+		game := NewGame("g1", "123456", "h", settings)
+		p1, p2, p3 := NewPlayer("p1", "P1", "a1"), NewPlayer("p2", "P2", "a2"), NewPlayer("p3", "P3", "a3")
+		_, _ = game.Join(p1)
+		_, _ = game.Join(p2)
+		_, _ = game.Join(p3)
+
+		game.Status = vo.StatusFinished
+		p2.IsImpostor = true
+
+		err := game.Rematch("NewWord", "", vo.CategoryAnimals)
+		assert.NoError(t, err)
+
+		impostorCount := 0
+		for _, p := range game.Players {
+			if p.IsImpostor {
+				impostorCount++
+			}
+		}
+
+		assert.Equal(t, 1, impostorCount)
+		assert.False(t, p2.IsImpostor)
+	})
 }
