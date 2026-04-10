@@ -15,9 +15,10 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version-file: go.mod
+          go-version-file: api/go.mod
 
       - name: Run Go tests
+        working-directory: api
         run: go test ./...
         
   deploy:
@@ -36,8 +37,7 @@ jobs:
         run: |
           rsync -avz --delete \
             -e "ssh -o StrictHostKeyChecking=no" \
-            --exclude-from='deploy/rsync-exclude.txt' \
-            ./ root@${{ secrets.IMPOSTOR_HOST }}:/opt/impostor/
+            ./api root@${{ secrets.IMPOSTOR_HOST }}:/opt/impostor/
 
       - name: Build and Restart Services
         uses: appleboy/ssh-action@master
@@ -47,5 +47,5 @@ jobs:
           key: ${{ secrets.HETZNER_SSH_KEY }}
           script: |
             cd /opt/impostor
-            API_PORT=80 docker compose -f api/docker-compose.yml up --build -d
+            API_PORT=80 docker compose -f docker-compose.yml up --build -d
             docker image prune -f
