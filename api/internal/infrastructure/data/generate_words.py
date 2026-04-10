@@ -1,0 +1,83 @@
+import json
+
+# Definición de categorías con su disponibilidad junior
+categories_config = {
+    "animals": {"junior": True},
+    "places": {"junior": True},
+    "objects": {"junior": True},
+    "food": {"junior": True},
+    "celebrities": {"junior": False},
+    "eras": {"junior": False},
+    "movies": {"junior": False},
+    "sports": {"junior": False},
+    "professions": {"junior": False},
+    "brands": {"junior": False},
+    "books": {"junior": False}
+}
+
+# Listas de palabras (ejemplos expandibles)
+words_data = {
+    "animals": {
+        "junior": ["Perro", "Gato", "León", "Elefante", "Jirafa", "Mono", "Vaca", "Cerdo", "Oveja", "Pato", "Gallo", "Conejo", "Tortuga", "Pez", "Pájaro", "Oso", "Tigre", "Cebra", "Hipopótamo", "Cocodrilo", "Serpiente", "Ballena", "Delfín", "Pingüino", "Hormiga", "Abeja", "Mariposa", "Araña", "Rana", "Ardilla", "Canguro", "Koala", "Panda", "Camello", "Lobo", "Zorro", "Búho", "Loro", "Águila", "Tiburón", "Pulpo", "Medusa", "Caballo", "Cabra", "Gallina", "Ratón", "Murciélago", "Erizo", "Nutria", "Foca"],
+        "normal": ["Ornitorrinco", "Axolote", "Okapi", "Zarigüeya", "Armadillo", "Pangolín", "Narval", "Equidna", "Tapir", "Aye-aye", "Capibara", "Quokka", "Wombat", "Nudibranquio", "Dragón de Komodo", "Salamandra Gigante", "Cachalote", "Halcón Peregrino", "Colibrí", "Camaleón", "Iguana Marina", "Guepardo", "Licaón", "Dingo", "Bisonte", "Alce", "Rinoceronte Blanco", "Manatí", "Dugongo", "Estrella de Mar", "Anémona", "Coral", "Escorpión", "Tarántula", "Ciempiés", "Escarabajo Pelotero", "Libélula", "Cigarra", "Mantis Religiosa", "Pez Espada", "Manta Raya", "Pez Globo", "Pez Linterna", "Calamar Gigante", "Albatros", "Frailecillo", "Cóndor", "Buitre", "Urraca", "Ruiseñor"]
+    },
+    "places": {
+        "junior": ["Escuela", "Parque", "Playa", "Bosque", "Casa", "Hospital", "Zoo", "Granja", "Cine", "Tienda", "Biblioteca", "Museo", "Castillo", "Iglesia", "Estadio", "Aeropuerto", "Estación de Tren", "Puerto", "Faro", "Puente", "Río", "Lago", "Montaña", "Volcán", "Desierto", "Isla", "Selva", "Piscina", "Jardín", "Calle", "Plaza", "Mercado", "Restaurante", "Hotel", "Banco", "Oficina", "Fábrica", "Taller", "Garaje", "Circo", "Feria", "Acuario", "Planetario", "Luna", "Sol", "Estrellas", "Campo", "Ciudad", "Pueblo", "Cueva"],
+        "normal": ["Himalaya", "Amazonas", "Sahara", "Antártida", "Gran Barrera de Coral", "Machu Picchu", "Pirámides de Giza", "Coliseo", "Torre Eiffel", "Estatua de la Libertad", "Muralla China", "Taj Mahal", "Petra", "Cataratas del Niágara", "Gran Cañón", "Monte Everest", "Vaticano", "Pentágono", "Silicon Valley", "Wall Street", "Chernóbil", "Galápagos", "Triángulo de las Bermudas", "Estación Espacial Internacional", "Fosa de las Marianas", "Monte Fuji", "Acrópolis", "Stonehenge", "Isla de Pascua", "Venecia", "Santuario de Fushimi Inari", "Salar de Uyuni", "Capadocia", "Bora Bora", "Santorini", "Dubái", "Las Vegas", "Hollywood", "Broadway", "Oxford", "Cambridge", "NASA", "Interpol", "ONU", "Kremlin", "Casa Blanca", "Palacio de Buckingham", "Louvre", "Prado", "Estadio Maracaná"]
+    },
+    "objects": {
+        "junior": ["Mesa", "Silla", "Cama", "Sofá", "Lámpara", "Espejo", "Reloj", "Cuadro", "Libro", "Pelota", "Muñeca", "Coche", "Bicicleta", "Mochila", "Lápiz", "Papel", "Tijeras", "Teléfono", "Televisor", "Ordenador", "Plato", "Vaso", "Taza", "Cuchara", "Tenedor", "Cuchillo", "Llave", "Gafas", "Sombrero", "Zapatos", "Camiseta", "Pantalón", "Cepillo de Dientes", "Jabón", "Toalla", "Peine", "Paraguas", "Guitarra", "Piano", "Martillo", "Destornillador", "Escoba", "Cubo", "Pala", "Botella", "Caja", "Bolsa", "Reloj", "Cuerda", "Imán"],
+        "normal": ["Telescopio", "Microscopio", "Sismógrafo", "Acelerador de Partículas", "Dron", "Impresora 3D", "Láser", "Fibra Óptica", "Circuito Integrado", "Microprocesador", "Satélite", "Tubo de Ensayo", "Bureta", "Matraz", "Pipeta", "Centrifugadora", "Estetoscopio", "Bisturí", "Desfibrilador", "Electrocardiograma", "Prótesis", "Audífono", "Sextante", "Brújula", "Teodolito", "Astrolabio", "Metrónomo", "Diapasón", "Sintetizador", "Aerógrafo", "Cincel", "Torno", "Fresadora", "Yunque", "Calibrador", "Multímetro", "Osciloscopio", "Geiger", "Dinamo", "Turbina", "Panel Solar", "Pila de Combustible", "Motor de Combustión", "Reactor Nuclear", "Cifrado César", "Enigma", "Blockchain", "Algoritmo", "Protocolo", "Servidor"]
+    },
+    "food": {
+        "junior": ["Manzana", "Plátano", "Naranja", "Fresa", "Uva", "Sandía", "Melón", "Piña", "Pera", "Cerezas", "Lechuga", "Tomate", "Zanahoria", "Patata", "Huevo", "Leche", "Queso", "Pan", "Arroz", "Pasta", "Pizza", "Hamburgesa", "Pollo", "Pescado", "Carne", "Sopa", "Ensalada", "Yogur", "Helado", "Chocolate", "Caramelo", "Galleta", "Pastel", "Zumo", "Agua", "Miel", "Mermelada", "Mantequilla", "Macarrones", "Salchicha", "Croqueta", "Tortilla", "Bocadillo", "Donut", "Mandarina", "Limón", "Coco", "Calabaza", "Guisantes", "Maíz"],
+        "normal": ["Sushi", "Foie Gras", "Caviar", "Trufa", "Azafrán", "Quinoa", "Cuscús", "Hummus", "Falafel", "Ramen", "Gazpacho", "Paella", "Ratatouille", "Risotto", "Fondue", "Carpaccio", "Cebiche", "Mochi", "Baklava", "Curry", "Goulash", "Poutine", "Burrito", "Taco", "Nachos", "Guacamole", "Churros", "Tiramisú", "Brownie", "Smoothie", "Kombucha", "Chía", "Kéfir", "Wasabi", "Jengibre", "Cúrcuma", "Cilantro", "Albahaca", "Romero", "Tomillo", "Canela", "Vainilla", "Cacao", "Café Express", "Té Matcha", "Sake", "Champán", "Vino", "Cerveza Artesana"]
+    },
+    # Las categorías sin Junior solo tienen "normal"
+    "celebrities": {
+        "normal": ["Lionel Messi", "Cristiano Ronaldo", "Elon Musk", "Jeff Bezos", "Bill Gates", "Mark Zuckerberg", "Steve Jobs", "Albert Einstein", "Isaac Newton", "Marie Curie", "Leonardo da Vinci", "Pablo Picasso", "William Shakespeare", "Michael Jackson", "Madonna", "Elvis Presley", "Beyoncé", "Taylor Swift", "Marilyn Monroe", "Brad Pitt", "Angelina Jolie", "Leonardo DiCaprio", "Steven Spielberg", "Walt Disney", "Barack Obama", "Nelson Mandela", "Ghandi", "Rafael Nadal", "Roger Federer", "Michael Jordan", "Muhammad Ali", "Stephen Hawking", "Nikola Tesla", "Charles Darwin", "Oprah Winfrey", "Will Smith", "Stan Lee", "George Lucas", "Frida Kahlo", "Andy Warhol", "Beethoven", "Mozart", "Bach", "Pavarotti", "Frank Sinatra", "Queen Elizabeth II", "Papa Francisco", "Dalai Lama", "Malala Yousafzai", "Greta Thunberg", "Rihanna", "Lady Gaga", "Adele", "Justin Bieber", "Shakira", "Rosalía", "Bad Bunny", "Tom Hanks", "Meryl Streep", "Robert De Niro", "Al Pacino", "Morgan Freeman", "Cate Blanchett", "Quentin Tarantino", "Christopher Nolan", "Martin Scorsese", "Woody Allen", "Pedro Almodóvar", "JK Rowling", "Gabriel García Márquez", "Jorge Luis Borges", "Julio Cortázar", "Pablo Neruda", "Federico García Lorca", "Salvador Dalí", "Antoni Gaudí", "Ferran Adrià", "Pau Gasol", "Fernando Alonso", "Usain Bolt", "Michael Phelps", "Serena Williams", "Simone Biles", "Tiger Woods", "Lewis Hamilton", "Max Verstappen", "LeBron James", "Stephen Curry", "Tom Brady", "Tiger Woods", "Roger Federer", "Novak Djokovic", "Zenedine Zidane", "Ronaldinho", "Maradona", "Pelé"]
+    },
+    "eras": {
+        "normal": ["Prehistoria", "Edad de Piedra", "Edad de Bronce", "Edad de Hierro", "Antiguo Egipto", "Antigua Grecia", "Imperio Romano", "Edad Media", "Renacimiento", "Ilustración", "Revolución Industrial", "Era Victoriana", "Guerra Civil", "Primera Guerra Mundial", "Segunda Guerra Mundial", "Guerra Fría", "Era Espacial", "Era Digital", "Siglo de Oro", "Independencia", "Napoleón", "Era Meiji", "Revolución Rusa", "Apartheid", "Hippie", "Muro de Berlín", "Siglo XXI", "Antigüedad", "Barroco", "Romanticismo", "Realismo", "Impresionismo", "Modernismo", "Surrealismo", "Peste Negra", "Inquisición", "Imperio Bizantino", "Imperio Otomano", "Vikingos", "Mongoles", "Vietnam", "Corea", "Cuba", "Primavera Árabe", "Mayo del 68", "Capitalismo", "Socialismo", "Comunismo", "Fascismo", "Globalización", "Era Atómica", "Información", "Descubrimientos", "Reforma", "Cruzadas", "Feudalismo", "Mesopotamia", "Aztecas", "Mayas", "Incas", "Samuráis", "Piratería", "Lejano Oeste", "Belle Époque", "Años 20", "Gran Depresión", "Holocausto", "Mayo 68", "Perestroika", "Internet", "Smartphone", "Inteligencia Artificial", "Cambio Climático", "Pandemia", "Colonización", "Descolonización", "Sufragismo", "Derechos Civiles", "Revolución Mexicana", "Independencia Sudamericana", "Guerra de los Cien Años", "Guerra de las Rosas", "Tudor", "Estuardo", "Borbon", "Habsburgo", "Dinastía Ming", "Dinastía Qing", "Edo", "Pax Romana", "Helenismo", "Cruzada", "Reconquista", "Al-Ándalus"]
+    },
+    "movies": {
+        "normal": ["El Padrino", "Pulp Fiction", "Forrest Gump", "Matrix", "Inception", "Interstellar", "Gladiator", "Titanic", "Avatar", "Parásitos", "El Caballero Oscuro", "Star Wars", "El Señor de los Anillos", "Harry Potter", "Indiana Jones", "Jurassic Park", "Tiburón", "Apocalypse Now", "Blade Runner", "Alien", "Psicosis", "El Resplandor", "El Exorcista", "Seven", "Cadena Perpetua", "La Lista de Schindler", "Braveheart", "Regreso al Futuro", "E.T.", "Rocky", "Toy Story", "El Rey León", "Casablanca", "Ciudadano Kane", "2001: Odisea del Espacio", "La Naranja Mecánica", "Taxi Driver", "La Vida es Bella", "Amélie", "El Laberinto del Fauno", "Vengadores", "Iron Man", "Spider-Man", "Joker", "Batman", "Memento", "La La Land", "Whiplash", "Fight Club", "Seven", "Reservoir Dogs", "Snatch", "Trainspotting", "American History X", "La Gran Belleza", "El Padrino II", "Scarface", "Goodfellas", "Casino", "Hereditary", "Gran Torino", "Million Dollar Baby", "Unforgiven", "The Revenant", "El Renacido", "Mad Max", "Dunkirk", "Oppenheimer", "Dune", "Arrival", "La Llegada", "Spider-Man: Into the Spider-Verse", "Klaus", "Spirited Away", "El Viaje de Chihiro", "Mi Vecino Totoro", "Your Name", "Akira", "Ghost in the Shell", "Oldboy", "Parásitos", "Drive", "Whiplash", "Her", "Ex Machina", "Black Swan", "Cisne Negro", "Shutter Island", "The Prestige", "El Truco Final", "The Truman Show", "El Show de Truman", "Groundhog Day", "Atrapado en el Tiempo", "Eternal Sunshine", "¡Olvídate de mí!", "Lost in Translation", "Juno", "Little Miss Sunshine"]
+    },
+    "sports": {
+        "normal": ["Fútbol", "Baloncesto", "Tenis", "Golf", "Béisbol", "Rugby", "Fútbol Americano", "Hockey", "Voleibol", "Balonmano", "Natación", "Atletismo", "Ciclismo", "Boxeo", "Judo", "Kárate", "Taekwondo", "Esgrima", "Gimnasia", "Automovilismo", "Motociclismo", "Fórmula 1", "Surf", "Skateboarding", "Esquí", "Snowboard", "Patinaje", "Remo", "Vela", "Escalada", "Senderismo", "Pádel", "Bádminton", "Tenis de Mesa", "Billar", "Dardos", "Bolos", "Críquet", "Ajedrez", "E-sports", "Yoga", "Pilates", "Crossfit", "Tiro con Arco", "Equitación", "Lucha Libre", "MMA", "Muay Thai", "Parkour", "Paracaidismo", "Buceo", "Apnea", "Rugby a 7", "Cricket", "Waterpolo", "Natación Sincronizada", "Salto de Trampolín", "Triatlón", "Ironman", "Ultra Trail", "Maratón", "Pentatlón", "Decatlón", "Lanzamiento de Jabalina", "Lanzamiento de Disco", "Lanzamiento de Martillo", "Salto de Altura", "Salto de Longitud", "Triple Salto", "Pole Vault", "Salto con Pértiga", "Gimnasia Rítmica", "Gimnasia Artística", "Trampolín", "Curling", "Lacrosse", "Softbol", "Squash", "Pickleball", "Padel Surf", "Bodyboard", "Wakeboard", "Esquí Acuático", "Piragüismo", "Kayak", "Rafting", "Espeleología", "Orientación", "Caza", "Pesca", "Tiro al Plato", "Polo", "Hípica", "Carreras de Galgos", "Carreras de Camellos", "Sumo", "Kendo"]
+    },
+    "professions": {
+        "normal": ["Médico", "Enfermero", "Cirujano", "Dentista", "Veterinario", "Psicólogo", "Profesor", "Arquitecto", "Ingeniero", "Abogado", "Juez", "Policía", "Bombero", "Piloto", "Cocinero", "Camarero", "Panadero", "Agricultor", "Periodista", "Escritor", "Actor", "Músico", "Cantante", "Fotógrafo", "Programador", "Diseñador", "Científico", "Astrónomo", "Astronauta", "Arqueólogo", "Detective", "Carpintero", "Electricista", "Fontanero", "Mecánico", "Soldador", "Peluquero", "Vendedor", "Cartero", "Conductor", "Taxista", "Marinero", "Militar", "Político", "Diplomático", "Juez de Paz", "Artesano", "Joyero", "Relojero", "Sacerdote", "Secretario", "Contable", "Economista", "Analista de Datos", "Experto en Ciberseguridad", "Desarrollador de Videojuegos", "Community Manager", "Influencer", "YouTuber", "Operador de Grúa", "Minero", "Cantero", "Leñador", "Buzo", "Salvavidas", "Guía Turístico", "Azafata", "Bibliotecario", "Museólogo", "Conservador de Arte", "Traductor", "Intérprete", "Filólogo", "Sociólogo", "Antropólogo", "Filosofo", "Teólogo", "Meteorólogo", "Ecologista", "Activista", "Sindicalista", "Asesor Financiero", "Corredor de Bolsa", "Inversionista", "Empresario", "Emprendedor", "Gerente", "Director de Recursos Humanos", "Especialista en Marketing", "Relaciones Públicas", "Publicista", "Copywriter", "Editor de Video", "Ilustrador", "Animador 3D", "Escultor", "Curador"]
+    },
+    "brands": {
+        "normal": ["Apple", "Google", "Microsoft", "Amazon", "Tesla", "Samsung", "Nike", "Adidas", "Coca-Cola", "Pepsi", "McDonald's", "Starbucks", "Toyota", "Mercedes-Benz", "BMW", "Audi", "Ferrari", "Disney", "Netflix", "Sony", "Nintendo", "Lego", "Ikea", "Zara", "Gucci", "Louis Vuitton", "Chanel", "Rolex", "Visa", "Mastercard", "American Express", "PayPal", "Uber", "Airbnb", "Spotify", "TikTok", "Instagram", "WhatsApp", "YouTube", "Canon", "Nikon", "Panasonic", "LG", "Philips", "Siemens", "Bosch", "Ford", "Porsche", "Lamborghini", "Maserati", "Jaguar", "Land Rover", "Range Rover", "Volvo", "Volkswagen", "Fiat", "Renault", "Peugeot", "Citroën", "Nissan", "Honda", "Hyundai", "Kia", "Mazda", "Subaru", "Mitsubishi", "Lexus", "Infiniti", "Acura", "Bentley", "Rolls-Royce", "Aston Martin", "Bugatti", "McLaren", "Bose", "Beats", "JBL", "Harman Kardon", "Sennheiser", "Audio-Technica", "Shure", "GoPro", "DJI", "Garmin", "Fitbit", "Casio", "Seiko", "Swatch", "Tag Heuer", "Hublot", "Patek Philippe", "Audemars Piguet", "Cartier", "Tiffany & Co.", "Montblanc"]
+    },
+    "books": {
+        "normal": ["Quijote", "100 Años de Soledad", "El Principito", "1984", "Orgullo y Prejuicio", "Crímen y Castigo", "Los Miserables", "La Ilíada", "Harry Potter", "El Señor de los Anillos", "Crónicas de Narnia", "El Hobbit", "Alicia en el País de las Maravillas", "Moby Dick", "Drácula", "Frankenstein", "Sherlock Holmes", "Dr. Jekyll y Mr. Hyde", "Robinson Crusoe", "La Isla del Tesoro", "Cien años de soledad", "Pedro Páramo", "Rayuela", "El Aleph", "Ficciones", "La Ciudad y los Perros", "La Casa de los Espíritus", "Sapiens", "Homo Deus", "Breve Historia del Tiempo", "Cosmos", "El Gen Egoísta", "La Rama Dorada", "El Arte de la Guerra", "El Príncipe", "Utopía", "Leviatán", "El Contrato Social", "La Riqueza de las Naciones", "El Capital", "Manifiesto Comunista", "Crítica de la Razón Pura", "Así habló Zaratustra", "Más allá del bien y del mal", "El ser y el tiempo", "La náusea", "El extranjero", "La peste", "Ensayo sobre la ceguera", "Paula", "La tregua", "Cumbres borrascosas", "Jane Eyre", "Sentido y sensibilidad", "Emma", "Drácula", "Carmilla", "El retrato de Dorian Gray", "La importancia de llamarse Ernesto", "La máquina del tiempo", "La guerra de los mundos", "Fundación", "Yo, Robot", "Crónicas Marcianas", "Fahrenheit 451", "Un mundo feliz", "La metamorfosis", "El proceso", "El castillo", "La Odisea", "Eneida", "Divina Comedia", "Fausto", "Paraíso Perdido", "Hojas de Hierba", "Los cantos de Maldoror", "En busca del tiempo perdido", "Ulises", "Dublineses", "Al faro", "Las olas", "Mrs Dalloway", "El ruido y la furia", "Mientras agonizo", "¡Absalón, Absalón!", "El viejo y el mar", "Por quién doblan las campanas", "Fiesta"]
+    }
+}
+
+dataset = []
+
+for cat_id, types in words_data.items():
+    # Junior available?
+    can_be_junior = categories_config[cat_id]["junior"]
+    
+    for mode, words in types.items():
+        is_junior_word = (mode == "junior")
+        for word in words:
+            dataset.append({
+                "text": word,
+                "category_id": cat_id,
+                "is_junior": is_junior_word,
+                "image_url": f"https://assets.impostor.app/categories/{cat_id}/{word.lower().replace(' ', '_')}.webp" if is_junior_word else ""
+            })
+
+# Validar mínimos
+print(f"Dataset generated with {len(dataset)} words.")
+for cat in categories_config:
+    count = len([w for w in dataset if w["category_id"] == cat])
+    print(f" - {cat}: {count} words")
+
+with open('api/internal/infrastructure/data/words.json', 'w', encoding='utf-8') as f:
+    json.dump(dataset, f, ensure_ascii=False, indent=2)

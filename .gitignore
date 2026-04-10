@@ -1,0 +1,47 @@
+# IDEs and OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Go
+bin/
+main
+main.exe
+*.test
+*.prof
+.go_cache/
+.go_tmp/
+.gocache/
+.gopath/
+vendor/
+
+# Node/Frontend
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.npm-cache/
+.eslintcache
+.stylelintcache
+
+# Logs and Temp
+*.log
+.tmp/
+seeder_output.log
+
+# Environment and Secrets
+.env
+.env.*
+!.env.example
+
+# Media and Data
+media/*
+!media/.gitkeep
+data/*
+!data/.gitkeep
+!data/seeds/
+data/seeds/*
+!data/seeds/*.json
+!data/seeds/*.md

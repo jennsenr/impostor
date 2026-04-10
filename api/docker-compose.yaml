@@ -1,0 +1,29 @@
+services:
+  impostor-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - REDIS_ADDR=${REDIS_ADDR:-impostor-redis:6379}
+      - GIN_MODE=${GIN_MODE:-debug}
+      - WORDS_FILE_PATH=internal/infrastructure/data/words.json
+      - PUBLIC_DIR_PATH=public
+    volumes:
+    - ./public:/app/public
+    restart: always
+    depends_on:
+      - impostor-redis
+
+  impostor-redis:
+    container_name: impostor-redis
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: always
+
+volumes:
+  redis-data:

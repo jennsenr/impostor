@@ -1,0 +1,6392 @@
+[
+  {
+    "text": "Perro",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/perro.png"
+  },
+  {
+    "text": "Gato",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/gato.png"
+  },
+  {
+    "text": "León",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/leon.png"
+  },
+  {
+    "text": "Elefante",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/elefante.png"
+  },
+  {
+    "text": "Jirafa",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/jirafa.png"
+  },
+  {
+    "text": "Mono",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/mono.png"
+  },
+  {
+    "text": "Vaca",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/vaca.png"
+  },
+  {
+    "text": "Cerdo",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/cerdo.png"
+  },
+  {
+    "text": "Oveja",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/oveja.png"
+  },
+  {
+    "text": "Pato",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/pato.png"
+  },
+  {
+    "text": "Gallo",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/gallo.png"
+  },
+  {
+    "text": "Conejo",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/conejo.png"
+  },
+  {
+    "text": "Tortuga",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/tortuga.png"
+  },
+  {
+    "text": "Pez",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/pez.png"
+  },
+  {
+    "text": "Pájaro",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/pajaro.png"
+  },
+  {
+    "text": "Oso",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/oso.png"
+  },
+  {
+    "text": "Tigre",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/tigre.png"
+  },
+  {
+    "text": "Cebra",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/cebra.png"
+  },
+  {
+    "text": "Hipopótamo",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/hipopotamo.png"
+  },
+  {
+    "text": "Cocodrilo",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/cocodrilo.png"
+  },
+  {
+    "text": "Serpiente",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/serpiente.png"
+  },
+  {
+    "text": "Ballena",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/ballena.png"
+  },
+  {
+    "text": "Delfín",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/delfin.png"
+  },
+  {
+    "text": "Pingüino",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/pinguino.png"
+  },
+  {
+    "text": "Hormiga",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/hormiga.png"
+  },
+  {
+    "text": "Abeja",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/abeja.png"
+  },
+  {
+    "text": "Mariposa",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/mariposa.png"
+  },
+  {
+    "text": "Araña",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/arana.png"
+  },
+  {
+    "text": "Rana",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/rana.png"
+  },
+  {
+    "text": "Ardilla",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/ardilla.png"
+  },
+  {
+    "text": "Canguro",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/canguro.png"
+  },
+  {
+    "text": "Koala",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/koala.png"
+  },
+  {
+    "text": "Panda",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/panda.png"
+  },
+  {
+    "text": "Camello",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/camello.png"
+  },
+  {
+    "text": "Lobo",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/lobo.png"
+  },
+  {
+    "text": "Zorro",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/zorro.png"
+  },
+  {
+    "text": "Búho",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/buho.png"
+  },
+  {
+    "text": "Loro",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/loro.png"
+  },
+  {
+    "text": "Águila",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/aguila.png"
+  },
+  {
+    "text": "Tiburón",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/tiburon.png"
+  },
+  {
+    "text": "Pulpo",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/pulpo.png"
+  },
+  {
+    "text": "Medusa",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/medusa.png"
+  },
+  {
+    "text": "Caballo",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/caballo.png"
+  },
+  {
+    "text": "Cabra",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/cabra.png"
+  },
+  {
+    "text": "Gallina",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/gallina.png"
+  },
+  {
+    "text": "Ratón",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/raton.png"
+  },
+  {
+    "text": "Murciélago",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/murcielago.png"
+  },
+  {
+    "text": "Erizo",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/erizo.png"
+  },
+  {
+    "text": "Nutria",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/nutria.png"
+  },
+  {
+    "text": "Foca",
+    "category_id": "animals",
+    "is_junior": true,
+    "image_url": "/assets/animals/foca.png"
+  },
+  {
+    "text": "Ornitorrinco",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Axolote",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Okapi",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Zarigüeya",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Armadillo",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pangolín",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Narval",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Equidna",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tapir",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Aye-aye",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Capibara",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Quokka",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Wombat",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Nudibranquio",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dragón de Komodo",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Salamandra Gigante",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cachalote",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Halcón Peregrino",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Colibrí",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Camaleón",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Iguana Marina",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Guepardo",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Licaón",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dingo",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bisonte",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Alce",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rinoceronte Blanco",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Manatí",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dugongo",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Estrella de Mar",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Anémona",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Coral",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Escorpión",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tarántula",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ciempiés",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Escarabajo Pelotero",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Libélula",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cigarra",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mantis Religiosa",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pez Espada",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Manta Raya",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pez Globo",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pez Linterna",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Calamar Gigante",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Albatros",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Frailecillo",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cóndor",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Buitre",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Urraca",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ruiseñor",
+    "category_id": "animals",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Escuela",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/escuela.png"
+  },
+  {
+    "text": "Parque",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/parque.png"
+  },
+  {
+    "text": "Playa",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/playa.png"
+  },
+  {
+    "text": "Bosque",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/bosque.png"
+  },
+  {
+    "text": "Casa",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/casa.png"
+  },
+  {
+    "text": "Hospital",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/hospital.png"
+  },
+  {
+    "text": "Zoo",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/zoo.png"
+  },
+  {
+    "text": "Granja",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/granja.png"
+  },
+  {
+    "text": "Cine",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/cine.png"
+  },
+  {
+    "text": "Tienda",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/tienda.png"
+  },
+  {
+    "text": "Biblioteca",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/biblioteca.png"
+  },
+  {
+    "text": "Museo",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/museo.png"
+  },
+  {
+    "text": "Castillo",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/castillo.png"
+  },
+  {
+    "text": "Iglesia",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/iglesia.png"
+  },
+  {
+    "text": "Estadio",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/estadio.png"
+  },
+  {
+    "text": "Aeropuerto",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/aeropuerto.png"
+  },
+  {
+    "text": "Estación de Tren",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/estacion_de_tren.png"
+  },
+  {
+    "text": "Puerto",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/puerto.png"
+  },
+  {
+    "text": "Faro",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/faro.png"
+  },
+  {
+    "text": "Puente",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/puente.png"
+  },
+  {
+    "text": "Río",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/rio.png"
+  },
+  {
+    "text": "Lago",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/lago.png"
+  },
+  {
+    "text": "Montaña",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/montana.png"
+  },
+  {
+    "text": "Volcán",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/volcan.png"
+  },
+  {
+    "text": "Desierto",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/desierto.png"
+  },
+  {
+    "text": "Isla",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/isla.png"
+  },
+  {
+    "text": "Selva",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/selva.png"
+  },
+  {
+    "text": "Piscina",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/piscina.png"
+  },
+  {
+    "text": "Jardín",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/jardin.png"
+  },
+  {
+    "text": "Calle",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/calle.png"
+  },
+  {
+    "text": "Plaza",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/plaza.png"
+  },
+  {
+    "text": "Mercado",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/mercado.png"
+  },
+  {
+    "text": "Restaurante",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/restaurante.png"
+  },
+  {
+    "text": "Hotel",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/hotel.png"
+  },
+  {
+    "text": "Banco",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/banco.png"
+  },
+  {
+    "text": "Oficina",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/oficina.png"
+  },
+  {
+    "text": "Fábrica",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/fabrica.png"
+  },
+  {
+    "text": "Taller",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/taller.png"
+  },
+  {
+    "text": "Garaje",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/garaje.png"
+  },
+  {
+    "text": "Circo",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/circo.png"
+  },
+  {
+    "text": "Feria",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/feria.png"
+  },
+  {
+    "text": "Acuario",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/acuario.png"
+  },
+  {
+    "text": "Planetario",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/planetario.png"
+  },
+  {
+    "text": "Luna",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/luna.png"
+  },
+  {
+    "text": "Sol",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/sol.png"
+  },
+  {
+    "text": "Estrellas",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/estrellas.png"
+  },
+  {
+    "text": "Campo",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/campo.png"
+  },
+  {
+    "text": "Ciudad",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/ciudad.png"
+  },
+  {
+    "text": "Pueblo",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/pueblo.png"
+  },
+  {
+    "text": "Cueva",
+    "category_id": "places",
+    "is_junior": true,
+    "image_url": "/assets/places/cueva.png"
+  },
+  {
+    "text": "Himalaya",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Amazonas",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sahara",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Antártida",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gran Barrera de Coral",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Machu Picchu",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pirámides de Giza",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Coliseo",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Torre Eiffel",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Estatua de la Libertad",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Muralla China",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Taj Mahal",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Petra",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cataratas del Niágara",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gran Cañón",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Monte Everest",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Vaticano",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pentágono",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Silicon Valley",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Wall Street",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Chernóbil",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Galápagos",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Triángulo de las Bermudas",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Estación Espacial Internacional",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fosa de las Marianas",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Monte Fuji",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Acrópolis",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Stonehenge",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Isla de Pascua",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Venecia",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Santuario de Fushimi Inari",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Salar de Uyuni",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Capadocia",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bora Bora",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Santorini",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dubái",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Las Vegas",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Hollywood",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Broadway",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Oxford",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cambridge",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "NASA",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Interpol",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "ONU",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Kremlin",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Casa Blanca",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Palacio de Buckingham",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Louvre",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Prado",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Estadio Maracaná",
+    "category_id": "places",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mesa",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/mesa.png"
+  },
+  {
+    "text": "Silla",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/silla.png"
+  },
+  {
+    "text": "Cama",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/cama.png"
+  },
+  {
+    "text": "Sofá",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/sofa.png"
+  },
+  {
+    "text": "Lámpara",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/lampara.png"
+  },
+  {
+    "text": "Espejo",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/espejo.png"
+  },
+  {
+    "text": "Reloj",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/reloj.png"
+  },
+  {
+    "text": "Cuadro",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/cuadro.png"
+  },
+  {
+    "text": "Libro",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/libro.png"
+  },
+  {
+    "text": "Pelota",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/pelota.png"
+  },
+  {
+    "text": "Muñeca",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/muneca.png"
+  },
+  {
+    "text": "Coche",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/coche.png"
+  },
+  {
+    "text": "Bicicleta",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/bicicleta.png"
+  },
+  {
+    "text": "Mochila",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/mochila.png"
+  },
+  {
+    "text": "Lápiz",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/lapiz.png"
+  },
+  {
+    "text": "Papel",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/papel.png"
+  },
+  {
+    "text": "Tijeras",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/tijeras.png"
+  },
+  {
+    "text": "Teléfono",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/telefono.png"
+  },
+  {
+    "text": "Televisor",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/televisor.png"
+  },
+  {
+    "text": "Ordenador",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/ordenador.png"
+  },
+  {
+    "text": "Plato",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/plato.png"
+  },
+  {
+    "text": "Vaso",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/vaso.png"
+  },
+  {
+    "text": "Taza",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/taza.png"
+  },
+  {
+    "text": "Cuchara",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/cuchara.png"
+  },
+  {
+    "text": "Tenedor",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/tenedor.png"
+  },
+  {
+    "text": "Cuchillo",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/cuchillo.png"
+  },
+  {
+    "text": "Llave",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/llave.png"
+  },
+  {
+    "text": "Gafas",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/gafas.png"
+  },
+  {
+    "text": "Sombrero",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/sombrero.png"
+  },
+  {
+    "text": "Zapatos",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/zapatos.png"
+  },
+  {
+    "text": "Camiseta",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/camiseta.png"
+  },
+  {
+    "text": "Pantalón",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/pantalon.png"
+  },
+  {
+    "text": "Cepillo de Dientes",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/cepillo_de_dientes.png"
+  },
+  {
+    "text": "Jabón",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/jabon.png"
+  },
+  {
+    "text": "Toalla",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/toalla.png"
+  },
+  {
+    "text": "Peine",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/peine.png"
+  },
+  {
+    "text": "Paraguas",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/paraguas.png"
+  },
+  {
+    "text": "Guitarra",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/guitarra.png"
+  },
+  {
+    "text": "Piano",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/piano.png"
+  },
+  {
+    "text": "Martillo",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/martillo.png"
+  },
+  {
+    "text": "Destornillador",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/destornillador.png"
+  },
+  {
+    "text": "Escoba",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/escoba.png"
+  },
+  {
+    "text": "Cubo",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/cubo.png"
+  },
+  {
+    "text": "Pala",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/pala.png"
+  },
+  {
+    "text": "Botella",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/botella.png"
+  },
+  {
+    "text": "Caja",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/caja.png"
+  },
+  {
+    "text": "Bolsa",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/bolsa.png"
+  },
+  {
+    "text": "Reloj",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/reloj.png"
+  },
+  {
+    "text": "Cuerda",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/cuerda.png"
+  },
+  {
+    "text": "Imán",
+    "category_id": "objects",
+    "is_junior": true,
+    "image_url": "/assets/objects/iman.png"
+  },
+  {
+    "text": "Telescopio",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Microscopio",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sismógrafo",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Acelerador de Partículas",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dron",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Impresora 3D",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Láser",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fibra Óptica",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Circuito Integrado",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Microprocesador",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Satélite",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tubo de Ensayo",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bureta",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Matraz",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pipeta",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Centrifugadora",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Estetoscopio",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bisturí",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Desfibrilador",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Electrocardiograma",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Prótesis",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Audífono",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sextante",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Brújula",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Teodolito",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Astrolabio",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Metrónomo",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Diapasón",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sintetizador",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Aerógrafo",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cincel",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Torno",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fresadora",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Yunque",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Calibrador",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Multímetro",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Osciloscopio",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Geiger",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dinamo",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Turbina",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Panel Solar",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pila de Combustible",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Motor de Combustión",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Reactor Nuclear",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cifrado César",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Enigma",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Blockchain",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Algoritmo",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Protocolo",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Servidor",
+    "category_id": "objects",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Manzana",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/manzana.png"
+  },
+  {
+    "text": "Plátano",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/platano.png"
+  },
+  {
+    "text": "Naranja",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/naranja.png"
+  },
+  {
+    "text": "Fresa",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/fresa.png"
+  },
+  {
+    "text": "Uva",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/uva.png"
+  },
+  {
+    "text": "Sandía",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/sandia.png"
+  },
+  {
+    "text": "Melón",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/melon.png"
+  },
+  {
+    "text": "Piña",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/pina.png"
+  },
+  {
+    "text": "Pera",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/pera.png"
+  },
+  {
+    "text": "Cerezas",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/cerezas.png"
+  },
+  {
+    "text": "Lechuga",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/lechuga.png"
+  },
+  {
+    "text": "Tomate",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/tomate.png"
+  },
+  {
+    "text": "Zanahoria",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/zanahoria.png"
+  },
+  {
+    "text": "Patata",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/patata.png"
+  },
+  {
+    "text": "Huevo",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/huevo.png"
+  },
+  {
+    "text": "Leche",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/leche.png"
+  },
+  {
+    "text": "Queso",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/queso.png"
+  },
+  {
+    "text": "Pan",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/pan.png"
+  },
+  {
+    "text": "Arroz",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/arroz.png"
+  },
+  {
+    "text": "Pasta",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/pasta.png"
+  },
+  {
+    "text": "Pizza",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/pizza.png"
+  },
+  {
+    "text": "Hamburgesa",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/hamburgesa.png"
+  },
+  {
+    "text": "Pollo",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/pollo.png"
+  },
+  {
+    "text": "Pescado",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/pescado.png"
+  },
+  {
+    "text": "Carne",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/carne.png"
+  },
+  {
+    "text": "Sopa",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/sopa.png"
+  },
+  {
+    "text": "Ensalada",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/ensalada.png"
+  },
+  {
+    "text": "Yogur",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/yogur.png"
+  },
+  {
+    "text": "Helado",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/helado.png"
+  },
+  {
+    "text": "Chocolate",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/chocolate.png"
+  },
+  {
+    "text": "Caramelo",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/caramelo.png"
+  },
+  {
+    "text": "Galleta",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/galleta.png"
+  },
+  {
+    "text": "Pastel",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/pastel.png"
+  },
+  {
+    "text": "Zumo",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/zumo.png"
+  },
+  {
+    "text": "Agua",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/agua.png"
+  },
+  {
+    "text": "Miel",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/miel.png"
+  },
+  {
+    "text": "Mermelada",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/mermelada.png"
+  },
+  {
+    "text": "Mantequilla",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/mantequilla.png"
+  },
+  {
+    "text": "Macarrones",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/macarrones.png"
+  },
+  {
+    "text": "Salchicha",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/salchicha.png"
+  },
+  {
+    "text": "Croqueta",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/croqueta.png"
+  },
+  {
+    "text": "Tortilla",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/tortilla.png"
+  },
+  {
+    "text": "Bocadillo",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/bocadillo.png"
+  },
+  {
+    "text": "Donut",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/donut.png"
+  },
+  {
+    "text": "Mandarina",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/mandarina.png"
+  },
+  {
+    "text": "Limón",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/limon.png"
+  },
+  {
+    "text": "Coco",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/coco.png"
+  },
+  {
+    "text": "Calabaza",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/calabaza.png"
+  },
+  {
+    "text": "Guisantes",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/guisantes.png"
+  },
+  {
+    "text": "Maíz",
+    "category_id": "food",
+    "is_junior": true,
+    "image_url": "/assets/food/maiz.png"
+  },
+  {
+    "text": "Sushi",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Foie Gras",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Caviar",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Trufa",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Azafrán",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Quinoa",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cuscús",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Hummus",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Falafel",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ramen",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gazpacho",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Paella",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ratatouille",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Risotto",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fondue",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Carpaccio",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cebiche",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mochi",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Baklava",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Curry",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Goulash",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Poutine",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Burrito",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Taco",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Nachos",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Guacamole",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Churros",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tiramisú",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Brownie",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Smoothie",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Kombucha",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Chía",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Kéfir",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Wasabi",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Jengibre",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cúrcuma",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cilantro",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Albahaca",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Romero",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tomillo",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Canela",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Vainilla",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cacao",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Café Express",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Té Matcha",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sake",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Champán",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Vino",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cerveza Artesana",
+    "category_id": "food",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lionel Messi",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cristiano Ronaldo",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Elon Musk",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Jeff Bezos",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bill Gates",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mark Zuckerberg",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Steve Jobs",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Albert Einstein",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Isaac Newton",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Marie Curie",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Leonardo da Vinci",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pablo Picasso",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "William Shakespeare",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Michael Jackson",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Madonna",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Elvis Presley",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Beyoncé",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Taylor Swift",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Marilyn Monroe",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Brad Pitt",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Angelina Jolie",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Leonardo DiCaprio",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Steven Spielberg",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Walt Disney",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Barack Obama",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Nelson Mandela",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ghandi",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rafael Nadal",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Roger Federer",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Michael Jordan",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Muhammad Ali",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Stephen Hawking",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Nikola Tesla",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Charles Darwin",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Oprah Winfrey",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Will Smith",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Stan Lee",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "George Lucas",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Frida Kahlo",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Andy Warhol",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Beethoven",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mozart",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bach",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pavarotti",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Frank Sinatra",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Queen Elizabeth II",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Papa Francisco",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dalai Lama",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Malala Yousafzai",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Greta Thunberg",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rihanna",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lady Gaga",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Adele",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Justin Bieber",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Shakira",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rosalía",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bad Bunny",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tom Hanks",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Meryl Streep",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Robert De Niro",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Al Pacino",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Morgan Freeman",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cate Blanchett",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Quentin Tarantino",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Christopher Nolan",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Martin Scorsese",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Woody Allen",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pedro Almodóvar",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "JK Rowling",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gabriel García Márquez",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Jorge Luis Borges",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Julio Cortázar",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pablo Neruda",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Federico García Lorca",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Salvador Dalí",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Antoni Gaudí",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ferran Adrià",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pau Gasol",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fernando Alonso",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Usain Bolt",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Michael Phelps",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Serena Williams",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Simone Biles",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tiger Woods",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lewis Hamilton",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Max Verstappen",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "LeBron James",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Stephen Curry",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tom Brady",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tiger Woods",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Roger Federer",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Novak Djokovic",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Zenedine Zidane",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ronaldinho",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Maradona",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pelé",
+    "category_id": "celebrities",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Prehistoria",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Edad de Piedra",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Edad de Bronce",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Edad de Hierro",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Antiguo Egipto",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Antigua Grecia",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Imperio Romano",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Edad Media",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Renacimiento",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ilustración",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Revolución Industrial",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Era Victoriana",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Guerra Civil",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Primera Guerra Mundial",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Segunda Guerra Mundial",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Guerra Fría",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Era Espacial",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Era Digital",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Siglo de Oro",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Independencia",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Napoleón",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Era Meiji",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Revolución Rusa",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Apartheid",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Hippie",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Muro de Berlín",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Siglo XXI",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Antigüedad",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Barroco",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Romanticismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Realismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Impresionismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Modernismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Surrealismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Peste Negra",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Inquisición",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Imperio Bizantino",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Imperio Otomano",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Vikingos",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mongoles",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Vietnam",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Corea",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cuba",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Primavera Árabe",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mayo del 68",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Capitalismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Socialismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Comunismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fascismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Globalización",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Era Atómica",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Información",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Descubrimientos",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Reforma",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cruzadas",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Feudalismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mesopotamia",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Aztecas",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mayas",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Incas",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Samuráis",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Piratería",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lejano Oeste",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Belle Époque",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Años 20",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gran Depresión",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Holocausto",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mayo 68",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Perestroika",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Internet",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Smartphone",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Inteligencia Artificial",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cambio Climático",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pandemia",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Colonización",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Descolonización",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sufragismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Derechos Civiles",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Revolución Mexicana",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Independencia Sudamericana",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Guerra de los Cien Años",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Guerra de las Rosas",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tudor",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Estuardo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Borbon",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Habsburgo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dinastía Ming",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dinastía Qing",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Edo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pax Romana",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Helenismo",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cruzada",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Reconquista",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Al-Ándalus",
+    "category_id": "eras",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Padrino",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pulp Fiction",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Forrest Gump",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Matrix",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Inception",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Interstellar",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gladiator",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Titanic",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Avatar",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Parásitos",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Caballero Oscuro",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Star Wars",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Señor de los Anillos",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Harry Potter",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Indiana Jones",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Jurassic Park",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tiburón",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Apocalypse Now",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Blade Runner",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Alien",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Psicosis",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Resplandor",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Exorcista",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Seven",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cadena Perpetua",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Lista de Schindler",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Braveheart",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Regreso al Futuro",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "E.T.",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rocky",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Toy Story",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Rey León",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Casablanca",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ciudadano Kane",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "2001: Odisea del Espacio",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Naranja Mecánica",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Taxi Driver",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Vida es Bella",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Amélie",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Laberinto del Fauno",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Vengadores",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Iron Man",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Spider-Man",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Joker",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Batman",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Memento",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La La Land",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Whiplash",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fight Club",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Seven",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Reservoir Dogs",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Snatch",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Trainspotting",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "American History X",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Gran Belleza",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Padrino II",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Scarface",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Goodfellas",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Casino",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Hereditary",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gran Torino",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Million Dollar Baby",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Unforgiven",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "The Revenant",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Renacido",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mad Max",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dunkirk",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Oppenheimer",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dune",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Arrival",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Llegada",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Spider-Man: Into the Spider-Verse",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Klaus",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Spirited Away",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Viaje de Chihiro",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mi Vecino Totoro",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Your Name",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Akira",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ghost in the Shell",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Oldboy",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Parásitos",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Drive",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Whiplash",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Her",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ex Machina",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Black Swan",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cisne Negro",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Shutter Island",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "The Prestige",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Truco Final",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "The Truman Show",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Show de Truman",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Groundhog Day",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Atrapado en el Tiempo",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Eternal Sunshine",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "¡Olvídate de mí!",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lost in Translation",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Juno",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Little Miss Sunshine",
+    "category_id": "movies",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fútbol",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Baloncesto",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tenis",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Golf",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Béisbol",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rugby",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fútbol Americano",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Hockey",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Voleibol",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Balonmano",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Natación",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Atletismo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ciclismo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Boxeo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Judo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Kárate",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Taekwondo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Esgrima",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gimnasia",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Automovilismo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Motociclismo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fórmula 1",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Surf",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Skateboarding",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Esquí",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Snowboard",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Patinaje",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Remo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Vela",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Escalada",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Senderismo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pádel",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bádminton",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tenis de Mesa",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Billar",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dardos",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bolos",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Críquet",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ajedrez",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "E-sports",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Yoga",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pilates",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Crossfit",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tiro con Arco",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Equitación",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lucha Libre",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "MMA",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Muay Thai",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Parkour",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Paracaidismo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Buceo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Apnea",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rugby a 7",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cricket",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Waterpolo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Natación Sincronizada",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Salto de Trampolín",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Triatlón",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ironman",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ultra Trail",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Maratón",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pentatlón",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Decatlón",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lanzamiento de Jabalina",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lanzamiento de Disco",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lanzamiento de Martillo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Salto de Altura",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Salto de Longitud",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Triple Salto",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pole Vault",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Salto con Pértiga",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gimnasia Rítmica",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gimnasia Artística",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Trampolín",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Curling",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lacrosse",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Softbol",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Squash",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pickleball",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Padel Surf",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bodyboard",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Wakeboard",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Esquí Acuático",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Piragüismo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Kayak",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rafting",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Espeleología",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Orientación",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Caza",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pesca",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tiro al Plato",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Polo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Hípica",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Carreras de Galgos",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Carreras de Camellos",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sumo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Kendo",
+    "category_id": "sports",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Médico",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Enfermero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cirujano",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dentista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Veterinario",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Psicólogo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Profesor",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Arquitecto",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ingeniero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Abogado",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Juez",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Policía",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bombero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Piloto",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cocinero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Camarero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Panadero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Agricultor",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Periodista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Escritor",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Actor",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Músico",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cantante",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fotógrafo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Programador",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Diseñador",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Científico",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Astrónomo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Astronauta",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Arqueólogo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Detective",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Carpintero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Electricista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fontanero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mecánico",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Soldador",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Peluquero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Vendedor",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cartero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Conductor",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Taxista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Marinero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Militar",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Político",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Diplomático",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Juez de Paz",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Artesano",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Joyero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Relojero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sacerdote",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Secretario",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Contable",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Economista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Analista de Datos",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Experto en Ciberseguridad",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Desarrollador de Videojuegos",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Community Manager",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Influencer",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "YouTuber",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Operador de Grúa",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Minero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cantero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Leñador",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Buzo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Salvavidas",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Guía Turístico",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Azafata",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bibliotecario",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Museólogo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Conservador de Arte",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Traductor",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Intérprete",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Filólogo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sociólogo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Antropólogo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Filosofo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Teólogo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Meteorólogo",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ecologista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Activista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sindicalista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Asesor Financiero",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Corredor de Bolsa",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Inversionista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Empresario",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Emprendedor",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gerente",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Director de Recursos Humanos",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Especialista en Marketing",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Relaciones Públicas",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Publicista",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Copywriter",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Editor de Video",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ilustrador",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Animador 3D",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Escultor",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Curador",
+    "category_id": "professions",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Apple",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Google",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Microsoft",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Amazon",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tesla",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Samsung",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Nike",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Adidas",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Coca-Cola",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pepsi",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "McDonald's",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Starbucks",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Toyota",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mercedes-Benz",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "BMW",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Audi",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ferrari",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Disney",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Netflix",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sony",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Nintendo",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lego",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ikea",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Zara",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Gucci",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Louis Vuitton",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Chanel",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rolex",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Visa",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mastercard",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "American Express",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "PayPal",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Uber",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Airbnb",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Spotify",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "TikTok",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Instagram",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "WhatsApp",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "YouTube",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Canon",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Nikon",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Panasonic",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "LG",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Philips",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Siemens",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bosch",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ford",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Porsche",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lamborghini",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Maserati",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Jaguar",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Land Rover",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Range Rover",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Volvo",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Volkswagen",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fiat",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Renault",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Peugeot",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Citroën",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Nissan",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Honda",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Hyundai",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Kia",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mazda",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Subaru",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mitsubishi",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Lexus",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Infiniti",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Acura",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bentley",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rolls-Royce",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Aston Martin",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bugatti",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "McLaren",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Bose",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Beats",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "JBL",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Harman Kardon",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sennheiser",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Audio-Technica",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Shure",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "GoPro",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "DJI",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Garmin",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fitbit",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Casio",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Seiko",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Swatch",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tag Heuer",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Hublot",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Patek Philippe",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Audemars Piguet",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cartier",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Tiffany & Co.",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Montblanc",
+    "category_id": "brands",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Quijote",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "100 Años de Soledad",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Principito",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "1984",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Orgullo y Prejuicio",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Crímen y Castigo",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Los Miserables",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Ilíada",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Harry Potter",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Señor de los Anillos",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Crónicas de Narnia",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Hobbit",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Alicia en el País de las Maravillas",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Moby Dick",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Drácula",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Frankenstein",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sherlock Holmes",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dr. Jekyll y Mr. Hyde",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Robinson Crusoe",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Isla del Tesoro",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cien años de soledad",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Pedro Páramo",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Rayuela",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Aleph",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ficciones",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Ciudad y los Perros",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Casa de los Espíritus",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sapiens",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Homo Deus",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Breve Historia del Tiempo",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cosmos",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Gen Egoísta",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Rama Dorada",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Arte de la Guerra",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Príncipe",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Utopía",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Leviatán",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Contrato Social",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Riqueza de las Naciones",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El Capital",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Manifiesto Comunista",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Crítica de la Razón Pura",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Así habló Zaratustra",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Más allá del bien y del mal",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El ser y el tiempo",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La náusea",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El extranjero",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La peste",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ensayo sobre la ceguera",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Paula",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La tregua",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Cumbres borrascosas",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Jane Eyre",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Sentido y sensibilidad",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Emma",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Drácula",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Carmilla",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El retrato de Dorian Gray",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La importancia de llamarse Ernesto",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La máquina del tiempo",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La guerra de los mundos",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fundación",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Yo, Robot",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Crónicas Marcianas",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fahrenheit 451",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Un mundo feliz",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La metamorfosis",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El proceso",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El castillo",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "La Odisea",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Eneida",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Divina Comedia",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fausto",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Paraíso Perdido",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Hojas de Hierba",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Los cantos de Maldoror",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "En busca del tiempo perdido",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Ulises",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Dublineses",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Al faro",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Las olas",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mrs Dalloway",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El ruido y la furia",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Mientras agonizo",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "¡Absalón, Absalón!",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "El viejo y el mar",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Por quién doblan las campanas",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  },
+  {
+    "text": "Fiesta",
+    "category_id": "books",
+    "is_junior": false,
+    "image_url": ""
+  }
+]
