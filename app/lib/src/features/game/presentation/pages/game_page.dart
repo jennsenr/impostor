@@ -2260,15 +2260,11 @@ class _GamePageState extends State<GamePage> {
 }
 
 class _CornerBrackets extends StatelessWidget {
-  final Color color;
-  final double size;
-  final double thickness;
+  const _CornerBrackets();
 
-  const _CornerBrackets({
-    this.color = AppTheme.neonCyan,
-    this.size = 28,
-    this.thickness = 2.5,
-  });
+  static const Color _color = AppTheme.neonCyan;
+  static const double _size = 28;
+  static const double _thickness = 2.5;
 
   @override
   Widget build(BuildContext context) {
@@ -2279,9 +2275,9 @@ class _CornerBrackets extends StatelessWidget {
           top: 0,
           left: 0,
           child: _Bracket(
-            color: color,
-            size: size,
-            thickness: thickness,
+            color: _color,
+            size: _size,
+            thickness: _thickness,
             isTop: true,
             isLeft: true,
           ),
@@ -2291,9 +2287,9 @@ class _CornerBrackets extends StatelessWidget {
           top: 0,
           right: 0,
           child: _Bracket(
-            color: color,
-            size: size,
-            thickness: thickness,
+            color: _color,
+            size: _size,
+            thickness: _thickness,
             isTop: true,
             isLeft: false,
           ),
@@ -2303,9 +2299,9 @@ class _CornerBrackets extends StatelessWidget {
           bottom: 0,
           left: 0,
           child: _Bracket(
-            color: color,
-            size: size,
-            thickness: thickness,
+            color: _color,
+            size: _size,
+            thickness: _thickness,
             isTop: false,
             isLeft: true,
           ),
@@ -2315,9 +2311,9 @@ class _CornerBrackets extends StatelessWidget {
           bottom: 0,
           right: 0,
           child: _Bracket(
-            color: color,
-            size: size,
-            thickness: thickness,
+            color: _color,
+            size: _size,
+            thickness: _thickness,
             isTop: false,
             isLeft: false,
           ),
