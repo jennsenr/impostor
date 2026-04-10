@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'src/features/setup/presentation/cubit/setup_cubit.dart';
+import 'src/shared/config/app_config.dart';
 import 'src/shared/infrastructure/service_locator.dart';
 import 'src/shared/presentation/theme/app_theme.dart';
 import 'src/shared/presentation/router/app_router.dart';
@@ -20,6 +21,7 @@ Future<void> bootstrap() async {
 }
 
 void main() async {
+  AppConfig.configureFlavor(AppFlavor.dev);
   await bootstrap();
 }
 

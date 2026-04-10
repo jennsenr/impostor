@@ -1,7 +1,9 @@
 import 'dart:io';
 
+enum AppFlavor { dev, prod }
+
 class AppConfig {
-  static const String _defaultFlavor = String.fromEnvironment(
+  static const String _defaultFlavorName = String.fromEnvironment(
     'FLAVOR',
     defaultValue: 'dev',
   );
@@ -14,9 +16,23 @@ class AppConfig {
   static const String _devApiOrigin = 'http://192.168.68.63:8080';
   static const String _prodApiOrigin = 'https://impostor.manggio.com';
 
-  static String get flavor => _defaultFlavor;
+  static AppFlavor? _runtimeFlavor;
+
+  static void configureFlavor(AppFlavor flavor) {
+    _runtimeFlavor = flavor;
+  }
+
+  static AppFlavor get currentFlavor {
+    return _runtimeFlavor ?? _parseFlavor(_defaultFlavorName);
+  }
+
+  static String get flavor => currentFlavor.name;
 
   static bool get isProduction => flavor == 'prod';
+
+  static AppFlavor _parseFlavor(String flavor) {
+    return flavor == AppFlavor.prod.name ? AppFlavor.prod : AppFlavor.dev;
+  }
 
   static String resolveApiOrigin({
     required String flavor,
@@ -26,7 +42,7 @@ class AppConfig {
     final configuredUrl = apiUrl?.trim() ?? '';
     var origin = configuredUrl.isNotEmpty
         ? configuredUrl
-        : (flavor == 'prod' ? _prodApiOrigin : _devApiOrigin);
+        : (flavor == AppFlavor.prod.name ? _prodApiOrigin : _devApiOrigin);
 
     origin = origin.replaceFirst(RegExp(r'/+$'), '');
     origin = origin.replaceFirst(RegExp(r'/v1$'), '');

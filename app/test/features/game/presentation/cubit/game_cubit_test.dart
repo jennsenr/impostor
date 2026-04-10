@@ -12,6 +12,7 @@ import 'package:impostor/src/domain/models/player.dart';
 import 'package:impostor/src/domain/models/settings.dart';
 
 class MockGameRepository extends Mock implements GameRepository {}
+
 class MockWebSocketService extends Mock implements WebSocketService {}
 
 void main() {
@@ -25,10 +26,14 @@ void main() {
     code: '1234',
     status: GameStatus.adPhase,
     players: [
-      Player(id: 'p1', name: 'P1', avatarId: 'a1', isHost: true), 
-      Player(id: 'p2', name: 'P2', avatarId: 'a2')
+      Player(id: 'p1', name: 'P1', avatarId: 'a1', isHost: true),
+      Player(id: 'p2', name: 'P2', avatarId: 'a2'),
     ],
-    settings: Settings(categoryIds: ['animals'], juniorMode: false, survivalMode: false),
+    settings: Settings(
+      categoryIds: ['animals'],
+      juniorMode: false,
+      survivalMode: false,
+    ),
     currentRound: 1,
     currentTurnIndex: 0,
     word: 'Lion',
@@ -41,10 +46,10 @@ void main() {
     mockRepo = MockGameRepository();
     mockWs = MockWebSocketService();
     gameController = StreamController<Game>.broadcast();
-    
+
     when(() => mockWs.gameStream).thenAnswer((_) => gameController.stream);
     when(() => mockWs.connect(any(), any())).thenAnswer((_) async {});
-    
+
     gameCubit = GameCubit(mockRepo, mockWs, 'p1');
   });
 
@@ -75,18 +80,20 @@ void main() {
         isA<GameState>().having((s) => s.isReady, 'isReady', true),
       ],
       verify: (_) {
-         verify(() => mockRepo.readyPlayer('g1', 'p1')).called(1);
+        verify(() => mockRepo.readyPlayer('g1', 'p1')).called(1);
       },
     );
 
     blocTest<GameCubit, GameState>(
       'Should handle vote submission correctly',
       build: () {
-        when(() => mockRepo.submitVote(
-          gameId: any(named: 'gameId'),
-          voterId: any(named: 'voterId'),
-          targetId: any(named: 'targetId'),
-        )).thenAnswer((_) async {});
+        when(
+          () => mockRepo.submitVote(
+            gameId: any(named: 'gameId'),
+            voterId: any(named: 'voterId'),
+            targetId: any(named: 'targetId'),
+          ),
+        ).thenAnswer((_) async {});
         return gameCubit;
       },
       act: (cubit) async {
@@ -94,11 +101,10 @@ void main() {
         await cubit.vote('p2');
       },
       verify: (_) {
-        verify(() => mockRepo.submitVote(
-          gameId: 'g1',
-          voterId: 'p1',
-          targetId: 'p2',
-        )).called(1);
+        verify(
+          () =>
+              mockRepo.submitVote(gameId: 'g1', voterId: 'p1', targetId: 'p2'),
+        ).called(1);
       },
     );
     blocTest<GameCubit, GameState>(
@@ -117,15 +123,17 @@ void main() {
         isA<GameState>().having((s) => s.status, 'status', isA<GameLeft>()),
       ],
       verify: (_) {
-         verify(() => mockRepo.leaveGame('g1', 'p1')).called(1);
-         verify(() => mockWs.disconnect()).called(1);
+        verify(() => mockRepo.leaveGame('g1', 'p1')).called(1);
+        verify(() => mockWs.disconnect()).called(1);
       },
     );
 
     blocTest<GameCubit, GameState>(
       'Should handle fallback GameLeft emission on repository error',
       build: () {
-        when(() => mockRepo.leaveGame(any(), any())).thenThrow(Exception('Server error'));
+        when(
+          () => mockRepo.leaveGame(any(), any()),
+        ).thenThrow(Exception('Server error'));
         return gameCubit;
       },
       act: (cubit) async {
@@ -138,15 +146,15 @@ void main() {
         isA<GameState>().having((s) => s.status, 'status', isA<GameLeft>()),
       ],
       verify: (_) {
-         verify(() => mockRepo.leaveGame('g1', 'p1')).called(1);
-         verify(() => mockWs.disconnect()).called(1);
+        verify(() => mockRepo.leaveGame('g1', 'p1')).called(1);
+        verify(() => mockWs.disconnect()).called(1);
       },
     );
 
     test('Should start next round timer automatically on ties (Result)', () {
       fakeAsync((async) {
         when(() => mockRepo.nextRound(any(), any())).thenAnswer((_) async {});
-        
+
         final gameWithResult = initialGame.copyWith(
           status: GameStatus.result,
           winnerTeam: null, // No winner, meaning a tie or continuing
