@@ -1651,6 +1651,10 @@ class _GamePageState extends State<GamePage> {
 
               const SizedBox(height: 24),
 
+              _buildExpelledSummary(game, compact: true),
+
+              const SizedBox(height: 24),
+
               // --- Winning avatars (wrap) ---
               Wrap(
                 spacing: 12,
@@ -1921,17 +1925,6 @@ class _GamePageState extends State<GamePage> {
   }
 
   Widget _buildVoteResult(BuildContext context, Game game) {
-    final expelledPlayer =
-        game.expelledId != null && game.expelledId!.isNotEmpty
-        ? game.players.firstWhere(
-            (p) => p.id == game.expelledId,
-            orElse: () => game.players.first,
-          )
-        : null;
-
-    final isTie = expelledPlayer == null;
-    final isImpostor = expelledPlayer?.isImpostor == true;
-
     return Scaffold(
       backgroundColor: AppTheme.backgroundDark,
       body: SafeArea(
@@ -1942,151 +1935,7 @@ class _GamePageState extends State<GamePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-
-              if (!isTie) ...[
-                // --- Expelled Player Card ---
-                Container(
-                  width: 220,
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: AppTheme.surfaceElevated.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(32),
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            (isImpostor ? AppTheme.occupiedRed : Colors.white)
-                                .withOpacity(0.15),
-                        blurRadius: 40,
-                        spreadRadius: 5,
-                      ),
-                    ],
-                    border: Border.all(
-                      color: (isImpostor
-                          ? AppTheme.occupiedRed
-                          : Colors.white24),
-                      width: 2,
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(28),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/images/avatars/avatar_${expelledPlayer.avatarId}.png',
-                              height: 200,
-                              fit: BoxFit.contain,
-                            ),
-                            if (isImpostor)
-                              Positioned.fill(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    gradient: RadialGradient(
-                                      colors: [
-                                        AppTheme.occupiedRed.withOpacity(0.1),
-                                        Colors.transparent,
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 40),
-
-                Text(
-                  expelledPlayer.name.toUpperCase(),
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.outfit(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 4,
-                    color: Colors.white,
-                  ),
-                ),
-
-                const SizedBox(height: 12),
-
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color:
-                        (isImpostor
-                                ? AppTheme.occupiedRed
-                                : AppTheme.accentBlue)
-                            .withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(
-                      color:
-                          (isImpostor
-                                  ? AppTheme.occupiedRed
-                                  : AppTheme.accentBlue)
-                              .withOpacity(0.3),
-                    ),
-                  ),
-                  child: Text(
-                    isImpostor ? 'ERA EL IMPOSTOR' : 'ERA INOCENTE',
-                    style: GoogleFonts.outfit(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 2,
-                      color: isImpostor
-                          ? AppTheme.occupiedRed
-                          : AppTheme.accentBlue,
-                    ),
-                  ),
-                ),
-              ] else ...[
-                // --- Tie / No One Expelled ---
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: AppTheme.surfaceElevated.withOpacity(0.3),
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white10),
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.balance_rounded,
-                      size: 48,
-                      color: Colors.white38,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 32),
-                Text(
-                  'EMPATE',
-                  style: GoogleFonts.outfit(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 6,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  'NADIE HA SIDO ELIMINADO EN ESTA RONDA',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.outfit(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.5,
-                    color: Colors.white30,
-                  ),
-                ),
-              ],
-
+              _buildExpelledSummary(game),
               const Spacer(),
 
               // --- Footer Transition Loader ---
@@ -2120,6 +1969,157 @@ class _GamePageState extends State<GamePage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildExpelledSummary(Game game, {bool compact = false}) {
+    final expelledPlayer =
+        game.expelledId != null && game.expelledId!.isNotEmpty
+        ? game.players.firstWhere(
+            (p) => p.id == game.expelledId,
+            orElse: () => game.players.first,
+          )
+        : null;
+
+    final isTie = expelledPlayer == null;
+    final isImpostor = expelledPlayer?.isImpostor == true;
+
+    final avatarSize = compact ? 148.0 : 200.0;
+    final cardWidth = compact ? 180.0 : 220.0;
+    final titleSize = compact ? 22.0 : 32.0;
+    final badgeFontSize = compact ? 11.0 : 14.0;
+    final titleSpacing = compact ? 2.0 : 4.0;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (!isTie) ...[
+          Container(
+            width: cardWidth,
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: AppTheme.surfaceElevated.withOpacity(0.4),
+              borderRadius: BorderRadius.circular(32),
+              boxShadow: [
+                BoxShadow(
+                  color: (isImpostor ? AppTheme.occupiedRed : Colors.white)
+                      .withOpacity(0.15),
+                  blurRadius: 40,
+                  spreadRadius: 5,
+                ),
+              ],
+              border: Border.all(
+                color: isImpostor ? AppTheme.occupiedRed : Colors.white24,
+                width: 2,
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(28),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/avatars/avatar_${expelledPlayer.avatarId}.png',
+                        height: avatarSize,
+                        fit: BoxFit.contain,
+                      ),
+                      if (isImpostor)
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: RadialGradient(
+                                colors: [
+                                  AppTheme.occupiedRed.withOpacity(0.1),
+                                  Colors.transparent,
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: compact ? 20 : 40),
+          Text(
+            expelledPlayer.name.toUpperCase(),
+            textAlign: TextAlign.center,
+            style: GoogleFonts.outfit(
+              fontSize: titleSize,
+              fontWeight: FontWeight.w900,
+              letterSpacing: titleSpacing,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+            decoration: BoxDecoration(
+              color: (isImpostor ? AppTheme.occupiedRed : AppTheme.accentBlue)
+                  .withOpacity(0.1),
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(
+                color:
+                    (isImpostor ? AppTheme.occupiedRed : AppTheme.accentBlue)
+                        .withOpacity(0.3),
+              ),
+            ),
+            child: Text(
+              isImpostor ? 'ERA EL IMPOSTOR' : 'ERA INOCENTE',
+              style: GoogleFonts.outfit(
+                fontSize: badgeFontSize,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 2,
+                color:
+                    isImpostor ? AppTheme.occupiedRed : AppTheme.accentBlue,
+              ),
+            ),
+          ),
+        ] else ...[
+          Container(
+            width: compact ? 84 : 100,
+            height: compact ? 84 : 100,
+            decoration: BoxDecoration(
+              color: AppTheme.surfaceElevated.withOpacity(0.3),
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white10),
+            ),
+            child: const Center(
+              child: Icon(
+                Icons.balance_rounded,
+                size: 48,
+                color: Colors.white38,
+              ),
+            ),
+          ),
+          SizedBox(height: compact ? 20 : 32),
+          Text(
+            'EMPATE',
+            style: GoogleFonts.outfit(
+              fontSize: compact ? 28 : 40,
+              fontWeight: FontWeight.w900,
+              letterSpacing: compact ? 4 : 6,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'NADIE HA SIDO ELIMINADO EN ESTA RONDA',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.outfit(
+              fontSize: compact ? 11 : 13,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.5,
+              color: Colors.white30,
+            ),
+          ),
+        ],
+      ],
     );
   }
 
