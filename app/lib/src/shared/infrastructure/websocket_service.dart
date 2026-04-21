@@ -4,12 +4,13 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import '../../domain/models/game.dart';
 import '../../domain/models/ws_event.dart';
 import '../config/app_config.dart';
+import 'app_logger.dart';
 
 class WebSocketService {
   WebSocketChannel? _channel;
   final _eventStreamController = StreamController<WebSocketEvent>.broadcast();
   final _statusController = StreamController<WebSocketStatus>.broadcast();
-  
+
   WebSocketStatus _currentStatus = WebSocketStatus.disconnected;
   Timer? _reconnectTimer;
   String? _lastGameID;
@@ -19,16 +20,19 @@ class WebSocketService {
   Stream<WebSocketEvent> get eventStream => _eventStreamController.stream;
   Stream<WebSocketStatus> get statusStream => _statusController.stream;
   WebSocketStatus get currentStatus => _currentStatus;
-  
+
   Stream<Game> get gameStream => _eventStreamController.stream
-      .where((event) => event.type == WebSocketEventType.gameUpdate && event.game != null)
+      .where(
+        (event) =>
+            event.type == WebSocketEventType.gameUpdate && event.game != null,
+      )
       .map((event) => event.game!);
 
   void _updateStatus(WebSocketStatus status) {
     if (_currentStatus == status) return;
     _currentStatus = status;
     _statusController.add(status);
-    print('WebSocket Status: $status');
+    AppLogger.info('WebSocket Status: $status');
   }
 
   void connect(String gameID, String playerID) {
@@ -37,15 +41,17 @@ class WebSocketService {
     _lastPlayerID = playerID;
 
     if (_channel != null && _currentStatus == WebSocketStatus.connected) return;
-    
+
     _reconnectTimer?.cancel();
     _updateStatus(WebSocketStatus.connecting);
-    
-    final uri = Uri.parse('${AppConfig.wsBaseUrl}games/$gameID/ws?player_id=$playerID');
-    
+
+    final uri = Uri.parse(
+      '${AppConfig.wsBaseUrl}games/$gameID/ws?player_id=$playerID',
+    );
+
     try {
       _channel = WebSocketChannel.connect(uri);
-      
+
       _channel!.stream.listen(
         (data) {
           _updateStatus(WebSocketStatus.connected);
@@ -54,30 +60,32 @@ class WebSocketService {
               final Map<String, dynamic> json = jsonDecode(data);
               if (!json.containsKey('type')) {
                 final game = Game.fromJson(json);
-                _eventStreamController.add(WebSocketEvent(
-                  type: WebSocketEventType.gameUpdate,
-                  game: game,
-                ));
+                _eventStreamController.add(
+                  WebSocketEvent(
+                    type: WebSocketEventType.gameUpdate,
+                    game: game,
+                  ),
+                );
                 return;
               }
               final event = WebSocketEvent.fromJson(json);
               _eventStreamController.add(event);
             } catch (e) {
-              print('Error parsing WS event: $e');
+              AppLogger.error('Error parsing WS event', e);
             }
           }
         },
         onError: (error) {
-          print('WebSocket Error: $error');
+          AppLogger.error('WebSocket Error', error);
           _handleDisconnect();
         },
         onDone: () {
-          print('WebSocket Done (Closed)');
+          AppLogger.info('WebSocket Done (Closed)');
           _handleDisconnect();
         },
       );
     } catch (e) {
-      print('WebSocket Connection Error: $e');
+      AppLogger.error('WebSocket Connection Error', e);
       _handleDisconnect();
     }
   }
@@ -85,7 +93,7 @@ class WebSocketService {
   void _handleDisconnect() {
     _channel = null;
     _updateStatus(WebSocketStatus.disconnected);
-    
+
     if (!_isManualDisconnect) {
       _scheduleReconnect();
     }
@@ -94,8 +102,10 @@ class WebSocketService {
   void _scheduleReconnect() {
     _reconnectTimer?.cancel();
     _reconnectTimer = Timer(const Duration(seconds: 3), () {
-      if (_lastGameID != null && _lastPlayerID != null && !_isManualDisconnect) {
-        print('Attempting auto-reconnect...');
+      if (_lastGameID != null &&
+          _lastPlayerID != null &&
+          !_isManualDisconnect) {
+        AppLogger.info('Attempting auto-reconnect...');
         connect(_lastGameID!, _lastPlayerID!);
       }
     });

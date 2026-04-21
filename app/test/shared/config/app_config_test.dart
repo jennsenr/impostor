@@ -12,7 +12,7 @@ void main() {
     test('uses dev origin for dev flavor by default', () {
       final origin = AppConfig.resolveApiOrigin(flavor: 'dev');
 
-      expect(origin, 'http://192.168.68.63:8080');
+      expect(origin, 'http://localhost:8080');
     });
 
     test('normalizes trailing slash and v1 suffix', () {

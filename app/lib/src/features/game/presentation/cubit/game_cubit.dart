@@ -15,7 +15,7 @@ class GameCubit extends Cubit<GameState> {
   Timer? _nextRoundTimer;
 
   GameCubit(this._repository, this._wsService, String playerID)
-      : super(GameState(status: GameInitial(), myPlayerId: playerID));
+    : super(GameState(status: GameInitial(), myPlayerId: playerID));
 
   String _errorCode(Object error, String fallback) {
     final message = error.toString().replaceFirst('Exception: ', '').trim();
@@ -31,19 +31,19 @@ class GameCubit extends Cubit<GameState> {
   void init(Game game) {
     _emitLoadedGame(game);
     _refreshFinishedGameIfNeeded(game);
-    
+
     // El weblink ya debería estar conectado desde el Lobby, pero nos aseguramos
     // en caso de navegación directa o reconexión.
     _wsService.connect(game.id, state.myPlayerId);
-    
+
     _subscription = _wsService.eventStream.listen((event) {
       if (isClosed) return;
       if (event.type == WebSocketEventType.gameUpdate && event.game != null) {
-         _emitLoadedGame(event.game!);
-         _refreshFinishedGameIfNeeded(event.game!);
-         emit(state.copyWith(lastEvent: event));
+        _emitLoadedGame(event.game!);
+        _refreshFinishedGameIfNeeded(event.game!);
+        emit(state.copyWith(lastEvent: event));
       } else if (event.type == WebSocketEventType.playerEvent) {
-         emit(state.copyWith(lastEvent: event));
+        emit(state.copyWith(lastEvent: event));
       }
     });
 
@@ -55,7 +55,9 @@ class GameCubit extends Cubit<GameState> {
             await _repository.getGame(currentStatus.game.id);
           } catch (e) {
             // Se produjo una excepción de 404/game_not_found
-            if (!isClosed && (e.toString().contains('404') || e.toString().contains('game_not_found'))) {
+            if (!isClosed &&
+                (e.toString().contains('404') ||
+                    e.toString().contains('game_not_found'))) {
               emit(state.copyWith(status: GameDeleted()));
             }
           }
@@ -68,14 +70,12 @@ class GameCubit extends Cubit<GameState> {
     if (isClosed) return;
     final me = game.getMe(state.myPlayerId);
     emit(
-      state.copyWith(
-        status: GameLoaded(game),
-        isReady: me?.isReady ?? false,
-      ),
+      state.copyWith(status: GameLoaded(game), isReady: me?.isReady ?? false),
     );
 
-    // Auto-advance logic for Host on intermediate results (Ties or Expulsions)
-    if (game.status == GameStatus.result && game.hostId == state.myPlayerId && game.winnerTeam == null) {
+    // Auto-advance logic for Host after vote results.
+    // The backend decides whether RESULT advances to PLAYING or FINISHED.
+    if (game.status == GameStatus.result && game.hostId == state.myPlayerId) {
       _startNextRoundTimer(game.id);
     } else {
       _nextRoundTimer?.cancel();
@@ -85,7 +85,7 @@ class GameCubit extends Cubit<GameState> {
 
   void _startNextRoundTimer(String gameId) {
     if (_nextRoundTimer != null) return;
-    
+
     _nextRoundTimer = Timer(const Duration(seconds: 4), () {
       nextRound();
     });
@@ -115,7 +115,7 @@ class GameCubit extends Cubit<GameState> {
   Future<void> ready() async {
     final status = state.status;
     if (status is! GameLoaded) return;
-    
+
     try {
       await _repository.readyPlayer(status.game.id, state.myPlayerId);
       emit(state.copyWith(isReady: true));
@@ -127,7 +127,7 @@ class GameCubit extends Cubit<GameState> {
   Future<void> nextTurn() async {
     final status = state.status;
     if (status is! GameLoaded) return;
-    
+
     try {
       await _repository.nextTurn(status.game.id, state.myPlayerId);
     } catch (error) {
@@ -138,7 +138,7 @@ class GameCubit extends Cubit<GameState> {
   Future<void> vote(String targetId) async {
     final status = state.status;
     if (status is! GameLoaded) return;
-    
+
     try {
       await _repository.submitVote(
         gameId: status.game.id,
@@ -153,7 +153,7 @@ class GameCubit extends Cubit<GameState> {
   Future<void> decide(bool voteToVoting) async {
     final status = state.status;
     if (status is! GameLoaded) return;
-    
+
     try {
       await _repository.submitDecision(
         gameId: status.game.id,
@@ -164,15 +164,17 @@ class GameCubit extends Cubit<GameState> {
       _emitTransientError(_errorCode(error, 'decision_failed'));
     }
   }
-  
-  Future<void> finishAd() async {
-     final status = state.status;
-    if (status is! GameLoaded) return;
-    
+
+  Future<bool> finishAd() async {
+    final status = state.status;
+    if (status is! GameLoaded) return false;
+
     try {
       await _repository.finishAd(status.game.id, state.myPlayerId);
+      return true;
     } catch (error) {
       _emitTransientError(_errorCode(error, 'ad_failed'));
+      return false;
     }
   }
 

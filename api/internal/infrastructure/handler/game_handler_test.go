@@ -45,16 +45,16 @@ func (m *GameRepoMock) Delete(ctx context.Context, id vo.GameID) error {
 
 type WordRepoMock struct{ mock.Mock }
 
-func (m *WordRepoMock) GetRandomWord(ctx context.Context, cat vo.CategoryID, junior bool) (*entity.Word, error) {
-	args := m.Called(ctx, cat, junior)
+func (m *WordRepoMock) GetRandomWord(ctx context.Context, cat vo.CategoryID, junior bool, language vo.Language) (*entity.Word, error) {
+	args := m.Called(ctx, cat, junior, language)
 	if args.Get(0) == nil {
 		return nil, args.Error(1)
 	}
 	return args.Get(0).(*entity.Word), args.Error(1)
 }
 
-func (m *WordRepoMock) GetCategories(ctx context.Context) ([]vo.Category, error) {
-	args := m.Called(ctx)
+func (m *WordRepoMock) GetCategories(ctx context.Context, language vo.Language) ([]vo.Category, error) {
+	args := m.Called(ctx, language)
 	return args.Get(0).([]vo.Category), args.Error(1)
 }
 
@@ -77,7 +77,7 @@ func TestGameHandler_CreateGame(t *testing.T) {
 	r.POST("/api/games", h.CreateGame)
 
 	t.Run("Success", func(t *testing.T) {
-		reqBody := request.CreateGameRequest{HostName: "H", AvatarID: "a1", Categories: []string{"animals"}}
+		reqBody := request.CreateGameRequest{HostName: "H", AvatarID: "a1", Categories: []string{"animals"}, ImpostorCount: 1}
 		body, _ := json.Marshal(reqBody)
 		repo.On("Save", mock.Anything, mock.AnythingOfType("*entity.Game")).Return(nil)
 		w := httptest.NewRecorder()
@@ -97,7 +97,7 @@ func TestGameHandler_JoinGame(t *testing.T) {
 	r.POST("/api/games/:id/join", h.JoinGame)
 
 	t.Run("Success", func(t *testing.T) {
-		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		repo.On("GetByID", mock.Anything, vo.GameID("g1")).Return(game, nil)
 		repo.On("Save", mock.Anything, game).Return(nil)
 		pub.On("PublishGameUpdate", mock.Anything, "g1").Return(nil)
@@ -121,7 +121,7 @@ func TestGameHandler_GetGame_Redaction(t *testing.T) {
 		r := gin.Default()
 		r.GET("/api/games/:id", h.GetGame)
 
-		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		game.Word = "Lion"
 		p1 := entity.NewPlayer("p1", "P1", "a1")
 		p1.IsImpostor = true
@@ -147,7 +147,7 @@ func TestGameHandler_GetGame_Redaction(t *testing.T) {
 		r := gin.Default()
 		r.GET("/api/games/:id", h.GetGame)
 
-		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		game.Word = "Lion"
 		p1 := entity.NewPlayer("p1", "P1", "a1")
 		p1.IsImpostor = false // Civil
@@ -173,7 +173,7 @@ func TestGameHandler_GetGame_Redaction(t *testing.T) {
 		r := gin.Default()
 		r.GET("/api/games/:id", h.GetGame)
 
-		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		game.Word = "Lion"
 		p1 := entity.NewPlayer("p1", "P1", "a1")
 		p1.IsImpostor = true
@@ -253,7 +253,7 @@ func TestGameHandler_ActionAuthorization(t *testing.T) {
 		r := gin.Default()
 		r.PUT("/api/games/:id/settings", h.UpdateSettings)
 
-		body, _ := json.Marshal(request.UpdateSettingsRequest{Categories: []string{"animals"}})
+		body, _ := json.Marshal(request.UpdateSettingsRequest{Categories: []string{"animals"}, ImpostorCount: 1})
 		w := httptest.NewRecorder()
 		req, _ := http.NewRequest("PUT", "/api/games/g1/settings", bytes.NewBuffer(body))
 		r.ServeHTTP(w, req)
@@ -270,7 +270,7 @@ func TestGameHandler_ActionAuthorization(t *testing.T) {
 		r := gin.Default()
 		r.POST("/api/games/:id/next-turn", h.NextTurn)
 
-		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		_, _ = game.Join(entity.NewPlayer("p1", "P1", "a1"))
 		_, _ = game.Join(entity.NewPlayer("p2", "P2", "a2"))
 		game.Status = vo.StatusPlaying
@@ -295,7 +295,7 @@ func TestGameHandler_ActionAuthorization(t *testing.T) {
 		r := gin.Default()
 		r.POST("/api/games/:id/next-round", h.NextRound)
 
-		game := entity.NewGame("g1", "1234", "host", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g1", "1234", "host", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		_, _ = game.Join(entity.NewPlayer("host", "Host", "a1"))
 		_, _ = game.Join(entity.NewPlayer("p2", "P2", "a2"))
 		game.Status = vo.StatusResult

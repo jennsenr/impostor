@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../shared/infrastructure/ads_consent_service.dart';
+import '../../../../shared/infrastructure/ads_service.dart';
 import '../../../../shared/infrastructure/service_locator.dart';
 import '../../../../shared/infrastructure/websocket_service.dart';
+import '../../../../shared/presentation/localization/app_localizations.dart';
 import '../../../../shared/presentation/theme/app_theme.dart';
 import '../cubit/setup_cubit.dart';
 import '../cubit/setup_state.dart';
@@ -50,82 +53,133 @@ class _HomePageState extends State<HomePage> {
           if (state.status is SetupError) {
             final error = state.status as SetupError;
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(_setupErrorMessage(error.message))),
+              SnackBar(content: Text(context.l10n.setupError(error.message))),
             );
           }
         },
         builder: (context, state) {
-          return Container(
-            constraints: const BoxConstraints.expand(),
-            decoration: const BoxDecoration(
-              color: AppTheme.backgroundDark,
-            ),
-            child: SafeArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(height: 20),
-                    _buildHeader(),
-                    const SizedBox(height: 32),
-                    // Main card container for configuration
-                    Container(
-                      padding: const EdgeInsets.all(24),
-                      decoration: BoxDecoration(
-                        color: AppTheme.surfaceElevated.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.05),
-                          width: 1,
+          return Stack(
+            children: [
+              Container(
+                constraints: const BoxConstraints.expand(),
+                decoration: const BoxDecoration(color: AppTheme.backgroundDark),
+                child: SafeArea(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const SizedBox(height: 20),
+                        _buildHeader(),
+                        const SizedBox(height: 32),
+                        // Main card container for configuration
+                        Container(
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: AppTheme.surfaceElevated.withValues(
+                              alpha: 0.5,
+                            ),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.05),
+                              width: 1,
+                            ),
+                          ),
+                          child: Column(
+                            children: [_buildGameOptions(context, state)],
+                          ),
                         ),
-                      ),
+                        const SizedBox(height: 24),
+                        _buildActions(context, state),
+                        const SizedBox(height: 12),
+                        _buildPrivacyEntryPoint(),
+                        const SizedBox(height: 32),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              if (state.isRestoringSession)
+                Positioned.fill(
+                  child: ColoredBox(
+                    color: AppTheme.backgroundDark.withValues(alpha: 0.88),
+                    child: Center(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          _buildGameOptions(context, state),
+                          const CircularProgressIndicator(
+                            color: AppTheme.neonCyan,
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            context.l10n.restoringRoom,
+                            style: GoogleFonts.outfit(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 2,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            context.l10n.restoringRoomSubtitle,
+                            style: GoogleFonts.heebo(
+                              fontSize: 12,
+                              color: Colors.white54,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
-                    _buildActions(context, state),
-                    const SizedBox(height: 32),
-                  ],
+                  ),
                 ),
-              ),
-            ),
+            ],
           );
         },
       ),
     );
   }
 
-  String _setupErrorMessage(String code) {
-    switch (code) {
-      case 'fetch_categories_failed':
-        return 'No se pudieron cargar las categorias.';
-      case 'name_required':
-        return 'Introduce tu nombre antes de continuar.';
-      case 'category_required':
-        return 'Selecciona al menos una categoria.';
-      case 'name_already_taken':
-        return 'Ese nombre ya esta en uso en la sala.';
-      case 'avatar_already_taken':
-        return 'Ese avatar ya esta ocupado.';
-      case 'game_not_found':
-      case 'join_game_failed':
-        return 'No se pudo encontrar la sala. Revisa el codigo.';
-      case 'create_game_failed':
-        return 'No se pudo crear la partida.';
-      default:
-        return 'Ha ocurrido un error.';
-    }
+  Widget _buildPrivacyEntryPoint() {
+    return AnimatedBuilder(
+      animation: sl<AdsConsentService>(),
+      builder: (context, _) {
+        final consentService = sl<AdsConsentService>();
+        if (!consentService.privacyOptionsRequired) {
+          return const SizedBox.shrink();
+        }
+
+        return Center(
+          child: TextButton.icon(
+            onPressed: () async {
+              await consentService.showPrivacyOptions();
+              await sl<AdsService>().initialize();
+            },
+            icon: const Icon(
+              Icons.privacy_tip_outlined,
+              size: 18,
+              color: Colors.white70,
+            ),
+            label: Text(
+              context.l10n.privacyAndConsent,
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 1.1,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildHeader() {
     return Column(
       children: [
         Text(
-          'CONFIGURAR\nPARTIDA',
+          context.l10n.homeTitle,
           textAlign: TextAlign.center,
           style: GoogleFonts.outfit(
             fontSize: 42,
@@ -136,8 +190,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         const SizedBox(height: 16),
-        const Text(
-          'ESTABLECER PROTOCOLOS',
+        Text(
+          context.l10n.homeSubtitle,
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w800,
@@ -165,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'CATEGORÍAS',
+                  context.l10n.homeCategories,
                   style: GoogleFonts.outfit(
                     fontSize: 16,
                     fontWeight: FontWeight.w900,
@@ -183,18 +237,22 @@ class _HomePageState extends State<HomePage> {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryPurple.withOpacity(0.1),
+                  color: AppTheme.primaryPurple.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: AppTheme.primaryPurple.withOpacity(0.3),
+                    color: AppTheme.primaryPurple.withValues(alpha: 0.3),
                   ),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon( Icons.edit_note_rounded, size: 18, color: AppTheme.primaryPurple),
-                    SizedBox(width: 6),
+                    const Icon(
+                      Icons.edit_note_rounded,
+                      size: 18,
+                      color: AppTheme.primaryPurple,
+                    ),
+                    const SizedBox(width: 6),
                     Text(
-                      'EDITAR',
+                      context.l10n.edit,
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w900,
@@ -212,11 +270,11 @@ class _HomePageState extends State<HomePage> {
         state.categories.isEmpty
             ? _buildRetryButton(context)
             : state.selectedCategoryIds.isEmpty
-            ? const Padding(
+            ? Padding(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: Center(
                   child: Text(
-                    'Ninguna seleccionada. Pulsa EDITAR.',
+                    context.l10n.noCategoriesSelected,
                     style: TextStyle(
                       color: Colors.white24,
                       fontSize: 13,
@@ -241,10 +299,10 @@ class _HomePageState extends State<HomePage> {
                             vertical: 10,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.05),
+                            color: Colors.white.withValues(alpha: 0.05),
                             borderRadius: BorderRadius.circular(30),
                             border: Border.all(
-                              color: AppTheme.accentBlue.withOpacity(0.2),
+                              color: AppTheme.accentBlue.withValues(alpha: 0.2),
                               width: 1,
                             ),
                           ),
@@ -264,26 +322,114 @@ class _HomePageState extends State<HomePage> {
               ),
         const SizedBox(height: 24),
         const Divider(color: Colors.white10),
+        _buildImpostorCountSelector(context, state),
+        const SizedBox(height: 8),
         _buildSwitchOption(
-          title: 'MODO JUNIOR',
-          subtitle: 'Simplifica los términos para cadetes jóvenes.',
+          title: context.l10n.juniorMode,
+          subtitle: context.l10n.juniorModeSubtitle,
           value: state.juniorMode,
           onChanged: (v) => context.read<SetupCubit>().toggleJunior(v),
         ),
         _buildSwitchOption(
-          title: 'MODO SUPERVIVENCIA',
-          subtitle: 'Elimina jugadores que fallen.',
+          title: context.l10n.survivalMode,
+          subtitle: context.l10n.survivalModeSubtitle,
           value: state.survivalMode,
           onChanged: (v) => context.read<SetupCubit>().toggleSurvival(v),
         ),
         _buildSwitchOption(
-          title: 'TEMPORIZADOR',
-          subtitle: 'Segundos disponibles para cada turno',
+          title: context.l10n.questionsMode,
+          subtitle: context.l10n.questionsModeSubtitle,
+          value: state.questionsMode,
+          onChanged: (v) => context.read<SetupCubit>().toggleQuestions(v),
+        ),
+        _buildSwitchOption(
+          title: context.l10n.timer,
+          subtitle: context.l10n.timerSubtitle,
           value: state.timerEnabled,
           onChanged: (v) => context.read<SetupCubit>().toggleTimer(v),
         ),
         if (state.timerEnabled) _buildTimerSelector(context, state),
       ],
+    );
+  }
+
+  Widget _buildImpostorCountSelector(BuildContext context, SetupState state) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.l10n.impostors,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 1.5,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            context.l10n.impostorsSubtitle,
+            style: TextStyle(
+              fontSize: 11,
+              color: Colors.white.withValues(alpha: 0.35),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: Colors.black.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+            ),
+            child: Row(
+              children: List.generate(6, (index) => index + 1).map((count) {
+                final isSelected = state.impostorCount == count;
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () =>
+                        context.read<SetupCubit>().setImpostorCount(count),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? AppTheme.accentBlue
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: isSelected
+                            ? [
+                                BoxShadow(
+                                  color: AppTheme.accentBlue.withValues(
+                                    alpha: 0.35,
+                                  ),
+                                  blurRadius: 12,
+                                  spreadRadius: 1,
+                                ),
+                              ]
+                            : [],
+                      ),
+                      child: Text(
+                        '$count',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isSelected ? Colors.white : Colors.white24,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -315,8 +461,10 @@ class _HomePageState extends State<HomePage> {
                 child: Switch(
                   value: value,
                   onChanged: onChanged,
-                  activeColor: AppTheme.primaryPurple,
-                  activeTrackColor: AppTheme.primaryPurple.withOpacity(0.3),
+                  activeThumbColor: AppTheme.primaryPurple,
+                  activeTrackColor: AppTheme.primaryPurple.withValues(
+                    alpha: 0.3,
+                  ),
                 ),
               ),
             ],
@@ -326,7 +474,7 @@ class _HomePageState extends State<HomePage> {
             subtitle,
             style: TextStyle(
               fontSize: 11,
-              color: Colors.white.withOpacity(0.35),
+              color: Colors.white.withValues(alpha: 0.35),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -340,9 +488,9 @@ class _HomePageState extends State<HomePage> {
       margin: const EdgeInsets.only(top: 8, bottom: 16),
       padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.3),
+        color: Colors.black.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.05)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
       ),
       child: Row(
         children: [15, 30, 60].map((sec) {
@@ -361,7 +509,9 @@ class _HomePageState extends State<HomePage> {
                   boxShadow: isSelected
                       ? [
                           BoxShadow(
-                            color: AppTheme.primaryPurple.withOpacity(0.4),
+                            color: AppTheme.primaryPurple.withValues(
+                              alpha: 0.4,
+                            ),
                             blurRadius: 12,
                             spreadRadius: 1,
                           ),
@@ -390,15 +540,15 @@ class _HomePageState extends State<HomePage> {
     return Center(
       child: Column(
         children: [
-          const Text(
-            'No se han podido cargar las categorías',
+          Text(
+            context.l10n.categoriesLoadFailed,
             style: TextStyle(color: AppTheme.textSecondary),
           ),
           const SizedBox(height: 12),
           TextButton.icon(
             onPressed: () => context.read<SetupCubit>().loadCategories(),
             icon: const Icon(Icons.refresh),
-            label: const Text('REINTENTAR'),
+            label: Text(context.l10n.retry),
           ),
         ],
       ),
@@ -418,12 +568,14 @@ class _HomePageState extends State<HomePage> {
           width: double.infinity,
           height: 64,
           decoration: BoxDecoration(
-            color: canCreate ? AppTheme.buttonLavender : AppTheme.surfaceElevated,
+            color: canCreate
+                ? AppTheme.buttonLavender
+                : AppTheme.surfaceElevated,
             borderRadius: BorderRadius.circular(12),
             boxShadow: canCreate
                 ? [
                     BoxShadow(
-                      color: AppTheme.buttonLavender.withOpacity(0.3),
+                      color: AppTheme.buttonLavender.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 8),
                     ),
@@ -446,7 +598,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: Text(
-              'CREAR PARTIDA',
+              context.l10n.createGame,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w900,
@@ -463,9 +615,11 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 height: 64,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.white.withOpacity(0.05)),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.05),
+                  ),
                 ),
                 child: TextField(
                   controller: _gameIdController,
@@ -480,12 +634,12 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   decoration: InputDecoration(
-                    hintText: 'CODIGO',
+                    hintText: context.l10n.roomCode,
                     hintStyle: TextStyle(
                       letterSpacing: 2,
                       fontSize: 14,
                       fontWeight: FontWeight.w900,
-                      color: Colors.white.withOpacity(0.15),
+                      color: Colors.white.withValues(alpha: 0.15),
                     ),
                     counterText: '',
                     border: InputBorder.none,
@@ -505,7 +659,7 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.buttonLavender.withOpacity(0.3),
+                    color: AppTheme.buttonLavender.withValues(alpha: 0.3),
                     blurRadius: 15,
                     offset: const Offset(0, 4),
                   ),
@@ -527,8 +681,8 @@ class _HomePageState extends State<HomePage> {
                     context.read<SetupCubit>().startJoiningWithCode(code);
                   }
                 },
-                child: const Text(
-                  'UNIRSE',
+                child: Text(
+                  context.l10n.join,
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
                     letterSpacing: 1.5,
@@ -556,8 +710,12 @@ class _HomePageState extends State<HomePage> {
                 height: MediaQuery.of(context).size.height * 0.75,
                 decoration: BoxDecoration(
                   color: AppTheme.backgroundDark,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
-                  border: Border.all(color: Colors.white.withOpacity(0.05)),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(30),
+                  ),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.05),
+                  ),
                 ),
                 child: Column(
                   children: [
@@ -575,11 +733,11 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                               Text(
-                                'SELECCIONAR CATEGORÍAS',
+                              Text(
+                                context.l10n.selectCategories,
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -588,7 +746,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Text(
-                                'Escoge los mundos para jugar.',
+                                context.l10n.selectCategoriesSubtitle,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.white38,
@@ -600,7 +758,10 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               for (final cat in sheetState.categories) {
                                 // If Junior Mode is on and category is not allowed, ignore it
-                                if (sheetState.juniorMode && !cat.isJuniorAvailable) continue;
+                                if (sheetState.juniorMode &&
+                                    !cat.isJuniorAvailable) {
+                                  continue;
+                                }
                                 if (!sheetState.selectedCategoryIds.contains(
                                   cat.id,
                                 )) {
@@ -610,8 +771,8 @@ class _HomePageState extends State<HomePage> {
                                 }
                               }
                             },
-                            child: const Text(
-                              'TODO',
+                            child: Text(
+                              context.l10n.all,
                               style: TextStyle(
                                 color: AppTheme.accentBlue,
                                 fontWeight: FontWeight.bold,
@@ -626,25 +787,26 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 2.2,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                        ),
+                              crossAxisCount: 2,
+                              childAspectRatio: 2.2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                            ),
                         itemCount: sheetState.categories.length,
                         itemBuilder: (context, index) {
                           final cat = sheetState.categories[index];
                           final isSelected = sheetState.selectedCategoryIds
                               .contains(cat.id);
                           final isJuniorAllowed = cat.isJuniorAvailable;
-                          final isDisabled = sheetState.juniorMode && !isJuniorAllowed;
+                          final isDisabled =
+                              sheetState.juniorMode && !isJuniorAllowed;
 
                           return GestureDetector(
                             onTap: isDisabled
                                 ? null
                                 : () => context
-                                    .read<SetupCubit>()
-                                    .toggleCategory(cat.id),
+                                      .read<SetupCubit>()
+                                      .toggleCategory(cat.id),
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 200),
                               padding: const EdgeInsets.symmetric(
@@ -652,13 +814,15 @@ class _HomePageState extends State<HomePage> {
                               ),
                               decoration: BoxDecoration(
                                 color: isSelected
-                                    ? AppTheme.accentBlue.withOpacity(0.1)
-                                    : Colors.white.withOpacity(0.02),
+                                    ? AppTheme.accentBlue.withValues(alpha: 0.1)
+                                    : Colors.white.withValues(alpha: 0.02),
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(
                                   color: isSelected
-                                      ? AppTheme.accentBlue.withOpacity(0.5)
-                                      : Colors.white.withOpacity(0.05),
+                                      ? AppTheme.accentBlue.withValues(
+                                          alpha: 0.5,
+                                        )
+                                      : Colors.white.withValues(alpha: 0.05),
                                   width: 1,
                                 ),
                               ),
@@ -714,7 +878,7 @@ class _HomePageState extends State<HomePage> {
                             backgroundColor: Colors.transparent,
                             shadowColor: Colors.transparent,
                           ),
-                          child: const Text('LISTO PROTOCOLOS'),
+                          child: Text(context.l10n.doneProtocols),
                         ),
                       ),
                     ),

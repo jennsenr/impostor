@@ -52,9 +52,10 @@ func TestFullGame_E2E(t *testing.T) {
 	// 1. Host creates game
 	t.Run("1. Create Game", func(t *testing.T) {
 		createReq := request.CreateGameRequest{
-			HostName:   "Alice (Host)",
-			AvatarID:   "avatar-1",
-			Categories: []string{"animals"},
+			HostName:      "Alice (Host)",
+			AvatarID:      "avatar-1",
+			Categories:    []string{"animals"},
+			ImpostorCount: 1,
 		}
 		w := performRequest(r, "POST", "/v1/games", createReq, nil)
 		assert.Equal(t, http.StatusCreated, w.Code)
@@ -204,7 +205,7 @@ func TestFullGame_E2E(t *testing.T) {
 		_ = json.Unmarshal(w.Body.Bytes(), &results)
 		assert.Equal(t, impostorID, results["expelled_player_id"])
 		assert.True(t, results["was_impostor"].(bool))
-		assert.True(t, results["game_over"].(bool))
+		assert.False(t, results["game_over"].(bool))
 		assert.Equal(t, "civilians", results["winner_team"])
 	})
 }

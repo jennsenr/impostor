@@ -48,7 +48,16 @@ func (s *GameService) CreateGame(ctx context.Context, req request.CreateGameRequ
 	code := s.GenerateCode()
 	hostID := uuid.New().String()
 
-	settings := vo.NewSettings(categoryIDs, req.JuniorMode, req.SurvivalMode, req.TimerEnabled, req.TimerSeconds)
+	settings := vo.NewSettings(
+		categoryIDs,
+		req.ImpostorCount,
+		vo.NormalizeLanguage(req.Language),
+		req.JuniorMode,
+		req.SurvivalMode,
+		req.QuestionsMode,
+		req.TimerEnabled,
+		req.TimerSeconds,
+	)
 	game := entity.NewGame(gameID, code, hostID, settings)
 
 	host := entity.NewPlayer(hostID, req.HostName, vo.AvatarID(req.AvatarID))
@@ -122,6 +131,41 @@ func (s *GameService) LeaveGame(ctx context.Context, gameID string, playerID str
 		return err
 	}
 
+	return s.leaveGameLocked(ctx, game, gameID, playerID)
+}
+
+// LeaveDisconnectedPlayer convierte una desconexión prolongada en un abandono real.
+// Si el jugador ya volvió a conectarse o la partida ya no existe, no hace nada.
+func (s *GameService) LeaveDisconnectedPlayer(ctx context.Context, gameID string, playerID string) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	game, err := s.repo.GetByID(ctx, vo.GameID(gameID))
+	if err != nil {
+		if err == errs.ErrGameNotFound {
+			return nil
+		}
+		return err
+	}
+
+	for _, p := range game.Players {
+		if p.ID != playerID {
+			continue
+		}
+		if p.IsConnected {
+			return nil
+		}
+		return s.leaveGameLocked(ctx, game, gameID, playerID)
+	}
+
+	return nil
+}
+
+func (s *GameService) leaveGameLocked(ctx context.Context, game *entity.Game, gameID string, playerID string) error {
+	if game == nil {
+		return errs.ErrGameNotFound
+	}
+
 	// Capturar info del jugador antes de eliminarlo para la notificación
 	var playerName, avatarID string
 	for _, p := range game.Players {
@@ -140,6 +184,8 @@ func (s *GameService) LeaveGame(ctx context.Context, gameID string, playerID str
 		return s.repo.Delete(ctx, game.ID)
 	}
 
+	s.reconcileGameAfterLeave(game)
+
 	if err := s.repo.Save(ctx, game); err != nil {
 		return err
 	}
@@ -153,6 +199,112 @@ func (s *GameService) LeaveGame(ctx context.Context, gameID string, playerID str
 	_ = s.publisher.PublishGameUpdate(ctx, gameID)
 
 	return nil
+}
+
+func (s *GameService) reconcileGameAfterLeave(game *entity.Game) {
+	if game == nil || len(game.Players) == 0 {
+		return
+	}
+
+	s.resolveWinnerAfterLeave(game)
+
+	switch game.Status {
+	case vo.StatusAdPhase:
+		allDone := true
+		for _, p := range game.Players {
+			if !p.AdCompleted {
+				allDone = false
+				break
+			}
+		}
+		if allDone {
+			game.Status = vo.StatusReady
+		}
+	case vo.StatusReady:
+		allReady := true
+		for _, p := range game.Players {
+			if !p.IsReady {
+				allReady = false
+				break
+			}
+		}
+		if allReady {
+			_ = game.Ready(game.Players[0].ID)
+		}
+	case vo.StatusDecision:
+		allDecided := true
+		votesForVoting := 0
+		votesForAnotherRound := 0
+
+		for _, p := range game.Players {
+			if !p.IsAlive {
+				continue
+			}
+			if !p.HasDecided {
+				allDecided = false
+				break
+			}
+			if p.WantsToVote {
+				votesForVoting++
+			} else {
+				votesForAnotherRound++
+			}
+		}
+
+		if allDecided {
+			if votesForVoting > votesForAnotherRound {
+				_ = game.SetStatus(vo.StatusVoting)
+			} else {
+				_ = game.SetStatus(vo.StatusPlaying)
+			}
+		}
+	case vo.StatusVoting:
+		allVoted := true
+		for _, p := range game.Players {
+			if p.IsAlive && !p.HasVoted {
+				allVoted = false
+				break
+			}
+		}
+		if allVoted {
+			_, _, _, _ = game.CalculateResults()
+		}
+	}
+}
+
+func (s *GameService) resolveWinnerAfterLeave(game *entity.Game) {
+	if game == nil {
+		return
+	}
+
+	switch game.Status {
+	case vo.StatusWaiting, vo.StatusFinished, vo.StatusResult:
+		return
+	}
+
+	impostorsAlive := 0
+	civiliansAlive := 0
+	for _, p := range game.Players {
+		if !p.IsAlive {
+			continue
+		}
+		if p.IsImpostor {
+			impostorsAlive++
+		} else {
+			civiliansAlive++
+		}
+	}
+
+	switch {
+	case impostorsAlive == 0:
+		game.Status = vo.StatusResult
+		game.WinnerTeam = "civilians"
+		game.ExpelledID = ""
+	case civiliansAlive <= impostorsAlive:
+		game.Status = vo.StatusResult
+		game.WinnerTeam = "impostors"
+		game.ExpelledID = ""
+	}
 }
 
 // GetGame recupera el estado actual de una partida por ID o por código
@@ -184,7 +336,16 @@ func (s *GameService) UpdateSettings(ctx context.Context, gameID string, hostID 
 		categoryIDs[i] = vo.CategoryID(cat)
 	}
 
-	newSettings := vo.NewSettings(categoryIDs, req.JuniorMode, req.SurvivalMode, req.TimerEnabled, req.TimerSeconds)
+	newSettings := vo.NewSettings(
+		categoryIDs,
+		req.ImpostorCount,
+		vo.NormalizeLanguage(req.Language),
+		req.JuniorMode,
+		req.SurvivalMode,
+		req.QuestionsMode,
+		req.TimerEnabled,
+		req.TimerSeconds,
+	)
 	if err := game.UpdateSettings(hostID, newSettings); err != nil {
 		return nil, err
 	}
@@ -216,7 +377,12 @@ func (s *GameService) StartGame(ctx context.Context, gameID string, hostID strin
 	idx := rand.IntN(len(game.Settings.CategoryIDs))
 	selectedCategoryID := game.Settings.CategoryIDs[idx]
 
-	word, err := s.wordRepo.GetRandomWord(ctx, selectedCategoryID, game.Settings.JuniorMode)
+	word, err := s.wordRepo.GetRandomWord(
+		ctx,
+		selectedCategoryID,
+		game.Settings.JuniorMode,
+		game.Settings.Language,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -439,8 +605,8 @@ func (s *GameService) CalculateResults(ctx context.Context, gameID string) (map[
 }
 
 // GetCategories devuelve el catálogo de categorías disponibles
-func (s *GameService) GetCategories(ctx context.Context) ([]vo.Category, error) {
-	return vo.GetAvailableCategories(), nil
+func (s *GameService) GetCategories(ctx context.Context, language vo.Language) ([]vo.Category, error) {
+	return vo.GetAvailableCategories(language), nil
 }
 
 func (s *GameService) GenerateCode() string {
@@ -471,7 +637,12 @@ func (s *GameService) Rematch(ctx context.Context, gameID string) (*entity.Game,
 	idx := rand.IntN(len(game.Settings.CategoryIDs))
 	selectedCategoryID := game.Settings.CategoryIDs[idx]
 
-	word, err := s.wordRepo.GetRandomWord(ctx, selectedCategoryID, game.Settings.JuniorMode)
+	word, err := s.wordRepo.GetRandomWord(
+		ctx,
+		selectedCategoryID,
+		game.Settings.JuniorMode,
+		game.Settings.Language,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -507,7 +678,12 @@ func (s *GameService) NextRound(ctx context.Context, gameID string, playerID str
 		return nil, errs.ErrNotHost
 	}
 
-	if err := game.SetStatus(vo.StatusPlaying); err != nil {
+	nextStatus := vo.StatusPlaying
+	if game.WinnerTeam != "" {
+		nextStatus = vo.StatusFinished
+	}
+
+	if err := game.SetStatus(nextStatus); err != nil {
 		return nil, err
 	}
 

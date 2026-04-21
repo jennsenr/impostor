@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../config/app_config.dart';
+import '../presentation/localization/app_localizations.dart';
 
 class DioClient {
   late final Dio _dio;
@@ -15,6 +16,7 @@ class DioClient {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'Accept-Language': AppLocalizationUtils.currentDeviceLanguageCode(),
         },
       ),
     );
@@ -29,16 +31,17 @@ class DioClient {
           if (_hostID != null) {
             options.headers['X-Host-ID'] = _hostID;
           }
+          options.headers['Accept-Language'] =
+              AppLocalizationUtils.currentDeviceLanguageCode();
           return handler.next(options);
         },
       ),
     );
-    
+
     // Add logging in debug mode
-    _dio.interceptors.add(LogInterceptor(
-      requestBody: true,
-      responseBody: true,
-    ));
+    _dio.interceptors.add(
+      LogInterceptor(requestBody: true, responseBody: true),
+    );
   }
 
   void setPlayerID(String? id) => _playerID = id;

@@ -1,0 +1,192 @@
+{
+  "@@locale": "es",
+  "appTitle": "Impostor Game",
+  "privacyAndConsent": "PRIVACIDAD Y CONSENTIMIENTO",
+  "restoringRoom": "RECUPERANDO SALA...",
+  "restoringRoomSubtitle": "Intentando restaurar tu partida anterior.",
+  "errorFetchCategories": "No se pudieron cargar las categorías.",
+  "errorNameRequired": "Introduce tu nombre antes de continuar.",
+  "errorCategoryRequired": "Selecciona al menos una categoría.",
+  "errorNameTaken": "Ese nombre ya está en uso en la sala.",
+  "errorAvatarTaken": "Ese avatar ya está ocupado.",
+  "errorJoinGame": "No se pudo encontrar la sala. Revisa el código.",
+  "errorCreateGame": "No se pudo crear la partida.",
+  "errorMinimumPlayers": "No hay suficientes jugadores para esa cantidad de impostores.",
+  "errorSessionRestore": "No se pudo recuperar la sala anterior. Puedes volver a entrar manualmente.",
+  "errorGeneric": "Ha ocurrido un error.",
+  "errorNotHost": "Solo el host puede hacer esa acción.",
+  "errorInvalidGameStatus": "Esa acción no está disponible ahora mismo.",
+  "homeTitle": "CONFIGURAR\nPARTIDA",
+  "homeSubtitle": "ESTABLECER PROTOCOLOS",
+  "homeCategories": "CATEGORÍAS",
+  "edit": "EDITAR",
+  "noCategoriesSelected": "Ninguna seleccionada. Pulsa EDITAR.",
+  "juniorMode": "MODO JUNIOR",
+  "juniorModeSubtitle": "Simplifica los términos para cadetes jóvenes.",
+  "survivalMode": "MODO SUPERVIVENCIA",
+  "survivalModeSubtitle": "La partida continúa si el jugador expulsado no era el impostor",
+  "questionsMode": "MODO PREGUNTAS",
+  "questionsModeSubtitle": "Haz preguntas para descubrir al impostor",
+  "timer": "TEMPORIZADOR",
+  "timerSubtitle": "Tiempo límite antes de perder el turno",
+  "impostors": "IMPOSTORES",
+  "impostorsSubtitle": "Configura cuántos impostores tendrá la partida.",
+  "categoriesLoadFailed": "No se han podido cargar las categorías",
+  "retry": "REINTENTAR",
+  "createGame": "CREAR PARTIDA",
+  "roomCode": "CÓDIGO",
+  "join": "UNIRSE",
+  "selectCategories": "SELECCIONAR CATEGORÍAS",
+  "selectCategoriesSubtitle": "Escoge los mundos para jugar.",
+  "all": "TODAS",
+  "doneProtocols": "LISTO PROTOCOLOS",
+  "nameLabel": "NOMBRE DEL TRIPULANTE",
+  "nameHint": "INTRODUCE NOMBRE...",
+  "available": "DISPONIBLE",
+  "selected": "SELECCIONADO",
+  "occupied": "OCUPADO",
+  "selectAvatarTitle": "SELECCIONAR\nAVATAR",
+  "selectAvatarSubtitle": "SELECCIONA TU AVATAR DE TRIPULACIÓN",
+  "bindAvatar": "VINCULAR AVATAR",
+  "updateAvatar": "ACTUALIZAR AVATAR",
+  "lobbyInactiveRoom": "SALA INACTIVA: EL SERVIDOR LA HA CERRADO",
+  "lobbyErrorStartGame": "No se pudo iniciar la partida.",
+  "lobbyErrorUpdateSettings": "No se pudieron guardar los ajustes.",
+  "lobbyErrorAd": "No se pudo confirmar el anuncio.",
+  "lobbyErrorLeave": "No se pudo salir de la sala.",
+  "lobbyErrorDeleted": "La sala ya no existe.",
+  "lobbyErrorGeneric": "Ha ocurrido un error en la sala.",
+  "lobbyWaitingRoomLine1": "SALA DE",
+  "lobbyWaitingRoomLine2": "ESPERA",
+  "room": "SALA",
+  "lobbyCodeLabel": "CODIGO:",
+  "lobbyModesLabel": "M O D O S :",
+  "questionsModeBadge": "PREGUNTAS",
+  "waitingParticipantsLine1": "ESPERANDO",
+  "waitingParticipantsLine2": "PARTICIPANTES",
+  "playersLabel": "JUGADORES",
+  "connected": "CONECTADO",
+  "disconnected": "DESCONECTADO",
+  "host": "ANFITRIÓN",
+  "hostOffline": "ANFITRIÓN (OFF)",
+  "startGame": "EMPEZAR PARTIDA",
+  "minimumPlayersButton": "MINIMO {count} JUGADORES",
+  "@minimumPlayersButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "waitingForHost": "ESPERANDO AL ANFITRIÓN...",
+  "gameSettings": "AJUSTES DE PARTIDA",
+  "categories": "Categorías",
+  "impostorLobbyHint": "Para iniciar la sala hacen falta al menos impostores + 1 jugadores.",
+  "save": "GUARDAR",
+  "saveChanges": "GUARDAR CAMBIOS",
+  "discussionTime": "TIEMPO DE DISCUSIÓN",
+  "juniorModeTitle": "Modo Junior",
+  "survivalModeTitle": "Modo Supervivencia",
+  "questionsModeTitle": "Modo Preguntas",
+  "timerTitle": "Temporizador",
+  "juniorCategoriesHint": "Categorías simplificadas para niños",
+  "shareLobbyInvite": "¡Únete a mi partida de IMPOSTOR!\n\nCódigo: {code}\nEnlace: {url}",
+  "@shareLobbyInvite": {
+    "placeholders": {
+      "code": {},
+      "url": {}
+    }
+  },
+  "gameInactiveRoom": "SALA INACTIVA: EL SERVIDOR LA HA CERRADO",
+  "leaveGameTitle": "ABANDONAR PARTIDA",
+  "leaveGameBody": "El resto de jugadores verá que has abandonado la partida.",
+  "cancel": "CANCELAR",
+  "exit": "SALIR",
+  "unknownGameStatus": "Estado de juego desconocido",
+  "gameErrorReady": "No se pudo marcar al jugador como listo",
+  "gameErrorNextTurn": "No se pudo avanzar el turno",
+  "gameErrorVote": "No se pudo enviar el voto",
+  "gameErrorDecision": "No se pudo enviar la decisión",
+  "gameErrorAd": "No se pudo confirmar el anuncio",
+  "gameErrorRematch": "No se pudo iniciar la revancha",
+  "gameErrorNextRound": "No se pudo avanzar a la siguiente ronda",
+  "gameErrorGeneric": "Ha ocurrido un error en la partida",
+  "playerLeft": "{name} ha abandonado la partida.",
+  "@playerLeft": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "playerDisconnected": "{name} se ha desconectado.",
+  "@playerDisconnected": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "playerReconnected": "{name} ha vuelto a entrar.",
+  "@playerReconnected": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "playerJoinedLobby": "{name} ha entrado.",
+  "@playerJoinedLobby": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "round": "RONDA",
+  "turnOf": "TURNO DE:",
+  "readyShort": "LISTO",
+  "decisionTitle": "¿SABÉIS YA QUIÉN ES?",
+  "decisionSubtitle": "Hablad y decidid si queréis ir a votación ahora o jugar otra ronda.",
+  "teamDecisions": "DECISIONES DEL EQUIPO",
+  "teamDecisionsSubtitle": "Los jugadores en color ya han escogido si ir a votación o jugar otra ronda.",
+  "decisions": "DECISIONES",
+  "goToVote": "IR A VOTACIÓN",
+  "anotherRound": "OTRA RONDA",
+  "playersDeciding": "Los jugadores están decidiendo...",
+  "waitingForOthers": "Esperando a los demás ({done}/{total})...",
+  "@waitingForOthers": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "youAreOut": "¡ESTÁS FUERA!",
+  "waitFinalResult": "Espera al resultado final.",
+  "votesRegistered": "VOTOS REGISTRADOS",
+  "votesProgressEliminated": "Sigue el avance de la votación aunque ya no participes.",
+  "votes": "VOTOS",
+  "voteRegistered": "VOTO REGISTRADO",
+  "waitingRest": "Esperando al resto...",
+  "votesProgressWaiting": "Los jugadores iluminados ya han emitido su voto.",
+  "voteTheImpostor": "VOTA AL IMPOSTOR",
+  "voteWarning": "Si te equivocas, ¡lo pagarás caro!",
+  "votesProgressSubtitle": "Los avatares en gris todavía no han votado.",
+  "questionAsks": "{name} PREGUNTA A",
+  "@questionAsks": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "questionLabel": "PREGUNTA",
+  "answerLabel": "RESPONDE",
+  "currentTurnResolutionFailed": "No se pudo resolver el turno actual",
+  "shareRoomCodeMessage": "Únete a mi sala de Impostor. Código: {code}",
+  "@shareRoomCodeMessage": {
+    "placeholders": {
+      "code": {}
+    }
+  },
+  "roomJoinChannelLabel": "CANAL DE VINCULACIÓN: {code}",
+  "@roomJoinChannelLabel": {
+    "placeholders": {
+      "code": {}
+    }
+  }
+}

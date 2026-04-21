@@ -8,7 +8,6 @@
 class CategoryLocalizer {
   CategoryLocalizer._();
 
-  /// Traducciones en español. Extraer a ARB cuando se añada i18n completo.
   static const Map<String, String> _es = {
     'animals': 'Animales',
     'places': 'Lugares',
@@ -23,9 +22,24 @@ class CategoryLocalizer {
     'books': 'Libros',
   };
 
+  static const Map<String, String> _en = {
+    'animals': 'Animals',
+    'places': 'Places',
+    'objects': 'Objects',
+    'food': 'Food',
+    'celebrities': 'Celebrities',
+    'eras': 'Eras',
+    'movies': 'Movies',
+    'sports': 'Sports',
+    'professions': 'Professions',
+    'brands': 'Brands',
+    'books': 'Books',
+  };
+
   /// Devuelve el nombre localizado del [categoryId].
   /// Si no se encuentra, devuelve el propio ID como fallback.
-  static String localize(String categoryId) {
-    return _es[categoryId] ?? categoryId;
+  static String localize(String categoryId, {String languageCode = 'es'}) {
+    final normalized = languageCode.toLowerCase().startsWith('en') ? _en : _es;
+    return normalized[categoryId] ?? categoryId;
   }
 }

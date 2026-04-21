@@ -112,4 +112,24 @@ class Game {
     if (currentTurnIndex < 0 || currentTurnIndex >= players.length) return false;
     return players[currentTurnIndex].id == myPlayerID;
   }
+
+  Player? getCurrentTurnPlayer() {
+    if (currentTurnIndex < 0 || currentTurnIndex >= players.length) return null;
+    return players[currentTurnIndex];
+  }
+
+  Player? getQuestionTarget() {
+    if (status != GameStatus.playing || players.isEmpty) return null;
+    if (currentTurnIndex < 0 || currentTurnIndex >= players.length) return null;
+
+    for (var step = 1; step < players.length; step++) {
+      final nextIndex = (currentTurnIndex + step) % players.length;
+      final player = players[nextIndex];
+      if (player.isAlive) {
+        return player;
+      }
+    }
+
+    return null;
+  }
 }

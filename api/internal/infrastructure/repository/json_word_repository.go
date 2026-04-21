@@ -34,7 +34,7 @@ func NewJsonWordRepository(filePath string) (*JsonWordRepository, error) {
 }
 
 // GetRandomWord filtra las palabras por categoría y modo junior, y devuelve una al azar
-func (r *JsonWordRepository) GetRandomWord(ctx context.Context, categoryID vo.CategoryID, isJunior bool) (*entity.Word, error) {
+func (r *JsonWordRepository) GetRandomWord(ctx context.Context, categoryID vo.CategoryID, isJunior bool, language vo.Language) (*entity.Word, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 
@@ -51,10 +51,10 @@ func (r *JsonWordRepository) GetRandomWord(ctx context.Context, categoryID vo.Ca
 	}
 
 	idx := rand.IntN(len(filtered))
-	return &filtered[idx], nil
+	return filtered[idx].Localized(language), nil
 }
 
 // GetCategories devuelve las categorías disponibles filtradas por el catálogo del dominio
-func (r *JsonWordRepository) GetCategories(ctx context.Context) ([]vo.Category, error) {
-	return vo.GetAvailableCategories(), nil
+func (r *JsonWordRepository) GetCategories(ctx context.Context, language vo.Language) ([]vo.Category, error) {
+	return vo.GetAvailableCategories(language), nil
 }

@@ -2,12 +2,14 @@ package handler
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jennsenr/impostor/api/internal/application/request"
 	"github.com/jennsenr/impostor/api/internal/application/service"
 	"github.com/jennsenr/impostor/api/internal/domain/entity"
 	"github.com/jennsenr/impostor/api/internal/domain/errs"
+	"github.com/jennsenr/impostor/api/internal/domain/vo"
 )
 
 type GameHandler struct {
@@ -286,7 +288,10 @@ func (h *GameHandler) CalculateResults(c *gin.Context) {
 
 // GetCategories devuelve el catálogo de categorías
 func (h *GameHandler) GetCategories(c *gin.Context) {
-	categories, err := h.svc.GetCategories(c.Request.Context())
+	categories, err := h.svc.GetCategories(
+		c.Request.Context(),
+		requestedLanguage(c.GetHeader("Accept-Language")),
+	)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"code": "internal_error"})
 		return
@@ -330,6 +335,23 @@ func (h *GameHandler) RedirectToApp(c *gin.Context) {
 `
 	c.Header("Content-Type", "text/html")
 	c.String(200, html, code, code)
+}
+
+func requestedLanguage(acceptLanguage string) vo.Language {
+	if acceptLanguage == "" {
+		return vo.LanguageSpanish
+	}
+
+	parts := strings.Split(acceptLanguage, ",")
+	for _, part := range parts {
+		candidate := strings.TrimSpace(strings.Split(part, ";")[0])
+		if candidate == "" {
+			continue
+		}
+		return vo.NormalizeLanguage(candidate)
+	}
+
+	return vo.LanguageSpanish
 }
 
 // NextRound avanza la partida a la siguiente fase

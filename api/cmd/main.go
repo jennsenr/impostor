@@ -9,12 +9,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/redis/go-redis/v9"
 	"github.com/jennsenr/impostor/api/internal/application/service"
 	"github.com/jennsenr/impostor/api/internal/infrastructure/handler"
 	"github.com/jennsenr/impostor/api/internal/infrastructure/repository"
 	"github.com/jennsenr/impostor/api/internal/infrastructure/router"
 	"github.com/jennsenr/impostor/api/internal/infrastructure/ws"
+	"github.com/redis/go-redis/v9"
 )
 
 func main() {
@@ -60,13 +60,13 @@ func main() {
 	// Inicializar componentes de Tiempo Real
 	gameRepo := repository.NewRedisGameRepository(rdb)
 	publisher := repository.NewRedisEventPublisher(rdb)
-	
-	hub := ws.NewHub(gameRepo, rdb)
+
+	gameSvc := service.NewGameService(gameRepo, wordRepo, publisher)
+	hub := ws.NewHub(gameRepo, publisher, gameSvc, rdb)
 	go hub.SubscribeToRedis(ctx) // Escuchar eventos de Redis Pub/Sub
 	log.Printf("Sistema de notificaciones en tiempo real (Pub/Sub) iniciado")
 
 	// Inyección de dependencias
-	gameSvc := service.NewGameService(gameRepo, wordRepo, publisher)
 	gameHandler := handler.NewGameHandler(gameSvc)
 	wsHandler := handler.NewWSHandler(hub)
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../shared/presentation/localization/app_localizations.dart';
 import '../../../../shared/presentation/theme/app_theme.dart';
 import '../cubit/setup_cubit.dart';
 import '../cubit/setup_state.dart';
@@ -38,7 +39,7 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
         if (state.status is SetupError) {
           final error = state.status as SetupError;
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(_setupErrorMessage(error.message))),
+            SnackBar(content: Text(context.l10n.setupError(error.message))),
           );
         }
       },
@@ -79,10 +80,12 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
                       Container(
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          color: AppTheme.surfaceElevated.withOpacity(0.5),
+                          color: AppTheme.surfaceElevated.withValues(
+                            alpha: 0.5,
+                          ),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: Colors.white.withOpacity(0.05),
+                            color: Colors.white.withValues(alpha: 0.05),
                             width: 1,
                           ),
                         ),
@@ -100,7 +103,8 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
                 ),
               ),
             ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
             floatingActionButton: state.avatarId.isEmpty
                 ? null
                 : Padding(
@@ -113,33 +117,15 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
     );
   }
 
-  String _setupErrorMessage(String code) {
-    switch (code) {
-      case 'name_required':
-        return 'Introduce tu nombre antes de continuar.';
-      case 'name_already_taken':
-        return 'Ese nombre ya esta en uso en la sala.';
-      case 'avatar_already_taken':
-        return 'Ese avatar ya esta ocupado.';
-      case 'game_not_found':
-      case 'join_game_failed':
-        return 'No se pudo encontrar la sala. Revisa el codigo.';
-      case 'create_game_failed':
-        return 'No se pudo crear la partida.';
-      default:
-        return 'Ha ocurrido un error.';
-    }
-  }
-
   Widget _buildJoinInfo(String? code, bool isCreating) {
     if (isCreating || code == null) return const SizedBox.shrink();
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: AppTheme.accentBlue.withOpacity(0.05),
+        color: AppTheme.accentBlue.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppTheme.accentBlue.withOpacity(0.2)),
+        border: Border.all(color: AppTheme.accentBlue.withValues(alpha: 0.2)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -147,7 +133,7 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
           const Icon(Icons.sensors, size: 16, color: AppTheme.accentBlue),
           const SizedBox(width: 8),
           Text(
-            'CANAL DE VINCULACIÓN: $code',
+            context.l10n.roomJoinChannel(code),
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -164,8 +150,8 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'NOMBRE DEL TRIPULANTE',
+        Text(
+          context.l10n.nameLabel,
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w900,
@@ -185,14 +171,14 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
             letterSpacing: 1.1,
           ),
           decoration: InputDecoration(
-            hintText: 'INTRODUCE NOMBRE...',
+            hintText: context.l10n.nameHint,
             hintStyle: TextStyle(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               fontSize: 14,
               fontWeight: FontWeight.w900,
               letterSpacing: 1.5,
             ),
-            fillColor: Colors.black.withOpacity(0.4),
+            fillColor: Colors.black.withValues(alpha: 0.4),
             filled: true,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 20,
@@ -208,7 +194,10 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: AppTheme.accentBlue, width: 1),
+              borderSide: const BorderSide(
+                color: AppTheme.accentBlue,
+                width: 1,
+              ),
             ),
           ),
         ),
@@ -216,7 +205,8 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
     );
   }
 
-  Widget _buildAvatarGrid(BuildContext context, SetupState state) {    return GridView.builder(
+  Widget _buildAvatarGrid(BuildContext context, SetupState state) {
+    return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: 15,
@@ -231,14 +221,14 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
         final isSelected = state.avatarId == id;
         final isOccupied = state.occupiedAvatarIds.contains(id);
 
-        String statusLabel = 'DISPONIBLE';
+        String statusLabel = context.l10n.available;
         Color statusColor = AppTheme.availableGray;
 
         if (isSelected) {
-          statusLabel = 'SELECCIONADO';
+          statusLabel = context.l10n.selected;
           statusColor = AppTheme.primaryPurple;
         } else if (isOccupied) {
-          statusLabel = 'OCUPADO';
+          statusLabel = context.l10n.occupied;
           statusColor = AppTheme.occupiedRed;
         }
 
@@ -255,17 +245,21 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
                     duration: const Duration(milliseconds: 250),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? AppTheme.primaryPurple.withOpacity(0.1)
-                          : Colors.white.withOpacity(0.05),
+                          ? AppTheme.primaryPurple.withValues(alpha: 0.1)
+                          : Colors.white.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: isSelected ? AppTheme.primaryPurple : Colors.white10,
+                        color: isSelected
+                            ? AppTheme.primaryPurple
+                            : Colors.white10,
                         width: isSelected ? 2 : 1,
                       ),
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: AppTheme.primaryPurple.withOpacity(0.4),
+                                color: AppTheme.primaryPurple.withValues(
+                                  alpha: 0.4,
+                                ),
                                 blurRadius: 12,
                                 spreadRadius: 1,
                               ),
@@ -280,7 +274,7 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
                             child: ColorFiltered(
                               colorFilter: isOccupied
                                   ? ColorFilter.mode(
-                                      Colors.red.withOpacity(0.4),
+                                      Colors.red.withValues(alpha: 0.4),
                                       BlendMode.color,
                                     )
                                   : const ColorFilter.mode(
@@ -294,17 +288,17 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) =>
                                       Center(
-                                    child: Text(
-                                      'A$id',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: isSelected
-                                            ? AppTheme.primaryPurple
-                                            : Colors.white24,
+                                        child: Text(
+                                          'A$id',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: isSelected
+                                                ? AppTheme.primaryPurple
+                                                : Colors.white24,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
                                 ),
                               ),
                             ),
@@ -313,7 +307,7 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
                             Center(
                               child: Icon(
                                 Icons.lock_outline,
-                                color: Colors.red.withOpacity(0.8),
+                                color: Colors.red.withValues(alpha: 0.8),
                                 size: 32,
                               ),
                             ),
@@ -338,7 +332,6 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
         );
       },
     );
-
   }
 
   Widget _buildActionButton(BuildContext context, SetupState state) {
@@ -357,7 +350,7 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.buttonLavender.withOpacity(0.3),
+            color: AppTheme.buttonLavender.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -396,10 +389,16 @@ class _CharacterSelectionPageState extends State<CharacterSelectionPage> {
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(state.status is SetupSuccess ? Icons.refresh : Icons.link, color: Colors.black87, size: 24),
+                  Icon(
+                    state.status is SetupSuccess ? Icons.refresh : Icons.link,
+                    color: Colors.black87,
+                    size: 24,
+                  ),
                   const SizedBox(width: 16),
                   Text(
-                    state.status is SetupSuccess ? 'ACTUALIZAR AVATAR' : 'VINCULAR AVATAR',
+                    state.status is SetupSuccess
+                        ? context.l10n.updateAvatar
+                        : context.l10n.bindAvatar,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
@@ -422,7 +421,7 @@ class _FuturisticHeader extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'SELECCIONAR\nAVATAR',
+          context.l10n.selectAvatarTitle,
           textAlign: TextAlign.center,
           style: GoogleFonts.outfit(
             fontSize: 42,
@@ -433,8 +432,8 @@ class _FuturisticHeader extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        const Text(
-          'SELECCIONA TU AVATAR DE TRIPULACIÓN',
+        Text(
+          context.l10n.selectAvatarSubtitle,
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w800,

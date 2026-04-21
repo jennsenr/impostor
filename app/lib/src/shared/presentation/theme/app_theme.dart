@@ -12,7 +12,7 @@ class AppTheme {
   static const occupiedRed = Color(0xFFFF5252);
   static const buttonLavender = Color(0xFFC0A0FF);
   static const availableGray = Color(0xFF4A4A58);
-  
+
   // High-fidelity Neon accents
   static const neonCyan = Color(0xFF62D9FF);
   static const neonPurple = Color(0xFFA259FF);
@@ -83,7 +83,9 @@ class AppTheme {
           return Colors.grey.shade700;
         }),
         trackColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) return primaryPurple.withOpacity(0.3);
+          if (states.contains(WidgetState.selected)) {
+            return primaryPurple.withValues(alpha: 0.3);
+          }
           return Colors.black26;
         }),
       ),

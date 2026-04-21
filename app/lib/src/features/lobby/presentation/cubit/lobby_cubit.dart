@@ -4,6 +4,7 @@ import '../../../../domain/models/game.dart';
 import '../../../../domain/models/ws_event.dart';
 import '../../../../domain/repositories/game_repository.dart';
 import '../../../../shared/infrastructure/websocket_service.dart';
+import '../../../../shared/presentation/localization/app_localizations.dart';
 import 'lobby_state.dart';
 
 class LobbyCubit extends Cubit<LobbyState> {
@@ -13,7 +14,7 @@ class LobbyCubit extends Cubit<LobbyState> {
   StreamSubscription? _statusSubscription;
 
   LobbyCubit(this._repository, this._wsService, String playerID)
-      : super(LobbyState(status: LobbyInitial(), myPlayerId: playerID));
+    : super(LobbyState(status: LobbyInitial(), myPlayerId: playerID));
 
   String _errorCode(Object error, String fallback) {
     final message = error.toString().replaceFirst('Exception: ', '').trim();
@@ -28,7 +29,7 @@ class LobbyCubit extends Cubit<LobbyState> {
 
   Future<void> init(Game game) async {
     emit(state.copyWith(status: LobbyLoaded(game)));
-    
+
     // Fetch available categories from backend
     try {
       final categories = await _repository.getCategories();
@@ -38,14 +39,16 @@ class LobbyCubit extends Cubit<LobbyState> {
     } catch (_) {
       // Fallback or ignore
     }
-    
+
     // Conectar a WebSocket para actualizaciones en tiempo real
     _wsService.connect(game.id, state.myPlayerId);
-    
+
     _eventSubscription = _wsService.eventStream.listen((event) {
       if (isClosed) return;
       if (event.type == WebSocketEventType.gameUpdate && event.game != null) {
-        emit(state.copyWith(status: LobbyLoaded(event.game!), lastEvent: event));
+        emit(
+          state.copyWith(status: LobbyLoaded(event.game!), lastEvent: event),
+        );
       } else if (event.type == WebSocketEventType.playerEvent) {
         // Solo emitir si el evento es de otro jugador (opcional, pero más limpio)
         emit(state.copyWith(lastEvent: event));
@@ -65,7 +68,8 @@ class LobbyCubit extends Cubit<LobbyState> {
           } catch (e) {
             if (isClosed) return;
             // Error fetching game usually means it was deleted (404)
-            if (e.toString().contains('404') || e.toString().contains('game_not_found')) {
+            if (e.toString().contains('404') ||
+                e.toString().contains('game_not_found')) {
               emit(state.copyWith(status: const LobbyError('game_deleted')));
             }
           }
@@ -84,7 +88,7 @@ class LobbyCubit extends Cubit<LobbyState> {
   Future<void> startGame() async {
     final status = state.status;
     if (status is! LobbyLoaded) return;
-    
+
     try {
       await _repository.startGame(status.game.id, state.myPlayerId);
       // El cambio de estado vendrá por WebSocket
@@ -95,23 +99,28 @@ class LobbyCubit extends Cubit<LobbyState> {
 
   Future<void> updateSettings({
     List<String>? categoryIds,
+    int? impostorCount,
     bool? juniorMode,
     bool? survivalMode,
+    bool? questionsMode,
     bool? timerEnabled,
     int? timerSeconds,
   }) async {
     final status = state.status;
     if (status is! LobbyLoaded) return;
-    
+
     final currentSettings = status.game.settings;
-    
+
     try {
       await _repository.updateSettings(
         gameId: status.game.id,
         hostId: state.myPlayerId,
         categoryIds: categoryIds ?? currentSettings.categoryIds,
+        language: AppLocalizationUtils.currentDeviceLanguageCode(),
+        impostorCount: impostorCount ?? currentSettings.impostorCount,
         juniorMode: juniorMode ?? currentSettings.juniorMode,
         survivalMode: survivalMode ?? currentSettings.survivalMode,
+        questionsMode: questionsMode ?? currentSettings.questionsMode,
         timerEnabled: timerEnabled ?? currentSettings.timerEnabled,
         timerSeconds: timerSeconds ?? currentSettings.timerSeconds,
       );
@@ -124,7 +133,7 @@ class LobbyCubit extends Cubit<LobbyState> {
   Future<void> finishAd() async {
     final status = state.status;
     if (status is! LobbyLoaded) return;
-    
+
     try {
       await _repository.finishAd(status.game.id, state.myPlayerId);
     } catch (error) {
@@ -135,7 +144,7 @@ class LobbyCubit extends Cubit<LobbyState> {
   Future<void> leaveGame() async {
     final status = state.status;
     if (status is! LobbyLoaded) return;
-    
+
     emit(state.copyWith(isLeaving: true));
 
     try {

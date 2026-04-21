@@ -10,13 +10,16 @@ class JoinResponse {
 
 abstract class GameRepository {
   Future<List<Category>> getCategories();
-  
+
   Future<JoinResponse> createGame({
     required String hostName,
     required String avatarId,
     required List<String> categories,
+    required String language,
+    required int impostorCount,
     required bool juniorMode,
     required bool survivalMode,
+    required bool questionsMode,
     required bool timerEnabled,
     required int timerSeconds,
   });
@@ -28,15 +31,15 @@ abstract class GameRepository {
   });
 
   Future<Game> getGame(String gameId);
-  
+
   Future<void> startGame(String gameId, String hostId);
-  
+
   Future<void> finishAd(String gameId, String playerId);
-  
+
   Future<void> readyPlayer(String gameId, String playerId);
-  
+
   Future<void> nextTurn(String gameId, String playerId);
-  
+
   Future<void> submitVote({
     required String gameId,
     required String voterId,
@@ -50,15 +53,18 @@ abstract class GameRepository {
   });
 
   Future<Map<String, dynamic>> getResults(String gameId);
-  
+
   Future<void> leaveGame(String gameId, String playerId);
-  
+
   Future<void> updateSettings({
     required String gameId,
     required String hostId,
     required List<String> categoryIds,
+    required String language,
+    required int impostorCount,
     required bool juniorMode,
     required bool survivalMode,
+    required bool questionsMode,
     required bool timerEnabled,
     required int timerSeconds,
   });

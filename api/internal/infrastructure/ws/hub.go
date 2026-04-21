@@ -6,25 +6,39 @@ import (
 	"fmt"
 	"log"
 	"sync"
+	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/redis/go-redis/v9"
+	"github.com/jennsenr/impostor/api/internal/domain/entity"
 	"github.com/jennsenr/impostor/api/internal/domain/repository"
 	"github.com/jennsenr/impostor/api/internal/domain/vo"
+	"github.com/redis/go-redis/v9"
 )
 
-type Hub struct {
-	gameRepo repository.GameRepository
-	rdb      *redis.Client
-	clients  map[string]map[*websocket.Conn]string // gameID -> conn -> playerID
-	mu       sync.RWMutex
+const autoLeaveAfterDisconnect = 5 * time.Second
+
+type DisconnectLeaveService interface {
+	LeaveDisconnectedPlayer(ctx context.Context, gameID string, playerID string) error
 }
 
-func NewHub(gameRepo repository.GameRepository, rdb *redis.Client) *Hub {
+type Hub struct {
+	gameRepo         repository.GameRepository
+	publisher        repository.EventPublisher
+	leaveService     DisconnectLeaveService
+	rdb              *redis.Client
+	clients          map[string]map[*websocket.Conn]string // gameID -> conn -> playerID
+	disconnectTimers map[string]map[string]*time.Timer
+	mu               sync.RWMutex
+}
+
+func NewHub(gameRepo repository.GameRepository, publisher repository.EventPublisher, leaveService DisconnectLeaveService, rdb *redis.Client) *Hub {
 	return &Hub{
-		gameRepo: gameRepo,
-		rdb:      rdb,
-		clients:  make(map[string]map[*websocket.Conn]string),
+		gameRepo:         gameRepo,
+		publisher:        publisher,
+		leaveService:     leaveService,
+		rdb:              rdb,
+		clients:          make(map[string]map[*websocket.Conn]string),
+		disconnectTimers: make(map[string]map[string]*time.Timer),
 	}
 }
 
@@ -73,12 +87,18 @@ func (h *Hub) Register(gameID string, conn *websocket.Conn, playerID string) {
 	h.clients[gameID][conn] = playerID
 	h.mu.Unlock()
 
+	h.cancelDisconnectTimer(gameID, playerID)
+
 	// Actualizar estado de conexión en la entidad
 	ctx := context.Background()
 	game, err := h.gameRepo.GetByID(ctx, vo.GameID(gameID))
 	if err == nil {
 		if changed := game.SetPlayerConnectivity(playerID, true); changed {
 			_ = h.gameRepo.Save(ctx, game)
+			playerName, avatarID := h.findPlayerDetails(game, playerID)
+			if playerName != "" {
+				_ = h.publisher.PublishPlayerEvent(ctx, gameID, "RECONNECTED", playerID, playerName, avatarID)
+			}
 			h.broadcastGameUpdate(ctx, gameID)
 		}
 	}
@@ -105,9 +125,82 @@ func (h *Hub) Unregister(gameID string, conn *websocket.Conn) {
 			// Cambiar estado a desconectado
 			if changed := game.SetPlayerConnectivity(playerID, false); changed {
 				_ = h.gameRepo.Save(ctx, game)
+				playerName, avatarID := h.findPlayerDetails(game, playerID)
+				if playerName != "" {
+					_ = h.publisher.PublishPlayerEvent(ctx, gameID, "DISCONNECTED", playerID, playerName, avatarID)
+				}
 				h.broadcastGameUpdate(ctx, gameID)
+				h.scheduleDisconnectLeave(gameID, playerID)
 			}
 		}
+	}
+}
+
+func (h *Hub) findPlayerDetails(game *entity.Game, playerID string) (string, string) {
+	if game == nil {
+		return "", ""
+	}
+	for _, player := range game.Players {
+		if player.ID == playerID {
+			return player.Name, string(player.AvatarID)
+		}
+	}
+	return "", ""
+}
+
+func (h *Hub) scheduleDisconnectLeave(gameID, playerID string) {
+	h.cancelDisconnectTimer(gameID, playerID)
+
+	timer := time.AfterFunc(autoLeaveAfterDisconnect, func() {
+		if h.leaveService != nil {
+			if err := h.leaveService.LeaveDisconnectedPlayer(context.Background(), gameID, playerID); err != nil {
+				log.Printf("Error auto-removing disconnected player %s from game %s: %v", playerID, gameID, err)
+			}
+		}
+		h.clearDisconnectTimer(gameID, playerID)
+	})
+
+	h.mu.Lock()
+	if _, ok := h.disconnectTimers[gameID]; !ok {
+		h.disconnectTimers[gameID] = make(map[string]*time.Timer)
+	}
+	h.disconnectTimers[gameID][playerID] = timer
+	h.mu.Unlock()
+}
+
+func (h *Hub) cancelDisconnectTimer(gameID, playerID string) {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+
+	gameTimers, ok := h.disconnectTimers[gameID]
+	if !ok {
+		return
+	}
+
+	timer, ok := gameTimers[playerID]
+	if !ok {
+		return
+	}
+
+	timer.Stop()
+	delete(gameTimers, playerID)
+	if len(gameTimers) == 0 {
+		delete(h.disconnectTimers, gameID)
+	}
+}
+
+func (h *Hub) clearDisconnectTimer(gameID, playerID string) {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+
+	gameTimers, ok := h.disconnectTimers[gameID]
+	if !ok {
+		return
+	}
+
+	delete(gameTimers, playerID)
+	if len(gameTimers) == 0 {
+		delete(h.disconnectTimers, gameID)
 	}
 }
 
@@ -119,7 +212,7 @@ func (h *Hub) broadcastRaw(ctx context.Context, gameID string, payload []byte) {
 		h.mu.RUnlock()
 		return
 	}
-	
+
 	targets := make([]*websocket.Conn, 0, len(conns))
 	for c := range conns {
 		targets = append(targets, c)
@@ -148,7 +241,7 @@ func (h *Hub) broadcastGameUpdate(ctx context.Context, gameID string) {
 		h.mu.RUnlock()
 		return
 	}
-	
+
 	// Copiar mapeo de conexiones para iterar fuera del lock
 	targets := make(map[*websocket.Conn]string)
 	for c, pid := range conns {
@@ -159,13 +252,13 @@ func (h *Hub) broadcastGameUpdate(ctx context.Context, gameID string) {
 	for conn, playerID := range targets {
 		// Personalizar payload para cada jugador según el estado de la partida.
 		gameSanitized := gameBase.SanitizeForPlayer(playerID)
-		
+
 		msg := map[string]interface{}{
 			"type":    "GAME_UPDATE",
 			"game_id": gameID,
 			"payload": gameSanitized,
 		}
-		
+
 		payload, _ := json.Marshal(msg)
 		if err := conn.WriteMessage(websocket.TextMessage, payload); err != nil {
 			log.Printf("Error enviando WS a cliente %s: %v", playerID, err)

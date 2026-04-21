@@ -1,4 +1,4 @@
-.PHONY: help api-dev api-test api-build api-up api-down api-logs app-dev app-prod app-ios-prod app-android-prod app-test app-analyze app-build-android app-build-ios
+.PHONY: help api-dev api-test api-build api-up api-down api-logs app-dev app-prod app-ios-prod app-android-prod app-test app-analyze app-build-android app-build-apk app-build-ios app-run-all
 
 help:
 	@echo "Targets disponibles:"
@@ -15,7 +15,9 @@ help:
 	@echo "  app-test          Ejecuta los tests de Flutter"
 	@echo "  app-analyze       Ejecuta el análisis estático de Flutter"
 	@echo "  app-build-android Genera el App Bundle Android de prod"
+	@echo "  app-build-apk     Genera el APK Android de prod"
 	@echo "  app-build-ios     Genera el build iOS de prod"
+	@echo "  app-run-all       Abre una ventana de Terminal por dispositivo iOS definido"
 
 api-dev:
 	@$(MAKE) -C api dev
@@ -56,5 +58,11 @@ app-analyze:
 app-build-android:
 	@cd app && flutter build appbundle --flavor prod -t lib/main_prod.dart
 
+app-build-apk:
+	@cd app && flutter build apk --flavor prod -t lib/main_prod.dart
+
 app-build-ios:
 	@cd app && flutter build ios --flavor prod -t lib/main_prod.dart
+
+app-run-all:
+	@$(MAKE) -C app run-all

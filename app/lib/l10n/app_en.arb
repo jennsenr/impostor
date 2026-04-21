@@ -1,0 +1,192 @@
+{
+  "@@locale": "en",
+  "appTitle": "Impostor Game",
+  "privacyAndConsent": "PRIVACY AND CONSENT",
+  "restoringRoom": "RESTORING ROOM...",
+  "restoringRoomSubtitle": "Trying to restore your previous match.",
+  "errorFetchCategories": "Categories could not be loaded.",
+  "errorNameRequired": "Enter your name before continuing.",
+  "errorCategoryRequired": "Select at least one category.",
+  "errorNameTaken": "That name is already being used in the room.",
+  "errorAvatarTaken": "That avatar is already taken.",
+  "errorJoinGame": "The room could not be found. Check the code.",
+  "errorCreateGame": "The game could not be created.",
+  "errorMinimumPlayers": "There are not enough players for that impostor count.",
+  "errorSessionRestore": "The previous room could not be restored. You can join again manually.",
+  "errorGeneric": "Something went wrong.",
+  "errorNotHost": "Only the host can do that.",
+  "errorInvalidGameStatus": "That action is not available right now.",
+  "homeTitle": "SET UP\nMATCH",
+  "homeSubtitle": "ESTABLISH PROTOCOLS",
+  "homeCategories": "CATEGORIES",
+  "edit": "EDIT",
+  "noCategoriesSelected": "None selected. Tap EDIT.",
+  "juniorMode": "JUNIOR MODE",
+  "juniorModeSubtitle": "Simplifies terms for younger cadets.",
+  "survivalMode": "SURVIVAL MODE",
+  "survivalModeSubtitle": "The game continues if the expelled player was not the impostor",
+  "questionsMode": "QUESTION MODE",
+  "questionsModeSubtitle": "Ask questions to discover the impostor",
+  "timer": "TIMER",
+  "timerSubtitle": "Time limit before losing the turn",
+  "impostors": "IMPOSTORS",
+  "impostorsSubtitle": "Choose how many impostors the match will have.",
+  "categoriesLoadFailed": "Categories could not be loaded",
+  "retry": "RETRY",
+  "createGame": "CREATE MATCH",
+  "roomCode": "CODE",
+  "join": "JOIN",
+  "selectCategories": "SELECT CATEGORIES",
+  "selectCategoriesSubtitle": "Choose the worlds to play in.",
+  "all": "ALL",
+  "doneProtocols": "PROTOCOLS READY",
+  "nameLabel": "CREWMATE NAME",
+  "nameHint": "ENTER NAME...",
+  "available": "AVAILABLE",
+  "selected": "SELECTED",
+  "occupied": "TAKEN",
+  "selectAvatarTitle": "SELECT\nAVATAR",
+  "selectAvatarSubtitle": "CHOOSE YOUR CREW AVATAR",
+  "bindAvatar": "BIND AVATAR",
+  "updateAvatar": "UPDATE AVATAR",
+  "lobbyInactiveRoom": "ROOM INACTIVE: THE SERVER CLOSED IT",
+  "lobbyErrorStartGame": "The match could not be started.",
+  "lobbyErrorUpdateSettings": "The settings could not be saved.",
+  "lobbyErrorAd": "The ad could not be confirmed.",
+  "lobbyErrorLeave": "The room could not be left.",
+  "lobbyErrorDeleted": "The room no longer exists.",
+  "lobbyErrorGeneric": "Something went wrong in the lobby.",
+  "lobbyWaitingRoomLine1": "WAITING",
+  "lobbyWaitingRoomLine2": "ROOM",
+  "room": "ROOM",
+  "lobbyCodeLabel": "CODE:",
+  "lobbyModesLabel": "M O D E S :",
+  "questionsModeBadge": "QUESTIONS",
+  "waitingParticipantsLine1": "WAITING",
+  "waitingParticipantsLine2": "PARTICIPANTS",
+  "playersLabel": "PLAYERS",
+  "connected": "CONNECTED",
+  "disconnected": "DISCONNECTED",
+  "host": "HOST",
+  "hostOffline": "HOST (OFF)",
+  "startGame": "START MATCH",
+  "minimumPlayersButton": "MINIMUM {count} PLAYERS",
+  "@minimumPlayersButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "waitingForHost": "WAITING FOR HOST...",
+  "gameSettings": "MATCH SETTINGS",
+  "categories": "Categories",
+  "impostorLobbyHint": "To start the room you need at least impostors + 1 players.",
+  "save": "SAVE",
+  "saveChanges": "SAVE CHANGES",
+  "discussionTime": "DISCUSSION TIME",
+  "juniorModeTitle": "Junior Mode",
+  "survivalModeTitle": "Survival Mode",
+  "questionsModeTitle": "Question Mode",
+  "timerTitle": "Timer",
+  "juniorCategoriesHint": "Simplified categories for children",
+  "shareLobbyInvite": "Join my Impostor match.\n\nCode: {code}\nLink: {url}",
+  "@shareLobbyInvite": {
+    "placeholders": {
+      "code": {},
+      "url": {}
+    }
+  },
+  "gameInactiveRoom": "ROOM INACTIVE: THE SERVER CLOSED IT",
+  "leaveGameTitle": "LEAVE MATCH",
+  "leaveGameBody": "The other players will see that you left the match.",
+  "cancel": "CANCEL",
+  "exit": "EXIT",
+  "unknownGameStatus": "Unknown game status",
+  "gameErrorReady": "The player could not be marked as ready",
+  "gameErrorNextTurn": "The turn could not advance",
+  "gameErrorVote": "The vote could not be sent",
+  "gameErrorDecision": "The decision could not be sent",
+  "gameErrorAd": "The ad could not be confirmed",
+  "gameErrorRematch": "The rematch could not be started",
+  "gameErrorNextRound": "The next round could not advance",
+  "gameErrorGeneric": "Something went wrong in the match",
+  "playerLeft": "{name} left the match.",
+  "@playerLeft": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "playerDisconnected": "{name} disconnected.",
+  "@playerDisconnected": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "playerReconnected": "{name} rejoined the match.",
+  "@playerReconnected": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "playerJoinedLobby": "{name} joined the room.",
+  "@playerJoinedLobby": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "round": "ROUND",
+  "turnOf": "TURN OF:",
+  "readyShort": "READY",
+  "decisionTitle": "DO YOU KNOW WHO IT IS?",
+  "decisionSubtitle": "Talk it through and decide whether to vote now or play another round.",
+  "teamDecisions": "TEAM DECISIONS",
+  "teamDecisionsSubtitle": "Colored players have already chosen whether to vote now or play another round.",
+  "decisions": "DECISIONS",
+  "goToVote": "GO TO VOTE",
+  "anotherRound": "ANOTHER ROUND",
+  "playersDeciding": "The players are deciding...",
+  "waitingForOthers": "Waiting for the others ({done}/{total})...",
+  "@waitingForOthers": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "youAreOut": "YOU ARE OUT!",
+  "waitFinalResult": "Wait for the final result.",
+  "votesRegistered": "REGISTERED VOTES",
+  "votesProgressEliminated": "Follow the vote progress even if you are no longer participating.",
+  "votes": "VOTES",
+  "voteRegistered": "VOTE REGISTERED",
+  "waitingRest": "Waiting for the rest...",
+  "votesProgressWaiting": "Lit-up players have already cast their vote.",
+  "voteTheImpostor": "VOTE THE IMPOSTOR",
+  "voteWarning": "If you are wrong, you will pay for it!",
+  "votesProgressSubtitle": "Grey avatars have not voted yet.",
+  "questionAsks": "{name} ASKS",
+  "@questionAsks": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "questionLabel": "ASKS",
+  "answerLabel": "ANSWERS",
+  "currentTurnResolutionFailed": "The current turn could not be resolved",
+  "shareRoomCodeMessage": "Join my Impostor room. Code: {code}",
+  "@shareRoomCodeMessage": {
+    "placeholders": {
+      "code": {}
+    }
+  },
+  "roomJoinChannelLabel": "LINK CHANNEL: {code}",
+  "@roomJoinChannelLabel": {
+    "placeholders": {
+      "code": {}
+    }
+  }
+}

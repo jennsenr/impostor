@@ -9,19 +9,19 @@ import (
 )
 
 type Game struct {
-	ID               vo.GameID     `json:"id"`
-	Code             string        `json:"code"`
-	Status           vo.Status     `json:"status"`
-	Players          []*Player     `json:"players"`
-	Settings         vo.Settings   `json:"settings"`
-	CurrentRound     int           `json:"current_round"`
-	CurrentTurnIndex int           `json:"current_turn_index"`
-	Word                     string        `json:"word"`
-	WordImageURL             string        `json:"word_image_url,omitempty"`
-	ActiveCategoryID         vo.CategoryID `json:"active_category_id,omitempty"`
-	ActiveCategoryName       string        `json:"active_category_name,omitempty"`
-	HostID                   string        `json:"host_id"`
-	HostIsPremium            bool          `json:"host_is_premium"`
+	ID                 vo.GameID     `json:"id"`
+	Code               string        `json:"code"`
+	Status             vo.Status     `json:"status"`
+	Players            []*Player     `json:"players"`
+	Settings           vo.Settings   `json:"settings"`
+	CurrentRound       int           `json:"current_round"`
+	CurrentTurnIndex   int           `json:"current_turn_index"`
+	Word               string        `json:"word"`
+	WordImageURL       string        `json:"word_image_url,omitempty"`
+	ActiveCategoryID   vo.CategoryID `json:"active_category_id,omitempty"`
+	ActiveCategoryName string        `json:"active_category_name,omitempty"`
+	HostID             string        `json:"host_id"`
+	HostIsPremium      bool          `json:"host_is_premium"`
 
 	// Partida
 	WinnerTeam   string `json:"winner_team,omitempty"`
@@ -30,6 +30,10 @@ type Game struct {
 }
 
 func NewGame(id vo.GameID, code string, hostID string, settings vo.Settings) *Game {
+	if settings.ImpostorCount < 1 {
+		settings.ImpostorCount = 1
+	}
+
 	return &Game{
 		ID:            id,
 		Code:          code,
@@ -148,6 +152,13 @@ func (g *Game) Leave(playerID string) error {
 		g.HostID = g.Players[0].ID
 	}
 
+	if g.Status == vo.StatusWaiting {
+		g.syncImpostorCountToPlayerCount()
+		if err := g.trimActiveImpostors(); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -184,9 +195,7 @@ func (g *Game) Start(hostID string, word *Word) error {
 		return errs.ErrNotHost
 	}
 
-	// Validar mínimo de jugadores (3 en prod, 2 en debug)
-	// Como el backend no sabe si es debug, usamos 2 para facilitar pruebas del usuario
-	if len(g.Players) < 2 {
+	if len(g.Players) < g.requiredPlayersForConfiguredImpostors() {
 		return errs.ErrMinimumPlayersRequired
 	}
 
@@ -202,7 +211,7 @@ func (g *Game) Start(hostID string, word *Word) error {
 	g.WordImageURL = word.ImageURL
 	g.ActiveCategoryID = word.CategoryID
 
-	for _, c := range vo.GetAvailableCategories() {
+	for _, c := range vo.GetAvailableCategories(g.Settings.Language) {
 		if c.ID == word.CategoryID {
 			g.ActiveCategoryName = c.Name
 			break
@@ -210,19 +219,6 @@ func (g *Game) Start(hostID string, word *Word) error {
 	}
 	if g.ActiveCategoryName == "" {
 		g.ActiveCategoryName = string(word.CategoryID)
-	}
-
-	// Asignar roles (Impostores)
-	// Por defecto: 1 impostor (pronto será personalizable)
-	numImpostors := 1
-
-	impostorIndices := make(map[int]bool)
-	for len(impostorIndices) < numImpostors && len(g.Players) > 0 {
-		idx, err := randomInt(len(g.Players))
-		if err != nil {
-			return err
-		}
-		impostorIndices[idx] = true
 	}
 
 	// Seleccionar StarterIndex aleatorio para que el host no empiece siempre
@@ -235,11 +231,15 @@ func (g *Game) Start(hostID string, word *Word) error {
 	}
 
 	for i := 0; i < len(g.Players); i++ {
-		g.Players[i].IsImpostor = impostorIndices[i]
+		g.Players[i].IsImpostor = false
 		g.Players[i].OrderIndex = i
 		g.Players[i].IsAlive = true
 		g.Players[i].IsReady = false
 		g.Players[i].AdCompleted = false
+	}
+
+	if err := g.assignRandomImpostors(g.allowedImpostorCount()); err != nil {
+		return err
 	}
 
 	g.Status = vo.StatusAdPhase
@@ -310,6 +310,12 @@ func (g *Game) Ready(playerID string) error {
 	if allReady {
 		g.Status = vo.StatusPlaying
 		g.CurrentRound = 1
+		if g.Settings.QuestionsMode {
+			if err := g.shuffleQuestionOrder(); err != nil {
+				return err
+			}
+			g.StarterIndex = 0
+		}
 		g.CurrentTurnIndex = g.StarterIndex
 	}
 
@@ -363,6 +369,12 @@ func (g *Game) SetStatus(status vo.Status) error {
 	case vo.StatusPlaying:
 		if oldStatus == vo.StatusDecision || oldStatus == vo.StatusResult {
 			g.CurrentRound++
+			if g.Settings.QuestionsMode && oldStatus == vo.StatusResult {
+				if err := g.shuffleQuestionOrder(); err != nil {
+					return err
+				}
+				g.StarterIndex = 0
+			}
 			g.CurrentTurnIndex = g.StarterIndex
 
 			// Asegurar que el primer turno se asigne a un jugador vivo
@@ -524,12 +536,8 @@ func (g *Game) CalculateResults() (string, bool, bool, string) {
 		}
 	}
 
-	if gameOver {
-		g.Status = vo.StatusFinished
-		g.WinnerTeam = winnerTeam // Guardar en el struct
-	} else {
-		g.Status = vo.StatusResult
-	}
+	g.Status = vo.StatusResult
+	g.WinnerTeam = winnerTeam
 
 	return expelledID, wasImpostor, gameOver, winnerTeam
 }
@@ -562,7 +570,7 @@ func (g *Game) Rematch(word string, wordImageUrl string, categoryID vo.CategoryI
 	g.WordImageURL = wordImageUrl
 	g.ActiveCategoryID = categoryID
 
-	for _, c := range vo.GetAvailableCategories() {
+	for _, c := range vo.GetAvailableCategories(g.Settings.Language) {
 		if c.ID == categoryID {
 			g.ActiveCategoryName = c.Name
 			break
@@ -588,13 +596,8 @@ func (g *Game) Rematch(word string, wordImageUrl string, categoryID vo.CategoryI
 		p.AdCompleted = false // Resetear para la nueva partida
 	}
 
-	// Sortear nuevo impostor
-	if len(g.Players) > 0 {
-		imposterIndex, err := randomInt(len(g.Players))
-		if err != nil {
-			return err
-		}
-		g.Players[imposterIndex].IsImpostor = true
+	if err := g.assignRandomImpostors(g.allowedImpostorCount()); err != nil {
+		return err
 	}
 
 	return nil
@@ -631,7 +634,117 @@ func (g *Game) SanitizeForPlayer(playerID string) *Game {
 	return &clone
 }
 
+func (g *Game) shuffleQuestionOrder() error {
+	if len(g.Players) <= 1 {
+		for i, player := range g.Players {
+			player.OrderIndex = i
+		}
+		return nil
+	}
 
+	alivePlayers := make([]*Player, 0, len(g.Players))
+	eliminatedPlayers := make([]*Player, 0, len(g.Players))
+
+	for _, player := range g.Players {
+		if player.IsAlive {
+			alivePlayers = append(alivePlayers, player)
+			continue
+		}
+		eliminatedPlayers = append(eliminatedPlayers, player)
+	}
+
+	for i := len(alivePlayers) - 1; i > 0; i-- {
+		j, err := randomInt(i + 1)
+		if err != nil {
+			return err
+		}
+		alivePlayers[i], alivePlayers[j] = alivePlayers[j], alivePlayers[i]
+	}
+
+	g.Players = append(alivePlayers, eliminatedPlayers...)
+	for i, player := range g.Players {
+		player.OrderIndex = i
+	}
+
+	return nil
+}
+
+func (g *Game) requiredPlayersForConfiguredImpostors() int {
+	requiredPlayers := g.Settings.ImpostorCount + 1
+	if requiredPlayers < 2 {
+		return 2
+	}
+	return requiredPlayers
+}
+
+func (g *Game) allowedImpostorCount() int {
+	if len(g.Players) <= 1 {
+		return 0
+	}
+	if g.Settings.ImpostorCount < 0 {
+		return 0
+	}
+	maxAllowed := len(g.Players) - 1
+	if g.Settings.ImpostorCount > maxAllowed {
+		return maxAllowed
+	}
+	return g.Settings.ImpostorCount
+}
+
+func (g *Game) syncImpostorCountToPlayerCount() {
+	g.Settings.ImpostorCount = g.allowedImpostorCount()
+}
+
+func (g *Game) assignRandomImpostors(count int) error {
+	for _, player := range g.Players {
+		player.IsImpostor = false
+	}
+
+	if count <= 0 || len(g.Players) == 0 {
+		return nil
+	}
+
+	selectedIndices, err := randomDistinctIndices(len(g.Players), count)
+	if err != nil {
+		return err
+	}
+
+	for _, index := range selectedIndices {
+		g.Players[index].IsImpostor = true
+	}
+
+	return nil
+}
+
+func (g *Game) trimActiveImpostors() error {
+	allowed := g.allowedImpostorCount()
+	currentImpostors := make([]*Player, 0, len(g.Players))
+	for _, player := range g.Players {
+		if player.IsImpostor {
+			currentImpostors = append(currentImpostors, player)
+		}
+	}
+
+	if len(currentImpostors) <= allowed {
+		return nil
+	}
+
+	indicesToKeep, err := randomDistinctIndices(len(currentImpostors), allowed)
+	if err != nil {
+		return err
+	}
+
+	keep := make(map[int]bool, len(indicesToKeep))
+	for _, index := range indicesToKeep {
+		keep[index] = true
+	}
+
+	for index, player := range currentImpostors {
+		player.IsImpostor = keep[index]
+	}
+
+	return nil
+}
 
 func randomInt(max int) (int, error) {
 	if max <= 0 {
@@ -644,4 +757,25 @@ func randomInt(max int) (int, error) {
 	}
 
 	return int(n.Int64()), nil
+}
+
+func randomDistinctIndices(poolSize, count int) ([]int, error) {
+	if count < 0 || poolSize < 0 || count > poolSize {
+		return nil, errs.ErrInternal
+	}
+
+	indices := make([]int, poolSize)
+	for i := range indices {
+		indices[i] = i
+	}
+
+	for i := poolSize - 1; i > 0; i-- {
+		j, err := randomInt(i + 1)
+		if err != nil {
+			return nil, err
+		}
+		indices[i], indices[j] = indices[j], indices[i]
+	}
+
+	return indices[:count], nil
 }

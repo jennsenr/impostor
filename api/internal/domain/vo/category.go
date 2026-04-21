@@ -22,19 +22,94 @@ type Category struct {
 	IsJuniorAvailable bool       `json:"is_junior_available"`
 }
 
-// GetAvailableCategories returns the MVP category catalog in Spanish.
-func GetAvailableCategories() []Category {
-	return []Category{
-		{ID: CategoryAnimals, Name: "Animales", IsJuniorAvailable: true},
-		{ID: CategoryPlaces, Name: "Lugares", IsJuniorAvailable: true},
-		{ID: CategoryObjects, Name: "Objetos", IsJuniorAvailable: true},
-		{ID: CategoryFood, Name: "Comida", IsJuniorAvailable: true},
-		{ID: CategoryCelebrities, Name: "Celebridades", IsJuniorAvailable: false},
-		{ID: CategoryEras, Name: "Épocas", IsJuniorAvailable: false},
-		{ID: CategoryMovies, Name: "Cine", IsJuniorAvailable: false},
-		{ID: CategorySports, Name: "Deportes", IsJuniorAvailable: false},
-		{ID: CategoryProfessions, Name: "Profesiones", IsJuniorAvailable: false},
-		{ID: CategoryBrands, Name: "Marcas", IsJuniorAvailable: false},
-		{ID: CategoryBooks, Name: "Libros", IsJuniorAvailable: false},
+func categoryName(id CategoryID, language Language) string {
+	switch NormalizeLanguage(string(language)) {
+	case LanguageEnglish:
+		switch id {
+		case CategoryAnimals:
+			return "Animals"
+		case CategoryPlaces:
+			return "Places"
+		case CategoryObjects:
+			return "Objects"
+		case CategoryFood:
+			return "Food"
+		case CategoryCelebrities:
+			return "Celebrities"
+		case CategoryEras:
+			return "Eras"
+		case CategoryMovies:
+			return "Movies"
+		case CategorySports:
+			return "Sports"
+		case CategoryProfessions:
+			return "Professions"
+		case CategoryBrands:
+			return "Brands"
+		case CategoryBooks:
+			return "Books"
+		}
+	default:
+		switch id {
+		case CategoryAnimals:
+			return "Animales"
+		case CategoryPlaces:
+			return "Lugares"
+		case CategoryObjects:
+			return "Objetos"
+		case CategoryFood:
+			return "Comida"
+		case CategoryCelebrities:
+			return "Celebridades"
+		case CategoryEras:
+			return "Épocas"
+		case CategoryMovies:
+			return "Cine"
+		case CategorySports:
+			return "Deportes"
+		case CategoryProfessions:
+			return "Profesiones"
+		case CategoryBrands:
+			return "Marcas"
+		case CategoryBooks:
+			return "Libros"
+		}
 	}
+
+	return string(id)
+}
+
+// GetAvailableCategories returns the MVP category catalog in the requested language.
+func GetAvailableCategories(language Language) []Category {
+	ids := []CategoryID{
+		CategoryAnimals,
+		CategoryPlaces,
+		CategoryObjects,
+		CategoryFood,
+		CategoryCelebrities,
+		CategoryEras,
+		CategoryMovies,
+		CategorySports,
+		CategoryProfessions,
+		CategoryBrands,
+		CategoryBooks,
+	}
+
+	juniorAvailable := map[CategoryID]bool{
+		CategoryAnimals: true,
+		CategoryPlaces:  true,
+		CategoryObjects: true,
+		CategoryFood:    true,
+	}
+
+	categories := make([]Category, 0, len(ids))
+	for _, id := range ids {
+		categories = append(categories, Category{
+			ID:                id,
+			Name:              categoryName(id, language),
+			IsJuniorAvailable: juniorAvailable[id],
+		})
+	}
+
+	return categories
 }

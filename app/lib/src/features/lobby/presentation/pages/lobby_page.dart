@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/foundation.dart' hide Category;
 import '../../../../domain/models/category.dart';
 import '../../../../domain/models/game.dart';
 import '../../../../domain/models/settings.dart';
@@ -9,6 +8,9 @@ import '../../../../domain/utils/category_localizer.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../shared/config/app_config.dart';
+import '../../../../shared/infrastructure/ads_service.dart';
+import '../../../../shared/infrastructure/service_locator.dart';
+import '../../../../shared/presentation/localization/app_localizations.dart';
 import '../../../../shared/presentation/theme/app_theme.dart';
 import '../../../../features/setup/presentation/cubit/setup_cubit.dart';
 import '../cubit/lobby_cubit.dart';
@@ -51,13 +53,14 @@ class LobbyPage extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    'SALA INACTIVA: EL SERVIDOR LA HA CERRADO',
+                    context.l10n.lobbyInactiveRoom,
                     style: GoogleFonts.outfit(fontWeight: FontWeight.bold),
                   ),
-                  backgroundColor: AppTheme.occupiedRed.withOpacity(0.9),
+                  backgroundColor: AppTheme.occupiedRed.withValues(alpha: 0.9),
                   behavior: SnackBarBehavior.floating,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               );
             }
@@ -66,19 +69,24 @@ class LobbyPage extends StatelessWidget {
           }
 
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(_lobbyErrorMessage(status.message))),
+            SnackBar(content: Text(context.l10n.lobbyError(status.message))),
           );
         }
 
         if (state.transientError != null) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(_lobbyErrorMessage(state.transientError!))),
+            SnackBar(
+              content: Text(context.l10n.lobbyError(state.transientError!)),
+            ),
           );
         }
 
         if (status is LobbyLoaded) {
           // Sincronizar el estado global del juego para la navegación declarativa
           context.read<SetupCubit>().updateGame(status.game);
+          if (status.game.status == GameStatus.waiting) {
+            sl<AdsService>().preloadInterstitial();
+          }
         }
       },
       builder: (context, state) {
@@ -104,8 +112,8 @@ class LobbyPage extends StatelessWidget {
                   center: Alignment.center,
                   radius: 1.2,
                   colors: [
-                    AppTheme.backgroundDark.withOpacity(0.0),
-                    Colors.black.withOpacity(0.5),
+                    AppTheme.backgroundDark.withValues(alpha: 0.0),
+                    Colors.black.withValues(alpha: 0.5),
                   ],
                 ),
               ),
@@ -131,7 +139,7 @@ class LobbyPage extends StatelessWidget {
                               const SizedBox(height: 32),
                               _buildPixelCategoryWall(game),
                               const SizedBox(height: 12),
-                              _buildPixelStatusIndicator(game),
+                              _buildPixelStatusIndicator(context, game),
                               _buildPixelPlayerGrid(game, state.myPlayerId),
                               const SizedBox(height: 120), // Bottom padding
                             ],
@@ -158,27 +166,6 @@ class LobbyPage extends StatelessWidget {
     );
   }
 
-  String _lobbyErrorMessage(String code) {
-    switch (code) {
-      case 'start_game_failed':
-        return 'No se pudo iniciar la partida.';
-      case 'update_settings_failed':
-        return 'No se pudieron guardar los ajustes.';
-      case 'ad_failed':
-        return 'No se pudo confirmar el anuncio.';
-      case 'leave_game_failed':
-        return 'No se pudo salir de la sala.';
-      case 'game_deleted':
-        return 'La sala ya no existe.';
-      case 'not_host':
-        return 'Solo el host puede hacer esa accion.';
-      case 'invalid_game_status':
-        return 'Esa accion no esta disponible ahora mismo.';
-      default:
-        return 'Ha ocurrido un error en la sala.';
-    }
-  }
-
   Widget _buildPixelHeader(
     BuildContext context,
     String code,
@@ -196,7 +183,7 @@ class LobbyPage extends StatelessWidget {
           Column(
             children: [
               Text(
-                'SALA DE',
+                context.l10n.lobbyWaitingRoomLine1,
                 style: GoogleFonts.heebo(
                   fontSize: 24,
                   fontWeight: FontWeight.w900,
@@ -205,14 +192,14 @@ class LobbyPage extends StatelessWidget {
                   height: 0.9,
                   shadows: [
                     Shadow(
-                      color: AppTheme.neonCyan.withOpacity(0.6),
+                      color: AppTheme.neonCyan.withValues(alpha: 0.6),
                       blurRadius: 15,
                     ),
                   ],
                 ),
               ),
               Text(
-                'ESPERA',
+                context.l10n.lobbyWaitingRoomLine2,
                 style: GoogleFonts.heebo(
                   fontSize: 24,
                   fontWeight: FontWeight.w900,
@@ -221,7 +208,7 @@ class LobbyPage extends StatelessWidget {
                   height: 0.9,
                   shadows: [
                     Shadow(
-                      color: AppTheme.neonCyan.withOpacity(0.6),
+                      color: AppTheme.neonCyan.withValues(alpha: 0.6),
                       blurRadius: 15,
                     ),
                   ],
@@ -242,12 +229,12 @@ class LobbyPage extends StatelessWidget {
                   color: AppTheme.backgroundDark,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: AppTheme.neonCyan.withOpacity(0.5),
+                    color: AppTheme.neonCyan.withValues(alpha: 0.5),
                     width: 1.5,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.neonCyan.withOpacity(0.1),
+                      color: AppTheme.neonCyan.withValues(alpha: 0.1),
                       blurRadius: 8,
                     ),
                   ],
@@ -258,11 +245,11 @@ class LobbyPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'CODIGO:',
+                          context.l10n.lobbyCodeLabel,
                           style: GoogleFonts.heebo(
                             fontSize: 10,
                             fontWeight: FontWeight.w800,
-                            color: Colors.white.withOpacity(0.7),
+                            color: Colors.white.withValues(alpha: 0.7),
                             letterSpacing: 1.5,
                           ),
                         ),
@@ -297,125 +284,176 @@ class LobbyPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPixelModesRow(BuildContext context, Game game, LobbyState state) {
+  Widget _buildPixelModesRow(
+    BuildContext context,
+    Game game,
+    LobbyState state,
+  ) {
     final isHost = game.hostId == state.myPlayerId;
     final hasActiveModes =
+        game.settings.impostorCount > 1 ||
         game.settings.juniorMode ||
         game.settings.survivalMode ||
+        game.settings.questionsMode ||
         game.settings.timerEnabled;
 
     return SizedBox(
       height: 40,
-      child: Stack(
+      child: Row(
         children: [
-          if (hasActiveModes)
-            Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'M O D O S :',
-                    style: GoogleFonts.heebo(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w900,
-                      color: AppTheme.neonCyan,
-                      letterSpacing: 3,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  if (game.settings.juniorMode)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: SvgPicture.asset(
-                        'assets/svg/icon_junior.svg',
-                        width: 22,
-                        height: 22,
-                        colorFilter: const ColorFilter.mode(
-                          AppTheme.neonCyan,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    ),
-                  if (game.settings.survivalMode)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: SvgPicture.asset(
-                        'assets/svg/icon_survival.svg',
-                        width: 22,
-                        height: 22,
-                        colorFilter: const ColorFilter.mode(
-                          AppTheme.neonCyan,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    ),
-                  if (game.settings.timerEnabled)
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
+          Expanded(
+            child: hasActiveModes
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(right: 12),
+                    child: Row(
                       children: [
-                        SvgPicture.asset(
-                          'assets/svg/icon_timer.svg',
-                          width: 22,
-                          height: 22,
-                          colorFilter: const ColorFilter.mode(
-                            AppTheme.neonCyan,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                        const SizedBox(width: 4),
                         Text(
-                          '${game.settings.timerSeconds}S',
+                          context.l10n.lobbyModesLabel,
                           style: GoogleFonts.heebo(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.w900,
-                            color: Colors.white.withOpacity(0.9),
+                            color: AppTheme.neonCyan,
+                            letterSpacing: 3,
                           ),
                         ),
+                        const SizedBox(width: 12),
+                        if (game.settings.juniorMode)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: SvgPicture.asset(
+                              'assets/svg/icon_junior.svg',
+                              width: 22,
+                              height: 22,
+                              colorFilter: const ColorFilter.mode(
+                                AppTheme.neonCyan,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                          ),
+                        if (game.settings.impostorCount > 1)
+                          Container(
+                            margin: const EdgeInsets.only(right: 12),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppTheme.occupiedRed.withValues(
+                                alpha: 0.12,
+                              ),
+                              borderRadius: BorderRadius.circular(999),
+                              border: Border.all(
+                                color: AppTheme.occupiedRed.withValues(
+                                  alpha: 0.35,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              '${game.settings.impostorCount} ${context.l10n.impostors}',
+                              style: GoogleFonts.heebo(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w900,
+                                color: AppTheme.occupiedRed,
+                                letterSpacing: 1.2,
+                              ),
+                            ),
+                          ),
+                        if (game.settings.survivalMode)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: SvgPicture.asset(
+                              'assets/svg/icon_survival.svg',
+                              width: 22,
+                              height: 22,
+                              colorFilter: const ColorFilter.mode(
+                                AppTheme.neonCyan,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                          ),
+                        if (game.settings.questionsMode)
+                          Container(
+                            margin: const EdgeInsets.only(right: 12),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppTheme.neonCyan.withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(999),
+                              border: Border.all(
+                                color: AppTheme.neonCyan.withValues(
+                                  alpha: 0.35,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              context.l10n.questionsModeBadge,
+                              style: GoogleFonts.heebo(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w900,
+                                color: AppTheme.neonCyan,
+                                letterSpacing: 1.2,
+                              ),
+                            ),
+                          ),
+                        if (game.settings.timerEnabled)
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/svg/icon_timer.svg',
+                                width: 22,
+                                height: 22,
+                                colorFilter: const ColorFilter.mode(
+                                  AppTheme.neonCyan,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                '${game.settings.timerSeconds}S',
+                                style: GoogleFonts.heebo(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white.withValues(alpha: 0.9),
+                                ),
+                              ),
+                            ],
+                          ),
                       ],
                     ),
-                ],
-              ),
-            ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Transform.translate(
-              offset: const Offset(
-                20,
-                0,
-              ), // Push even further right to hit the edge
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  if (isHost)
-                    IconButton(
-                      onPressed: () => _showSettings(
-                        context,
-                        game,
-                        state.availableCategories,
-                      ),
-                      icon: Icon(
-                        Icons.settings,
-                        size: 20,
-                        color: Colors.white.withOpacity(0.6),
-                      ),
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                    ),
-                  IconButton(
-                    onPressed: () => context.read<LobbyCubit>().leaveGame(),
-                    icon: Icon(
-                      Icons.logout_rounded,
-                      size: 20,
-                      color: Colors.white.withOpacity(0.6),
-                    ),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(),
+                  )
+                : const SizedBox.shrink(),
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (isHost)
+                IconButton(
+                  onPressed: () =>
+                      _showSettings(context, game, state.availableCategories),
+                  icon: Icon(
+                    Icons.settings,
+                    size: 20,
+                    color: Colors.white.withValues(alpha: 0.6),
                   ),
-                ],
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                ),
+              const SizedBox(width: 8),
+              IconButton(
+                onPressed: () => context.read<LobbyCubit>().leaveGame(),
+                icon: Icon(
+                  Icons.logout_rounded,
+                  size: 20,
+                  color: Colors.white.withValues(alpha: 0.6),
+                ),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
               ),
-            ),
+            ],
           ),
         ],
       ),
@@ -435,15 +473,18 @@ class LobbyPage extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.05),
+              color: Colors.white.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(30),
               border: Border.all(
-                color: AppTheme.neonCyan.withOpacity(0.25),
+                color: AppTheme.neonCyan.withValues(alpha: 0.25),
                 width: 1.5,
               ),
             ),
             child: Text(
-              CategoryLocalizer.localize(catId).toUpperCase(),
+              CategoryLocalizer.localize(
+                catId,
+                languageCode: game.settings.language,
+              ).toUpperCase(),
               style: GoogleFonts.heebo(
                 fontSize: 11,
                 color: AppTheme.neonCyan,
@@ -457,14 +498,17 @@ class LobbyPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPixelStatusIndicator(Game game) {
+  Widget _buildPixelStatusIndicator(BuildContext context, Game game) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: Container(height: 1, color: Colors.white.withOpacity(0.1)),
+              child: Container(
+                height: 1,
+                color: Colors.white.withValues(alpha: 0.1),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -480,7 +524,7 @@ class LobbyPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'ESPERANDO',
+                        context.l10n.waitingParticipantsLine1,
                         style: GoogleFonts.heebo(
                           fontSize: 14,
                           fontWeight: FontWeight.w900,
@@ -490,7 +534,7 @@ class LobbyPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'PARTICIPANTES',
+                        context.l10n.waitingParticipantsLine2,
                         style: GoogleFonts.heebo(
                           fontSize: 14,
                           fontWeight: FontWeight.w900,
@@ -505,7 +549,10 @@ class LobbyPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(height: 1, color: Colors.white.withOpacity(0.1)),
+              child: Container(
+                height: 1,
+                color: Colors.white.withValues(alpha: 0.1),
+              ),
             ),
           ],
         ),
@@ -522,7 +569,7 @@ class LobbyPage extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: 'JUGADORES',
+                text: context.l10n.playersLabel,
                 style: GoogleFonts.heebo(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
@@ -554,16 +601,20 @@ class LobbyPage extends StatelessWidget {
         final isReady = player.adCompleted;
 
         final isConnected = player.isConnected;
-        
+
         Color statusColor = Colors.white38;
-        String statusLabel = isConnected ? 'CONECTADO' : 'DESCONECTADO';
+        String statusLabel = isConnected
+            ? context.l10n.connected
+            : context.l10n.disconnected;
         Color iconBgColor = isConnected ? AppTheme.neonGreen : Colors.grey;
         Color glowColor = isConnected ? AppTheme.neonGreen : Colors.transparent;
         bool showCheck = isConnected;
 
         if (isHost) {
-          statusColor = AppTheme.neonCyan.withOpacity(0.8);
-          statusLabel = isConnected ? 'ANFITRIÓN' : 'ANFITRIÓN (OFF)';
+          statusColor = AppTheme.neonCyan.withValues(alpha: 0.8);
+          statusLabel = isConnected
+              ? context.l10n.host
+              : context.l10n.hostOffline;
           iconBgColor = AppTheme.neonCyan;
           glowColor = AppTheme.neonCyan;
           showCheck = isConnected;
@@ -572,13 +623,16 @@ class LobbyPage extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppTheme.surfaceElevated.withOpacity(0.8),
+            color: AppTheme.surfaceElevated.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: glowColor.withOpacity(0.35), width: 1.5),
+            border: Border.all(
+              color: glowColor.withValues(alpha: 0.35),
+              width: 1.5,
+            ),
             boxShadow: [
               if (isHost || isReady)
                 BoxShadow(
-                  color: glowColor.withOpacity(0.1),
+                  color: glowColor.withValues(alpha: 0.1),
                   blurRadius: 10,
                   spreadRadius: 1,
                 ),
@@ -593,10 +647,10 @@ class LobbyPage extends StatelessWidget {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.4),
+                      color: Colors.black.withValues(alpha: 0.4),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: glowColor.withOpacity(0.6),
+                        color: glowColor.withValues(alpha: 0.6),
                         width: 2,
                       ),
                     ),
@@ -620,7 +674,7 @@ class LobbyPage extends StatelessWidget {
                         border: Border.all(color: Colors.white10, width: 1.5),
                         boxShadow: [
                           BoxShadow(
-                            color: statusColor.withOpacity(0.3),
+                            color: statusColor.withValues(alpha: 0.3),
                             blurRadius: 4,
                           ),
                         ],
@@ -698,8 +752,8 @@ class LobbyPage extends StatelessWidget {
     String myPlayerId,
   ) {
     final isHost = game.hostId == myPlayerId;
-    final minPlayers = kDebugMode ? 2 : 3;
-    final hasEnoughPlayers = game.players.length >= minPlayers;
+    final requiredPlayers = game.settings.impostorCount + 1;
+    final hasEnoughPlayers = game.players.length >= requiredPlayers;
 
     String label = 'ESPERANDO PARTICIPANTES...';
     Color btnColor = Colors.white10;
@@ -707,16 +761,16 @@ class LobbyPage extends StatelessWidget {
 
     if (isHost) {
       if (hasEnoughPlayers) {
-        label = 'EMPEZAR PARTIDA';
+        label = context.l10n.startGame;
         btnColor = AppTheme.neonCyan;
         action = () => context.read<LobbyCubit>().startGame();
       } else {
-        label = 'FALTAN JUGADORES';
+        label = context.l10n.minimumPlayersButton(requiredPlayers);
         btnColor = Colors.white10;
         action = null;
       }
     } else {
-      label = 'ESPERANDO AL ANFITRIÓN...';
+      label = context.l10n.waitingForHost;
       btnColor = Colors.white10;
       action = null;
     }
@@ -728,7 +782,7 @@ class LobbyPage extends StatelessWidget {
           boxShadow: [
             if (action != null && btnColor != Colors.white10)
               BoxShadow(
-                color: btnColor.withOpacity(0.4),
+                color: btnColor.withValues(alpha: 0.4),
                 blurRadius: 25,
                 spreadRadius: 2,
               ),
@@ -770,12 +824,16 @@ class LobbyPage extends StatelessWidget {
         : null;
 
     Share.share(
-      '¡Únete a mi partida de IMPOSTOR! 🕵️‍♂️\n\nCódigo: $code\nEnlace: $url',
+      context.l10n.shareLobbyInvite(code.toUpperCase(), url),
       sharePositionOrigin: sharePositionOrigin,
     );
   }
 
-  void _showSettings(BuildContext context, Game game, List<Category> availableCategories) {
+  void _showSettings(
+    BuildContext context,
+    Game game,
+    List<Category> availableCategories,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true, // Better for scrollable content
@@ -789,8 +847,10 @@ class LobbyPage extends StatelessWidget {
         onUpdate: (newSettings) {
           context.read<LobbyCubit>().updateSettings(
             categoryIds: newSettings.categoryIds,
+            impostorCount: newSettings.impostorCount,
             juniorMode: newSettings.juniorMode,
             survivalMode: newSettings.survivalMode,
+            questionsMode: newSettings.questionsMode,
             timerEnabled: newSettings.timerEnabled,
             timerSeconds: newSettings.timerSeconds,
           );
@@ -817,8 +877,10 @@ class _SettingsPanel extends StatefulWidget {
 
 class _SettingsPanelState extends State<_SettingsPanel> {
   late List<String> _selectedCategories;
+  late int _impostorCount;
   late bool _juniorMode;
   late bool _survivalMode;
+  late bool _questionsMode;
   late bool _timerEnabled;
   late int _timerSeconds;
 
@@ -826,8 +888,10 @@ class _SettingsPanelState extends State<_SettingsPanel> {
   void initState() {
     super.initState();
     _selectedCategories = List.from(widget.game.settings.categoryIds);
+    _impostorCount = widget.game.settings.impostorCount;
     _juniorMode = widget.game.settings.juniorMode;
     _survivalMode = widget.game.settings.survivalMode;
+    _questionsMode = widget.game.settings.questionsMode;
     _timerEnabled = widget.game.settings.timerEnabled;
     _timerSeconds = widget.game.settings.timerSeconds;
   }
@@ -836,8 +900,10 @@ class _SettingsPanelState extends State<_SettingsPanel> {
     widget.onUpdate(
       widget.game.settings.copyWith(
         categoryIds: _selectedCategories,
+        impostorCount: _impostorCount,
         juniorMode: _juniorMode,
         survivalMode: _survivalMode,
+        questionsMode: _questionsMode,
         timerEnabled: _timerEnabled,
         timerSeconds: _timerSeconds,
       ),
@@ -853,186 +919,272 @@ class _SettingsPanelState extends State<_SettingsPanel> {
       child: Container(
         padding: const EdgeInsets.all(24),
         child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'AJUSTES DE PARTIDA',
-              style: GoogleFonts.outfit(
-                fontWeight: FontWeight.w900,
-                color: Colors.white,
-                fontSize: 18,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                context.l10n.gameSettings,
+                style: GoogleFonts.outfit(
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
-            ),
-            const SizedBox(height: 24),
-            const Text(
-              'Categorías',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 24),
+              Text(
+                context.l10n.categories,
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: widget.availableCategories.map((cat) {
-                final isSelected = _selectedCategories.contains(cat.id);
-                final isJuniorAllowed = cat.isJuniorAvailable;
-                final isDisabled = _juniorMode && !isJuniorAllowed;
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: widget.availableCategories.map((cat) {
+                  final isSelected = _selectedCategories.contains(cat.id);
+                  final isJuniorAllowed = cat.isJuniorAvailable;
+                  final isDisabled = _juniorMode && !isJuniorAllowed;
 
-                return Opacity(
-                  opacity: isDisabled ? 0.4 : 1.0,
-                  child: FilterChip(
-                    label: Text(
-                      cat.name.toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w900,
-                        color: isSelected ? Colors.black : Colors.white,
+                  return Opacity(
+                    opacity: isDisabled ? 0.4 : 1.0,
+                    child: FilterChip(
+                      label: Text(
+                        CategoryLocalizer.localize(
+                          cat.id,
+                          languageCode: context.l10n.languageCode,
+                        ).toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w900,
+                          color: isSelected ? Colors.black : Colors.white,
+                        ),
                       ),
-                    ),
-                    selected: isSelected,
-                    onSelected: isDisabled
-                        ? null
-                        : (selected) {
-                            setState(() {
-                              if (selected) {
-                                _selectedCategories.add(cat.id);
-                              } else {
-                                if (_selectedCategories.length > 1) {
-                                  _selectedCategories.remove(cat.id);
+                      selected: isSelected,
+                      onSelected: isDisabled
+                          ? null
+                          : (selected) {
+                              setState(() {
+                                if (selected) {
+                                  _selectedCategories.add(cat.id);
+                                } else {
+                                  if (_selectedCategories.length > 1) {
+                                    _selectedCategories.remove(cat.id);
+                                  }
                                 }
-                              }
-                            });
-                          },
-                  ),
-                );
-              }).toList(),
-            ),
-            const SizedBox(height: 16),
-            SwitchListTile(
-              title: const Text(
-                'Modo Junior',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 13),
-              ),
-              subtitle: const Text(
-                'Categorías simplificadas para niños',
-                style: TextStyle(color: Colors.white54, fontSize: 10),
-              ),
-              value: _juniorMode,
-              onChanged: (v) {
-                setState(() {
-                  _juniorMode = v;
-                  if (_juniorMode) {
-                    _selectedCategories.retainWhere((id) {
-                      final results = widget.availableCategories.where((c) => c.id == id);
-                      if (results.isEmpty) return false;
-                      return results.first.isJuniorAvailable;
-                    });
-                    if (_selectedCategories.isEmpty) {
-                      final juniorCategories = widget.availableCategories.where(
-                        (c) => c.isJuniorAvailable,
-                      ).toList();
-                      if (juniorCategories.isNotEmpty) {
-                        _selectedCategories.add(juniorCategories.first.id);
-                      }
-                    }
-                  }
-                });
-              },
-            ),
-            SwitchListTile(
-              title: const Text(
-                'Modo Supervivencia',
-                style: TextStyle(color: Colors.white),
-              ),
-              subtitle: const Text(
-                'Los jugadores eliminados no pueden votar',
-                style: TextStyle(color: Colors.white54, fontSize: 10),
-              ),
-              value: _survivalMode,
-              onChanged: (v) => setState(() => _survivalMode = v),
-            ),
-            SwitchListTile(
-              title: const Text(
-                'Temporizador',
-                style: TextStyle(color: Colors.white),
-              ),
-              subtitle: const Text(
-                'Tiempo límite para discutir antes de votar',
-                style: TextStyle(color: Colors.white54, fontSize: 10),
-              ),
-              value: _timerEnabled,
-              onChanged: (v) => setState(() => _timerEnabled = v),
-            ),
-            if (_timerEnabled)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'TIEMPO DE DISCUSIÓN',
-                      style: TextStyle(
-                        color: Colors.white38,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1.2,
-                      ),
+                              });
+                            },
                     ),
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [15, 30, 60].map((sec) {
-                        final isSelected = _timerSeconds == sec;
-                        return Expanded(
-                          child: GestureDetector(
-                            onTap: () => setState(() => _timerSeconds = sec),
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              margin: const EdgeInsets.symmetric(horizontal: 4),
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              decoration: BoxDecoration(
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    context.l10n.impostors,
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    context.l10n.impostorLobbyHint,
+                    style: TextStyle(color: Colors.white54, fontSize: 10),
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [1, 2, 3, 4, 5, 6].map((count) {
+                      final isSelected = _impostorCount == count;
+                      return Expanded(
+                        child: GestureDetector(
+                          onTap: () => setState(() => _impostorCount = count),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppTheme.occupiedRed.withValues(alpha: 0.2)
+                                  : Colors.white.withValues(alpha: 0.05),
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
                                 color: isSelected
-                                    ? AppTheme.accentBlue.withOpacity(0.2)
-                                    : Colors.white.withOpacity(0.05),
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: isSelected
-                                      ? AppTheme.accentBlue
-                                      : Colors.white10,
-                                ),
+                                    ? AppTheme.occupiedRed
+                                    : Colors.white10,
                               ),
-                              child: Text(
-                                '${sec}S',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: isSelected ? AppTheme.accentBlue : Colors.white38,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 12,
-                                ),
+                            ),
+                            child: Text(
+                              '$count',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: isSelected
+                                    ? AppTheme.occupiedRed
+                                    : Colors.white38,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 12,
                               ),
                             ),
                           ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              SwitchListTile(
+                title: Text(
+                  context.l10n.juniorModeTitle,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 13,
+                  ),
                 ),
+                subtitle: Text(
+                  context.l10n.juniorCategoriesHint,
+                  style: TextStyle(color: Colors.white54, fontSize: 10),
+                ),
+                value: _juniorMode,
+                onChanged: (v) {
+                  setState(() {
+                    _juniorMode = v;
+                    if (_juniorMode) {
+                      _selectedCategories.retainWhere((id) {
+                        final results = widget.availableCategories.where(
+                          (c) => c.id == id,
+                        );
+                        if (results.isEmpty) return false;
+                        return results.first.isJuniorAvailable;
+                      });
+                      if (_selectedCategories.isEmpty) {
+                        final juniorCategories = widget.availableCategories
+                            .where((c) => c.isJuniorAvailable)
+                            .toList();
+                        if (juniorCategories.isNotEmpty) {
+                          _selectedCategories.add(juniorCategories.first.id);
+                        }
+                      }
+                    }
+                  });
+                },
               ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: _save,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.accentBlue,
-                minimumSize: const Size(double.infinity, 50),
+              SwitchListTile(
+                title: Text(
+                  context.l10n.survivalModeTitle,
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  context.l10n.survivalModeSubtitle,
+                  style: TextStyle(color: Colors.white54, fontSize: 10),
+                ),
+                value: _survivalMode,
+                onChanged: (v) => setState(() => _survivalMode = v),
               ),
-              child: const Text('GUARDAR CAMBIOS'),
-            ),
-          ],
+              SwitchListTile(
+                title: Text(
+                  context.l10n.questionsModeTitle,
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  context.l10n.questionsModeSubtitle,
+                  style: TextStyle(color: Colors.white54, fontSize: 10),
+                ),
+                value: _questionsMode,
+                onChanged: (v) => setState(() => _questionsMode = v),
+              ),
+              SwitchListTile(
+                title: Text(
+                  context.l10n.timerTitle,
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  context.l10n.timerSubtitle,
+                  style: TextStyle(color: Colors.white54, fontSize: 10),
+                ),
+                value: _timerEnabled,
+                onChanged: (v) => setState(() => _timerEnabled = v),
+              ),
+              if (_timerEnabled)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        context.l10n.discussionTime,
+                        style: TextStyle(
+                          color: Colors.white38,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [15, 30, 60].map((sec) {
+                          final isSelected = _timerSeconds == sec;
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () => setState(() => _timerSeconds = sec),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: isSelected
+                                      ? AppTheme.accentBlue.withValues(
+                                          alpha: 0.2,
+                                        )
+                                      : Colors.white.withValues(alpha: 0.05),
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? AppTheme.accentBlue
+                                        : Colors.white10,
+                                  ),
+                                ),
+                                child: Text(
+                                  '${sec}S',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: isSelected
+                                        ? AppTheme.accentBlue
+                                        : Colors.white38,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _save,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.accentBlue,
+                  minimumSize: const Size(double.infinity, 50),
+                ),
+                child: Text(context.l10n.saveChanges),
+              ),
+            ],
+          ),
         ),
       ),
-    ),);
+    );
   }
 }
 
@@ -1043,22 +1195,22 @@ void _showPlayerEventNotification(BuildContext context, WebSocketEvent event) {
 
   switch (event.event) {
     case PlayerEvent.left:
-      message = '${event.playerName} ha abandonado la sala.';
+      message = context.l10n.playerLeft(event.playerName ?? '');
       icon = Icons.exit_to_app_rounded;
       color = AppTheme.occupiedRed;
       break;
     case PlayerEvent.disconnected:
-      message = '${event.playerName} se ha desconectado.';
+      message = context.l10n.playerDisconnected(event.playerName ?? '');
       icon = Icons.wifi_off_rounded;
       color = Colors.orange;
       break;
     case PlayerEvent.joined:
-      message = '${event.playerName} ha entrado.';
+      message = context.l10n.playerJoinedLobby(event.playerName ?? '');
       icon = Icons.person_add_alt_1_rounded;
       color = AppTheme.neonCyan;
       break;
     case PlayerEvent.reconnected:
-      message = '${event.playerName} ha vuelto a entrar.';
+      message = context.l10n.playerReconnected(event.playerName ?? '');
       icon = Icons.wifi_rounded;
       color = AppTheme.neonPurple;
       break;
@@ -1098,7 +1250,7 @@ void _showPlayerEventNotification(BuildContext context, WebSocketEvent event) {
           ),
         ],
       ),
-      backgroundColor: color.withOpacity(0.9),
+      backgroundColor: color.withValues(alpha: 0.9),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 24),

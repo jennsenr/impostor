@@ -65,23 +65,23 @@ type InMemoryWordRepository struct {
 func NewInMemoryWordRepository() *InMemoryWordRepository {
 	return &InMemoryWordRepository{
 		words: []*entity.Word{
-			{Text: "León", CategoryID: "animals"},
-			{Text: "Gato", CategoryID: "animals"},
+			{Text: "León", TextEN: "Lion", CategoryID: "animals"},
+			{Text: "Gato", TextEN: "Cat", CategoryID: "animals"},
 		},
 	}
 }
 
-func (r *InMemoryWordRepository) GetRandomWord(ctx context.Context, categoryID vo.CategoryID, isJunior bool) (*entity.Word, error) {
+func (r *InMemoryWordRepository) GetRandomWord(ctx context.Context, categoryID vo.CategoryID, isJunior bool, language vo.Language) (*entity.Word, error) {
 	for _, w := range r.words {
 		if w.CategoryID == categoryID {
-			return w, nil
+			return w.Localized(language), nil
 		}
 	}
 	return nil, fmt.Errorf("no words for category %s", categoryID)
 }
 
-func (r *InMemoryWordRepository) GetCategories(ctx context.Context) ([]vo.Category, error) {
-	return vo.GetAvailableCategories(), nil
+func (r *InMemoryWordRepository) GetCategories(ctx context.Context, language vo.Language) ([]vo.Category, error) {
+	return vo.GetAvailableCategories(language), nil
 }
 
 // InMemoryEventPublisher no hace nada o captura eventos para aserciones.

@@ -1,13 +1,16 @@
 package request
 
 type CreateGameRequest struct {
-	HostName     string   `json:"host_name" binding:"required"`
-	AvatarID     string   `json:"avatar_id" binding:"required"`
-	Categories   []string `json:"categories" binding:"required"`
-	JuniorMode   bool     `json:"junior_mode"`
-	SurvivalMode bool     `json:"survival_mode"`
-	TimerEnabled bool     `json:"timer_enabled"`
-	TimerSeconds int      `json:"timer_seconds"`
+	HostName      string   `json:"host_name" binding:"required"`
+	AvatarID      string   `json:"avatar_id" binding:"required"`
+	Categories    []string `json:"categories" binding:"required"`
+	Language      string   `json:"language"`
+	ImpostorCount int      `json:"impostor_count"`
+	JuniorMode    bool     `json:"junior_mode"`
+	SurvivalMode  bool     `json:"survival_mode"`
+	QuestionsMode bool     `json:"questions_mode"`
+	TimerEnabled  bool     `json:"timer_enabled"`
+	TimerSeconds  int      `json:"timer_seconds"`
 }
 
 type JoinGameRequest struct {
@@ -16,9 +19,12 @@ type JoinGameRequest struct {
 }
 
 type UpdateSettingsRequest struct {
-	Categories   []string `json:"categories" binding:"required"`
-	JuniorMode   bool     `json:"junior_mode"`
-	SurvivalMode bool     `json:"survival_mode"`
-	TimerEnabled bool     `json:"timer_enabled"`
-	TimerSeconds int      `json:"timer_seconds"`
+	Categories    []string `json:"categories" binding:"required"`
+	Language      string   `json:"language"`
+	ImpostorCount int      `json:"impostor_count"`
+	JuniorMode    bool     `json:"junior_mode"`
+	SurvivalMode  bool     `json:"survival_mode"`
+	QuestionsMode bool     `json:"questions_mode"`
+	TimerEnabled  bool     `json:"timer_enabled"`
+	TimerSeconds  int      `json:"timer_seconds"`
 }

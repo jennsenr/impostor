@@ -41,16 +41,16 @@ func (m *GameRepoMock) Delete(ctx context.Context, id vo.GameID) error {
 
 type WordRepoMock struct{ mock.Mock }
 
-func (m *WordRepoMock) GetRandomWord(ctx context.Context, categoryID vo.CategoryID, isJunior bool) (*entity.Word, error) {
-	args := m.Called(ctx, categoryID, isJunior)
+func (m *WordRepoMock) GetRandomWord(ctx context.Context, categoryID vo.CategoryID, isJunior bool, language vo.Language) (*entity.Word, error) {
+	args := m.Called(ctx, categoryID, isJunior, language)
 	if args.Get(0) == nil {
 		return nil, args.Error(1)
 	}
 	return args.Get(0).(*entity.Word), args.Error(1)
 }
 
-func (m *WordRepoMock) GetCategories(ctx context.Context) ([]vo.Category, error) {
-	args := m.Called(ctx)
+func (m *WordRepoMock) GetCategories(ctx context.Context, language vo.Language) ([]vo.Category, error) {
+	args := m.Called(ctx, language)
 	return args.Get(0).([]vo.Category), args.Error(1)
 }
 
@@ -73,11 +73,12 @@ func TestGameService_CreateGame(t *testing.T) {
 	svc := NewGameService(repo, wordRepo, pub)
 
 	req := request.CreateGameRequest{
-		HostName:     "Host",
-		AvatarID:     "a1",
-		Categories:   []string{"animals"},
-		JuniorMode:   false,
-		SurvivalMode: false,
+		HostName:      "Host",
+		AvatarID:      "a1",
+		Categories:    []string{"animals"},
+		ImpostorCount: 1,
+		JuniorMode:    false,
+		SurvivalMode:  false,
 	}
 
 	repo.On("Save", mock.Anything, mock.AnythingOfType("*entity.Game")).Return(nil)
@@ -95,7 +96,7 @@ func TestGameService_JoinGame(t *testing.T) {
 	pub := new(EventPublisherMock)
 	svc := NewGameService(repo, nil, pub)
 
-	game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+	game := entity.NewGame("g1", "1234", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 	repo.On("GetByID", mock.Anything, vo.GameID("g1")).Return(game, nil)
 	repo.On("Save", mock.Anything, game).Return(nil)
 	pub.On("PublishGameUpdate", mock.Anything, "g1").Return(nil)
@@ -121,7 +122,7 @@ func TestGameService_StartGame(t *testing.T) {
 	pub := new(EventPublisherMock)
 	svc := NewGameService(repo, wordRepo, pub)
 
-	game := entity.NewGame("g1", "123456", "host-1", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+	game := entity.NewGame("g1", "123456", "host-1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 	h := entity.NewPlayer("host-1", "H", "a1")
 	h.AdCompleted = true
 	p2 := entity.NewPlayer("p2", "P2", "a2")
@@ -136,7 +137,7 @@ func TestGameService_StartGame(t *testing.T) {
 	word := &entity.Word{Text: "Lion"}
 
 	repo.On("GetByID", mock.Anything, vo.GameID("g1")).Return(game, nil)
-	wordRepo.On("GetRandomWord", mock.Anything, vo.CategoryID("animals"), false).Return(word, nil)
+	wordRepo.On("GetRandomWord", mock.Anything, vo.CategoryID("animals"), false, vo.LanguageSpanish).Return(word, nil)
 	repo.On("Save", mock.Anything, game).Return(nil)
 	pub.On("PublishGameUpdate", mock.Anything, "g1").Return(nil)
 
@@ -154,7 +155,7 @@ func TestGameService_ReadyPlayer(t *testing.T) {
 	pub := new(EventPublisherMock)
 	svc := NewGameService(repo, nil, pub)
 
-	game := entity.NewGame("g1", "123456", "h-1", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+	game := entity.NewGame("g1", "123456", "h-1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 	_, _ = game.Join(entity.NewPlayer("p1", "P1", "a1"))
 	game.Status = vo.StatusReady
 
@@ -172,7 +173,7 @@ func TestGameService_CalculateResults(t *testing.T) {
 	pub := new(EventPublisherMock)
 	svc := NewGameService(repo, nil, pub)
 
-	game := entity.NewGame("g1", "123456", "h-1", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+	game := entity.NewGame("g1", "123456", "h-1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 	p1 := entity.NewPlayer("p1", "P1", "a1")
 	p2 := entity.NewPlayer("p2", "P2", "a2")
 	_, _ = game.Join(p1)
@@ -192,6 +193,27 @@ func TestGameService_CalculateResults(t *testing.T) {
 	results, err := svc.CalculateResults(context.Background(), "g1")
 	assert.NoError(t, err)
 	assert.Empty(t, results["expelled_player_id"])
+	assert.Equal(t, vo.StatusResult, game.Status)
+}
+
+func TestGameService_NextRound_FinishesGameAfterFinalVoteResult(t *testing.T) {
+	repo := new(GameRepoMock)
+	pub := new(EventPublisherMock)
+	svc := NewGameService(repo, nil, pub)
+
+	game := entity.NewGame("g1", "123456", "h-1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
+	_, _ = game.Join(entity.NewPlayer("p1", "P1", "a1"))
+	_, _ = game.Join(entity.NewPlayer("p2", "P2", "a2"))
+	game.Status = vo.StatusResult
+	game.WinnerTeam = "impostors"
+
+	repo.On("GetByID", mock.Anything, vo.GameID("g1")).Return(game, nil)
+	repo.On("Save", mock.Anything, game).Return(nil)
+	pub.On("PublishGameUpdate", mock.Anything, "g1").Return(nil)
+
+	res, err := svc.NextRound(context.Background(), "g1", "h-1")
+	assert.NoError(t, err)
+	assert.Equal(t, vo.StatusFinished, res.Status)
 }
 
 func TestGameService_NextTurn(t *testing.T) {
@@ -199,7 +221,7 @@ func TestGameService_NextTurn(t *testing.T) {
 	pub := new(EventPublisherMock)
 	svc := NewGameService(repo, nil, pub)
 
-	game := entity.NewGame("g1", "123456", "h-1", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+	game := entity.NewGame("g1", "123456", "h-1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 	_, _ = game.Join(entity.NewPlayer("p1", "P1", "a1"))
 	_, _ = game.Join(entity.NewPlayer("p2", "P2", "a2"))
 	game.Status = vo.StatusPlaying
@@ -220,7 +242,7 @@ func TestGameService_SubmitVote(t *testing.T) {
 	pub := new(EventPublisherMock)
 	svc := NewGameService(repo, nil, pub)
 
-	game := entity.NewGame("g1", "123456", "h-1", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+	game := entity.NewGame("g1", "123456", "h-1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 	_, _ = game.Join(entity.NewPlayer("p1", "P1", "a1"))
 	_, _ = game.Join(entity.NewPlayer("p2", "P2", "a2"))
 	game.Status = vo.StatusVoting
@@ -254,7 +276,7 @@ func TestGameService_LeaveGame(t *testing.T) {
 		pub := new(EventPublisherMock)
 		svc := NewGameService(repo, nil, pub)
 
-		game := entity.NewGame("g1", "123456", "p1", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g1", "123456", "p1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		_, _ = game.Join(entity.NewPlayer("p1", "P1", "a1"))
 
 		repo.On("GetByID", mock.Anything, vo.GameID("g1")).Return(game, nil).Once()
@@ -271,7 +293,7 @@ func TestGameService_LeaveGame(t *testing.T) {
 		pub := new(EventPublisherMock)
 		svc := NewGameService(repo, nil, pub)
 
-		game := entity.NewGame("g2", "123456", "p1", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g2", "123456", "p1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		_, _ = game.Join(entity.NewPlayer("p1", "P1", "a1"))
 		_, _ = game.Join(entity.NewPlayer("p2", "P2", "a2"))
 
@@ -286,6 +308,78 @@ func TestGameService_LeaveGame(t *testing.T) {
 		repo.AssertExpectations(t)
 		pub.AssertExpectations(t)
 	})
+
+	t.Run("Reconciles pending decision when undecided player leaves", func(t *testing.T) {
+		repo := new(GameRepoMock)
+		pub := new(EventPublisherMock)
+		svc := NewGameService(repo, nil, pub)
+
+		game := entity.NewGame("g3", "123456", "p1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
+		p1 := entity.NewPlayer("p1", "P1", "a1")
+		p2 := entity.NewPlayer("p2", "P2", "a2")
+		p3 := entity.NewPlayer("p3", "P3", "a3")
+		p4 := entity.NewPlayer("p4", "P4", "a4")
+		_, _ = game.Join(p1)
+		_, _ = game.Join(p2)
+		_, _ = game.Join(p3)
+		_, _ = game.Join(p4)
+		game.Status = vo.StatusDecision
+		p1.IsImpostor = true
+		p1.HasDecided = true
+		p1.WantsToVote = true
+		p2.HasDecided = true
+		p2.WantsToVote = true
+		p3.HasDecided = true
+		p3.WantsToVote = false
+
+		repo.On("GetByID", mock.Anything, vo.GameID("g3")).Return(game, nil).Once()
+		repo.On("Save", mock.Anything, mock.AnythingOfType("*entity.Game")).Return(nil).Once()
+		pub.On("PublishGameUpdate", mock.Anything, "g3").Return(nil).Once()
+		pub.On("PublishPlayerEvent", mock.Anything, "g3", "LEFT", "p4", "P4", "a4").Return(nil).Once()
+
+		err := svc.LeaveGame(context.Background(), "g3", "p4")
+		assert.NoError(t, err)
+		assert.Equal(t, vo.StatusVoting, game.Status)
+		repo.AssertExpectations(t)
+		pub.AssertExpectations(t)
+	})
+
+	t.Run("Reconciles pending vote when only missing voter leaves", func(t *testing.T) {
+		repo := new(GameRepoMock)
+		pub := new(EventPublisherMock)
+		svc := NewGameService(repo, nil, pub)
+
+		game := entity.NewGame("g4", "123456", "p1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
+		p1 := entity.NewPlayer("p1", "P1", "a1")
+		p2 := entity.NewPlayer("p2", "P2", "a2")
+		p3 := entity.NewPlayer("p3", "P3", "a3")
+		p4 := entity.NewPlayer("p4", "P4", "a4")
+		_, _ = game.Join(p1)
+		_, _ = game.Join(p2)
+		_, _ = game.Join(p3)
+		_, _ = game.Join(p4)
+		game.Status = vo.StatusVoting
+		p1.IsImpostor = true
+		p1.HasVoted = true
+		p1.VoteTargetID = "p2"
+		p2.HasVoted = true
+		p2.VoteTargetID = "p3"
+		p3.HasVoted = true
+		p3.VoteTargetID = "p2"
+
+		repo.On("GetByID", mock.Anything, vo.GameID("g4")).Return(game, nil).Once()
+		repo.On("Save", mock.Anything, mock.AnythingOfType("*entity.Game")).Return(nil).Once()
+		pub.On("PublishGameUpdate", mock.Anything, "g4").Return(nil).Once()
+		pub.On("PublishPlayerEvent", mock.Anything, "g4", "LEFT", "p4", "P4", "a4").Return(nil).Once()
+
+		err := svc.LeaveGame(context.Background(), "g4", "p4")
+		assert.NoError(t, err)
+		assert.Equal(t, vo.StatusResult, game.Status)
+		assert.Equal(t, "impostors", game.WinnerTeam)
+		assert.Equal(t, "p2", game.ExpelledID)
+		repo.AssertExpectations(t)
+		pub.AssertExpectations(t)
+	})
 }
 
 func TestGameService_SubmitDecision(t *testing.T) {
@@ -294,7 +388,7 @@ func TestGameService_SubmitDecision(t *testing.T) {
 		pub := new(EventPublisherMock)
 		svc := NewGameService(repo, nil, pub)
 
-		game := entity.NewGame("g1", "123456", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g1", "123456", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		p1 := entity.NewPlayer("p1", "P1", "a1")
 		p2 := entity.NewPlayer("p2", "P2", "a2")
 		p3 := entity.NewPlayer("p3", "P3", "a3")
@@ -322,7 +416,7 @@ func TestGameService_SubmitDecision(t *testing.T) {
 		pub := new(EventPublisherMock)
 		svc := NewGameService(repo, nil, pub)
 
-		game := entity.NewGame("g2", "123456", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g2", "123456", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		p1 := entity.NewPlayer("p1", "P1", "a1")
 		p2 := entity.NewPlayer("p2", "P2", "a2")
 		_, _ = game.Join(p1)
@@ -349,7 +443,7 @@ func TestGameService_UpdateSettingsAndRematch(t *testing.T) {
 	svc := NewGameService(repo, wordRepo, pub)
 
 	t.Run("UpdateSettings", func(t *testing.T) {
-		game := entity.NewGame("g1", "123456", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g1", "123456", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		_, _ = game.Join(entity.NewPlayer("h", "H", "a1"))
 
 		repo.On("GetByID", mock.Anything, vo.GameID("g1")).Return(game, nil).Once()
@@ -357,21 +451,23 @@ func TestGameService_UpdateSettingsAndRematch(t *testing.T) {
 		pub.On("PublishGameUpdate", mock.Anything, "g1").Return(nil).Once()
 
 		req := request.UpdateSettingsRequest{
-			Categories:   []string{"sports"},
-			JuniorMode:   true,
-			SurvivalMode: true,
-			TimerEnabled: true,
-			TimerSeconds: 45,
+			Categories:    []string{"sports"},
+			ImpostorCount: 2,
+			JuniorMode:    true,
+			SurvivalMode:  true,
+			TimerEnabled:  true,
+			TimerSeconds:  45,
 		}
 		updatedGame, err := svc.UpdateSettings(context.Background(), "g1", "h", req)
 		assert.NoError(t, err)
+		assert.Equal(t, 2, updatedGame.Settings.ImpostorCount)
 		assert.True(t, updatedGame.Settings.JuniorMode)
 		assert.Equal(t, vo.CategoryID("sports"), updatedGame.Settings.CategoryIDs[0])
 		assert.Equal(t, 45, updatedGame.Settings.TimerSeconds)
 	})
 
 	t.Run("Rematch", func(t *testing.T) {
-		game := entity.NewGame("g2", "123456", "h", vo.NewSettings([]vo.CategoryID{"animals"}, false, false, true, 60))
+		game := entity.NewGame("g2", "123456", "h", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
 		p1, p2 := entity.NewPlayer("p1", "P1", "a1"), entity.NewPlayer("p2", "P2", "a2")
 		_, _ = game.Join(p1)
 		_, _ = game.Join(p2)
@@ -380,7 +476,7 @@ func TestGameService_UpdateSettingsAndRematch(t *testing.T) {
 		word := &entity.Word{Text: "Tiger", CategoryID: vo.CategoryAnimals}
 
 		repo.On("GetByID", mock.Anything, vo.GameID("g2")).Return(game, nil).Once()
-		wordRepo.On("GetRandomWord", mock.Anything, mock.Anything, false).Return(word, nil).Once()
+		wordRepo.On("GetRandomWord", mock.Anything, mock.Anything, false, vo.LanguageSpanish).Return(word, nil).Once()
 		repo.On("Save", mock.Anything, game).Return(nil).Once()
 		pub.On("PublishGameUpdate", mock.Anything, "g2").Return(nil).Once()
 

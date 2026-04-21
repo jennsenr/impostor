@@ -10,6 +10,7 @@ import 'package:impostor/src/shared/infrastructure/websocket_service.dart';
 import 'package:impostor/src/domain/models/game.dart';
 import 'package:impostor/src/domain/models/player.dart';
 import 'package:impostor/src/domain/models/settings.dart';
+import 'package:impostor/src/domain/models/ws_event.dart';
 
 class MockGameRepository extends Mock implements GameRepository {}
 
@@ -19,15 +20,16 @@ void main() {
   late GameCubit gameCubit;
   late MockGameRepository mockRepo;
   late MockWebSocketService mockWs;
-  late StreamController<Game> gameController;
+  late StreamController<WebSocketEvent> eventController;
+  late StreamController<WebSocketStatus> statusController;
 
   final initialGame = Game(
     id: 'g1',
     code: '1234',
     status: GameStatus.adPhase,
     players: [
-      Player(id: 'p1', name: 'P1', avatarId: 'a1', isHost: true),
-      Player(id: 'p2', name: 'P2', avatarId: 'a2'),
+      Player(id: 'p1', name: 'P1', avatarId: '1', isHost: true),
+      Player(id: 'p2', name: 'P2', avatarId: '2'),
     ],
     settings: Settings(
       categoryIds: ['animals'],
@@ -45,17 +47,21 @@ void main() {
   setUp(() {
     mockRepo = MockGameRepository();
     mockWs = MockWebSocketService();
-    gameController = StreamController<Game>.broadcast();
+    eventController = StreamController<WebSocketEvent>.broadcast();
+    statusController = StreamController<WebSocketStatus>.broadcast();
 
-    when(() => mockWs.gameStream).thenAnswer((_) => gameController.stream);
-    when(() => mockWs.connect(any(), any())).thenAnswer((_) async {});
+    when(() => mockWs.eventStream).thenAnswer((_) => eventController.stream);
+    when(() => mockWs.statusStream).thenAnswer((_) => statusController.stream);
+    when(() => mockWs.connect(any(), any())).thenAnswer((_) {});
+    when(() => mockWs.disconnect()).thenAnswer((_) {});
 
     gameCubit = GameCubit(mockRepo, mockWs, 'p1');
   });
 
   tearDown(() {
     gameCubit.close();
-    gameController.close();
+    eventController.close();
+    statusController.close();
   });
 
   group('GameCubit', () {
@@ -164,7 +170,12 @@ void main() {
 
         // En un emit local, podemos forzar un evento de actualización simulando llegada
         // Pero init ya verifica el estatus y arranca el timer si es result
-        gameController.add(gameWithResult);
+        eventController.add(
+          WebSocketEvent(
+            type: WebSocketEventType.gameUpdate,
+            game: gameWithResult,
+          ),
+        );
         async.flushMicrotasks();
 
         // Verificar que no se ha llamado aún si no pasaron los 4 segundos
