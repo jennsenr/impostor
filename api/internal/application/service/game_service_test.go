@@ -380,6 +380,35 @@ func TestGameService_LeaveGame(t *testing.T) {
 		repo.AssertExpectations(t)
 		pub.AssertExpectations(t)
 	})
+
+	t.Run("Does not force result when a civilian leaves and only parity remains", func(t *testing.T) {
+		repo := new(GameRepoMock)
+		pub := new(EventPublisherMock)
+		svc := NewGameService(repo, nil, pub)
+
+		game := entity.NewGame("g5", "123456", "p1", vo.NewSettings([]vo.CategoryID{"animals"}, 1, vo.LanguageSpanish, false, false, false, true, 60))
+		p1 := entity.NewPlayer("p1", "P1", "a1")
+		p2 := entity.NewPlayer("p2", "P2", "a2")
+		p3 := entity.NewPlayer("p3", "P3", "a3")
+		_, _ = game.Join(p1)
+		_, _ = game.Join(p2)
+		_, _ = game.Join(p3)
+		game.Status = vo.StatusPlaying
+		p1.IsImpostor = true
+
+		repo.On("GetByID", mock.Anything, vo.GameID("g5")).Return(game, nil).Once()
+		repo.On("Save", mock.Anything, mock.AnythingOfType("*entity.Game")).Return(nil).Once()
+		pub.On("PublishGameUpdate", mock.Anything, "g5").Return(nil).Once()
+		pub.On("PublishPlayerEvent", mock.Anything, "g5", "LEFT", "p3", "P3", "a3").Return(nil).Once()
+
+		err := svc.LeaveGame(context.Background(), "g5", "p3")
+		assert.NoError(t, err)
+		assert.Equal(t, vo.StatusPlaying, game.Status)
+		assert.Empty(t, game.WinnerTeam)
+		assert.Empty(t, game.ExpelledID)
+		repo.AssertExpectations(t)
+		pub.AssertExpectations(t)
+	})
 }
 
 func TestGameService_SubmitDecision(t *testing.T) {

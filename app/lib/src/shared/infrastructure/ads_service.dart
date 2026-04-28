@@ -13,11 +13,14 @@ class AdsService {
   bool _isInitialized = false;
   bool _isLoadingInterstitial = false;
   bool _isShowingInterstitial = false;
+  DateTime? _showStartedAt;
   InterstitialAd? _interstitialAd;
   Completer<void>? _pendingInterstitialLoad;
 
   Future<void> initialize() async {
-    if (_isInitialized || !AppConfig.adsEnabled || !_consentService.canRequestAds) {
+    if (_isInitialized ||
+        !AppConfig.adsEnabled ||
+        !_consentService.canRequestAds) {
       return;
     }
 
@@ -60,8 +63,16 @@ class AdsService {
   }
 
   Future<bool> showInterstitialIfReady({
-    Duration waitForLoad = const Duration(seconds: 2),
+    Duration waitForLoad = const Duration(seconds: 4),
   }) async {
+    if (_isShowingInterstitial &&
+        _showStartedAt != null &&
+        DateTime.now().difference(_showStartedAt!) >
+            const Duration(seconds: 20)) {
+      _isShowingInterstitial = false;
+      _showStartedAt = null;
+    }
+
     if (!AppConfig.adsEnabled ||
         !_consentService.canRequestAds ||
         _isShowingInterstitial) {
@@ -87,27 +98,35 @@ class AdsService {
 
     _interstitialAd = null;
     _isShowingInterstitial = true;
+    _showStartedAt = DateTime.now();
     final completer = Completer<bool>();
+    Timer? safetyTimer;
+
+    void completeShow(bool value, InterstitialAd ad) {
+      safetyTimer?.cancel();
+      _isShowingInterstitial = false;
+      _showStartedAt = null;
+      ad.dispose();
+      if (!completer.isCompleted) {
+        completer.complete(value);
+      }
+      unawaited(preloadInterstitial());
+    }
 
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (ad) {
-        ad.dispose();
-        _isShowingInterstitial = false;
-        if (!completer.isCompleted) {
-          completer.complete(true);
-        }
-        unawaited(preloadInterstitial());
+        completeShow(true, ad);
       },
       onAdFailedToShowFullScreenContent: (ad, error) {
         debugPrint('Interstitial failed to show: $error');
-        ad.dispose();
-        _isShowingInterstitial = false;
-        if (!completer.isCompleted) {
-          completer.complete(false);
-        }
-        unawaited(preloadInterstitial());
+        completeShow(false, ad);
       },
     );
+
+    safetyTimer = Timer(const Duration(seconds: 15), () {
+      debugPrint('Interstitial safety timeout reached');
+      completeShow(false, ad);
+    });
 
     ad.show();
     return completer.future;

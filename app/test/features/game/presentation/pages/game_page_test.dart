@@ -65,11 +65,14 @@ void main() {
     mockAdsService = MockAdsService();
     when(() => mockGameCubit.stream).thenAnswer((_) => const Stream.empty());
     when(() => mockGameCubit.isClosed).thenReturn(false);
+    when(() => mockGameCubit.finishAd()).thenAnswer((_) async => true);
     when(
       () => mockSetupCubit.state,
     ).thenReturn(const SetupState(status: SetupInitial()));
     when(() => mockSetupCubit.stream).thenAnswer((_) => const Stream.empty());
     when(() => mockSetupCubit.updateGame(any())).thenReturn(null);
+    when(() => mockSetupCubit.backToSettings()).thenReturn(null);
+    when(() => mockSetupCubit.backToProfile()).thenReturn(null);
     when(() => mockAdsService.preloadInterstitial()).thenAnswer((_) async {});
     when(
       () => mockAdsService.showInterstitialIfReady(
@@ -151,6 +154,31 @@ void main() {
       expect(find.text('PREPARANDO PUBLICIDAD...'), findsNothing);
       expect(find.text('MOSTRANDO PUBLICIDAD...'), findsNothing);
     });
+
+    testWidgets('Should return to home flow when game is left', (
+      WidgetTester tester,
+    ) async {
+      final stateController = StreamController<GameState>.broadcast();
+      addTearDown(stateController.close);
+
+      when(() => mockGameCubit.state).thenReturn(
+        GameState(
+          status: GameLoaded(baseGame.copyWith(status: GameStatus.playing)),
+          myPlayerId: 'p1',
+        ),
+      );
+      when(
+        () => mockGameCubit.stream,
+      ).thenAnswer((_) => stateController.stream);
+
+      await tester.pumpWidget(createWidgetUnderTest());
+
+      stateController.add(GameState(status: GameLeft(), myPlayerId: 'p1'));
+      await tester.pump();
+
+      verify(() => mockSetupCubit.backToSettings()).called(1);
+      verifyNever(() => mockSetupCubit.backToProfile());
+    });
   });
 
   group('GamePage ad flow', () {
@@ -187,6 +215,13 @@ void main() {
     testWidgets('Should show interstitial and finish ad automatically', (
       WidgetTester tester,
     ) async {
+      final adCompleter = Completer<bool>();
+      when(
+        () => mockAdsService.showInterstitialIfReady(
+          waitForLoad: const Duration(milliseconds: 800),
+        ),
+      ).thenAnswer((_) => adCompleter.future);
+
       await tester.pumpWidget(
         MaterialApp(
           locale: const Locale('es'),
@@ -200,6 +235,40 @@ void main() {
       );
 
       realGameCubit!.init(baseGame.copyWith(status: GameStatus.adPhase));
+
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 50));
+
+      verify(
+        () => mockAdsService.showInterstitialIfReady(
+          waitForLoad: const Duration(milliseconds: 800),
+        ),
+      ).called(1);
+      verifyNever(() => mockRepo.finishAd('g1', 'p1'));
+
+      adCompleter.complete(true);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 50));
+
+      verify(() => mockRepo.finishAd('g1', 'p1')).called(1);
+    });
+
+    testWidgets('Should handle ad phase immediately on initial loaded state', (
+      WidgetTester tester,
+    ) async {
+      realGameCubit!.init(baseGame.copyWith(status: GameStatus.adPhase));
+
+      await tester.pumpWidget(
+        MaterialApp(
+          locale: const Locale('es'),
+          localizationsDelegates: ImpostorLocalizations.localizationsDelegates,
+          supportedLocales: ImpostorLocalizations.supportedLocales,
+          home: BlocProvider<GameCubit>.value(
+            value: realGameCubit!,
+            child: const GamePage(),
+          ),
+        ),
+      );
 
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 50));
@@ -249,5 +318,41 @@ void main() {
       ).called(2);
       verify(() => mockRepo.finishAd('g1', 'p1')).called(2);
     });
+
+    testWidgets(
+      'Should still finish ad phase if no interstitial is available',
+      (WidgetTester tester) async {
+        when(
+          () => mockAdsService.showInterstitialIfReady(
+            waitForLoad: const Duration(milliseconds: 800),
+          ),
+        ).thenAnswer((_) async => false);
+
+        await tester.pumpWidget(
+          MaterialApp(
+            locale: const Locale('es'),
+            localizationsDelegates:
+                ImpostorLocalizations.localizationsDelegates,
+            supportedLocales: ImpostorLocalizations.supportedLocales,
+            home: BlocProvider<GameCubit>.value(
+              value: realGameCubit!,
+              child: const GamePage(),
+            ),
+          ),
+        );
+
+        realGameCubit!.init(baseGame.copyWith(status: GameStatus.adPhase));
+
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 50));
+
+        verify(
+          () => mockAdsService.showInterstitialIfReady(
+            waitForLoad: const Duration(milliseconds: 800),
+          ),
+        ).called(1);
+        verify(() => mockRepo.finishAd('g1', 'p1')).called(1);
+      },
+    );
   });
 }

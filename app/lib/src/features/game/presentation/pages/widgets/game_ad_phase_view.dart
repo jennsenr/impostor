@@ -9,9 +9,9 @@ class GameAdPhaseView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ColoredBox(
       color: AppTheme.backgroundDark,
-      child: SizedBox.expand(
-        child: Center(
-          child: CircularProgressIndicator(color: AppTheme.neonCyan),
+      child: Center(
+        child: CircularProgressIndicator(
+          color: AppTheme.neonCyan,
         ),
       ),
     );

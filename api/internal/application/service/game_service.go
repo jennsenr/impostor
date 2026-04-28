@@ -300,7 +300,7 @@ func (s *GameService) resolveWinnerAfterLeave(game *entity.Game) {
 		game.Status = vo.StatusResult
 		game.WinnerTeam = "civilians"
 		game.ExpelledID = ""
-	case civiliansAlive <= impostorsAlive:
+	case civiliansAlive == 0:
 		game.Status = vo.StatusResult
 		game.WinnerTeam = "impostors"
 		game.ExpelledID = ""

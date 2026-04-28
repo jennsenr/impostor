@@ -15,7 +15,10 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-const autoLeaveAfterDisconnect = 5 * time.Second
+// Un anuncio fullscreen, un cambio temporal de app lifecycle o una red móvil
+// inestable pueden cortar el socket varios segundos sin que el jugador haya
+// abandonado realmente la partida.
+const autoLeaveAfterDisconnect = 60 * time.Second
 
 type DisconnectLeaveService interface {
 	LeaveDisconnectedPlayer(ctx context.Context, gameID string, playerID string) error

@@ -28,6 +28,12 @@ make run-all
 
 Esos targets detectan automaticamente la IP local del host y lanzan Flutter con `--dart-define=API_URL=http://<tu-ip-local>:8080`.
 
+Si la deteccion automatica falla o coge una IP rara, puedes forzarla:
+
+```bash
+LOCAL_IP=192.168.68.68 make run-dev-jenn
+```
+
 `make run-all` abre una ventana de Terminal por dispositivo definido para evitar el problema de un único `flutter run` interactivo bloqueando el resto.
 
 Producción con la URL oficial:

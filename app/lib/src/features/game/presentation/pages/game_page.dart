@@ -110,12 +110,23 @@ class _GamePageState extends State<GamePage> {
 
     var didFinishAd = false;
     try {
-      await sl<AdsService>().showInterstitialIfReady(
-        waitForLoad: const Duration(milliseconds: 800),
-      );
+      // Intentamos mostrar el anuncio. Si por algún motivo Google Mobile Ads
+      // lanza una excepción síncrona evitamos que rompa todo el flujo.
+      try {
+        await sl<AdsService>().showInterstitialIfReady(
+          waitForLoad: const Duration(milliseconds: 800),
+        );
+      } catch (e) {
+        debugPrint('Error showing interstitial: $e');
+      }
+
       if (!mounted) {
         return;
       }
+
+      // Solo marcamos el anuncio como completado después de que se haya
+      // mostrado o haya terminado el intento de carga. Si el SDK no consigue
+      // mostrar nada, dejamos avanzar igualmente para no bloquear la sala.
       didFinishAd = await context.read<GameCubit>().finishAd();
       if (didFinishAd) {
         _lastAdPhaseKey = adPhaseKey;
@@ -249,7 +260,7 @@ class _GamePageState extends State<GamePage> {
         }
 
         if (state.status is GameLeft) {
-          sl<SetupCubit>().backToProfile();
+          sl<SetupCubit>().backToSettings();
           return;
         }
 
@@ -316,6 +327,15 @@ class _GamePageState extends State<GamePage> {
 
         final game = status.game;
         final me = game.getMe(state.myPlayerId);
+
+        if (game.status == GameStatus.adPhase) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!mounted) {
+              return;
+            }
+            _maybeHandleAdPhase(game, me);
+          });
+        }
 
         return Scaffold(
           backgroundColor: AppTheme.backgroundDark,
@@ -544,7 +564,6 @@ class _GamePageState extends State<GamePage> {
       },
       onReturnToHome: () async {
         await context.read<GameCubit>().leaveGame();
-        sl<SetupCubit>().backToSettings();
       },
     );
   }

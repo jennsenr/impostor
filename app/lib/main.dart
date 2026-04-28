@@ -6,6 +6,7 @@ import 'src/shared/config/app_config.dart';
 import 'src/shared/infrastructure/ads_consent_service.dart';
 import 'src/shared/infrastructure/ads_service.dart';
 import 'src/shared/infrastructure/service_locator.dart';
+import 'src/shared/infrastructure/websocket_service.dart';
 import 'src/shared/presentation/localization/app_localizations.dart';
 import 'src/shared/presentation/theme/app_theme.dart';
 import 'src/shared/presentation/router/app_router.dart';
@@ -54,6 +55,7 @@ class _ImpostorAppState extends State<ImpostorApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
+      sl<WebSocketService>().reconnectIfNeeded();
       sl<SetupCubit>().restorePreviousSessionOnResume();
     }
   }

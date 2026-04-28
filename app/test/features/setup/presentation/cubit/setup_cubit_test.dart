@@ -297,5 +297,36 @@ void main() {
       expect(stringPrefs.containsKey('pref_session_player_name'), isFalse);
       verify(() => mockPrefs.remove('pref_session_game_code')).called(1);
     });
+
+    test(
+      'backToSettings clears local session and does not leave the game again',
+      () async {
+        when(() => mockRepo.leaveGame(any(), any())).thenAnswer((_) async {});
+        when(
+          () => mockRepo.joinGame(
+            gameId: any(named: 'gameId'),
+            playerName: any(named: 'playerName'),
+            avatarId: any(named: 'avatarId'),
+          ),
+        ).thenAnswer(
+          (_) async => JoinResponse(game: buildGame(), playerId: 'p1'),
+        );
+
+        stringPrefs['pref_session_game_code'] = '1234';
+        stringPrefs['pref_session_player_id'] = 'p1';
+        stringPrefs['pref_session_player_name'] = 'TestPlayer';
+        stringPrefs['pref_session_avatar_id'] = '7';
+
+        await setupCubit.joinGame('1234');
+
+        setupCubit.backToSettings();
+        await Future<void>.delayed(Duration.zero);
+
+        expect(setupCubit.state.status, const SetupInitial());
+        expect(setupCubit.state.avatarId, '');
+        expect(setupCubit.state.isCreating, isTrue);
+        verifyNever(() => mockRepo.leaveGame(any(), any()));
+      },
+    );
   });
 }

@@ -171,6 +171,16 @@ class GameCubit extends Cubit<GameState> {
 
     try {
       await _repository.finishAd(status.game.id, state.myPlayerId);
+      
+      // Optimistic update
+      final me = status.game.getMe(state.myPlayerId);
+      if (me != null) {
+        final updatedMe = me.copyWith(adCompleted: true);
+        final updatedPlayers = status.game.players.map((p) => p.id == me.id ? updatedMe : p).toList();
+        final updatedGame = status.game.copyWith(players: updatedPlayers);
+        emit(state.copyWith(status: GameLoaded(updatedGame)));
+      }
+      
       return true;
     } catch (error) {
       _emitTransientError(_errorCode(error, 'ad_failed'));

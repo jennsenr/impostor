@@ -111,6 +111,19 @@ class WebSocketService {
     });
   }
 
+  void reconnectIfNeeded() {
+    if (_isManualDisconnect) {
+      return;
+    }
+    if (_currentStatus == WebSocketStatus.connected) {
+      return;
+    }
+    if (_lastGameID == null || _lastPlayerID == null) {
+      return;
+    }
+    connect(_lastGameID!, _lastPlayerID!);
+  }
+
   void disconnect() {
     _isManualDisconnect = true;
     _reconnectTimer?.cancel();

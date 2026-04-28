@@ -205,21 +205,14 @@ class SetupCubit extends Cubit<SetupState> {
   }
 
   void backToSettings() async {
-    final currentStatus = state.status;
-    if (currentStatus is SetupSuccess) {
-      try {
-        await _repository.leaveGame(
-          currentStatus.game.id,
-          currentStatus.playerId,
-        );
-      } catch (_) {}
-    }
     await _clearActiveSession();
     emit(
       state.copyWith(
         status: const SetupInitial(),
         clearPendingGameId: true,
         occupiedAvatarIds: [],
+        avatarId: '',
+        isCreating: true,
       ),
     );
   }
